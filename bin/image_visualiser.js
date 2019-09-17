@@ -130,7 +130,6 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   var layer = Map.addLayer(paddockCollection, visParams, layerName);
 
   manager.elevationLayer = layer;
-  manager.elevationLayer.setOpacity(0.5);
 
   return layer;
 }
