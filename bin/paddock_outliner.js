@@ -135,8 +135,9 @@ var setSelectedLayer = function() {
   //TODO: Check if this set is empty before creating a layer out of it.
   
   // Create a layer based off the currently selected paddocks
-  var soilLayerOfSelectedPaddocks = ee.ImageCollection('CSIRO/SLGA')
-  .filterDate('2000-01-01', '2013-05-01');
+  var mosaic = ee.ImageCollection('CSIRO/SLGA')
+  .filterDate('2000-01-01', '2013-05-01').mosaic();
+  var soilLayerOfSelectedPaddocks = mosaic.clip(selectedPaddocks);
   manager.soil = ui.Map.Layer({
       eeObject: soilLayerOfSelectedPaddocks, 
       name: LAYER_NAME_SOIL,
