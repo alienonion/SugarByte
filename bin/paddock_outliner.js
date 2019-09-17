@@ -136,7 +136,7 @@ var setSelectedLayer = function() {
   
   // Create a layer based off the currently selected paddocks
   var soilLayerOfSelectedPaddocks = ee.ImageCollection('CSIRO/SLGA')
-  .filterBounds(selectedPaddocks).filterDate('2000-01-01', '2013-05-01');
+  .filterDate('2000-01-01', '2013-05-01');
   manager.soil = ui.Map.Layer({
       eeObject: soilLayerOfSelectedPaddocks, 
       name: LAYER_NAME_SOIL,
