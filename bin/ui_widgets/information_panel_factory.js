@@ -180,15 +180,14 @@ var createNDVIVisualiser = function(paddock) {
       debug.info("clicked data is", date);
 
       // Get the 5 day range (guarantees that at least one data point will be present
-      var dateRange = ee.DateRange(date, date.advance(5, 'day'));
+      // var dateRange = ee.DateRange(date, date.advance(5, 'day'));
 
       // clear all NDVI layers before displaying new one
       manager.app.imageVisualiser.clearAllNdviLayers();
       //visualizing NDVI of chosen time point of scatter chart on the map
-      manager.app.imageVisualiser.displayPaddockNDVIMedian(
+      manager.app.imageVisualiser.displayPaddockNDVIOnDate(
           //the clicked date on the scatter chart
-          dateRange.start(),
-          dateRange.end(),
+          date,
           // the paddock chosen by user
           paddock.geometry(),
           'Paddock NDVI on chosen date',

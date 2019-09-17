@@ -183,10 +183,11 @@ var setElevationLayer = function() {
   //     name: LAYER_NAME_ELEVATION,
   //     shown: SHOWN_ELEVATION,
   // });
+
+  var visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
+      '#ffc623', '#ffa114','#ff5a0c']};
   
-  var visParams = {bands: ['elevation'], min: 0, max: 3000, palette: ['blue', 'green', 'red']};
-  
-  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams);
+  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams, "Elevation");
   
   manager.elevation.setOpacity(0.5);
   

@@ -128,8 +128,6 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   }
 
   var layer = Map.addLayer(paddockCollection, visParams, layerName);
-
   manager.elevationLayer = layer;
-
   return layer;
 }
