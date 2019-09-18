@@ -58,6 +58,16 @@ Will only work if things are removed in the same order they were opened.
 
 */
 
+
+
+
+
+
+
+
+
+
+
 /**
  * Creates an info panel for the given paddock and adds it to the paddock inspector UI.
  * This is called whenever a paddock is selected.
