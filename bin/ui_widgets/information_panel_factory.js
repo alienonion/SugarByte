@@ -460,7 +460,7 @@ exports.createInfoPanel = function(paddock) {
   // Create and add a heading for the info panel
   var headingWidget = createHeading(paddock);
 
-  createSelectWidget();
+  // createSelectWidget();
 
   // ndvi chart visualiser
   var visualiserWidget = createNDVIVisualiser(paddock);
