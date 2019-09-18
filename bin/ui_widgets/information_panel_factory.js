@@ -21,6 +21,13 @@ exports.initialise = function(app) {
   // Grab a reference to the app
   manager.app = app;// create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
 
+  //Container to show time label and select for layers
+  manager.selectContainer = ui.Panel({
+    style:{
+      width: '100px',
+      height:'30px',
+    }
+  });
   manager.time_label  = ui.Label({
     value: 'Click a point on the chart to show the NDVI for that date.',
     style: {
@@ -28,8 +35,8 @@ exports.initialise = function(app) {
       height: '40px',
     }
   });
+  manager.selectContainer.add(manager.time_label)
 };
-
 
 
 /**
@@ -78,8 +85,8 @@ var createHeading = function(paddock) {
    */
   var closeEvent = function(button) {
 
-    // remove time label
-    Map.remove(manager.time_label);
+    // remove select container
+    Map.remove(manager.selectContainer);
     // remove this panel's NDVI layer after closing
     manager.app.imageVisualiser.clearCurrentNdviLayer(manager.currenttLayer);
     // deselect paddock and close current info panel
@@ -176,8 +183,9 @@ var createNDVIVisualiser = function(paddock) {
 
     // Clear the chart container panel and add the new chart
     chartContainer.clear().add(ndviChart);
+
     // add time label on the map
-    Map.add(manager.time_label);
+    Map.add(manager.selectContainer);
     debug.info("show time label on map");
 
     // When the chart is clicked, update the map and label.
