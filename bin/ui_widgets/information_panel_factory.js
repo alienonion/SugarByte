@@ -41,7 +41,7 @@ var createSelectWidget = function () {
             position: 'top-center',
             height: '40px',
         }
-    })
+    });
 
     // Layer selection
     // keys
@@ -61,10 +61,10 @@ var createSelectWidget = function () {
     widgets: [selectTitle, selectBox],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      position: 'middle-right'
+      position: 'middle-right',
     }
   });
-}
+};
 
 
 
@@ -245,7 +245,7 @@ var createNDVIVisualiser = function(paddock) {
       manager.time_label.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
       debug.info("added NDVI imagery to time series", date);
-    })
+    });
   };
     ////////////////////////////
   // Visualise button
@@ -280,7 +280,7 @@ var createSeasonComparator = function(paddock) {
   var growingSeasons = [];
 
   // Title label for growing season comparison
-  debug.info('Creating title label for growing season comparison.')
+  debug.info('Creating title label for growing season comparison.');
   var titleLabel = ui.Label({
     value: 'Growing Season Comparison',
     style: {
@@ -430,7 +430,7 @@ var createSeasonComparator = function(paddock) {
   var compareButton = ui.Button({
       label: 'Create/Update Comparison Chart',
       onClick: refreshComparisonChart,
-  })
+  });
 
   // Create and return the season comparator panel
   var seasonComparatorPanel = ui.Panel({
