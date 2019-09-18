@@ -77,6 +77,7 @@ var createHeading = function(paddock) {
     manager.app.paddockManager.deselectPaddock(paddock);
     // remove time label
     Map.remove(manager.time_label);
+    // remove all ndvi layers after close
     manager.app.imageVisualiser.clearAllNdviLayers();
   };
 
