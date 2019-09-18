@@ -99,16 +99,19 @@ exports.addPaddock = function(paddock) {
  * @param {ee.Feature} paddock - The paddock to remove.
  */
 exports.removePaddock = function(paddock) {
-  debug.info('Attempting to remove a paddock/infopanel from the paddock inspector:', paddock);
+  debug.info('Attempting to remove a paddock/info panel from the paddock inspector:', paddock);
   manager.numPanels--;
   // Get the info panel
-  var infoPanel = manager.infoPanels[manager.numPanels][1];
-  // Remove the info panel and paddock from the dictionary
-  manager.infoPanels[manager.numPanels] = 0;
-  debug.info('infoPanels after deletion of paddock:', manager.infoPanels);
-  // Remove the info panel to the inspector UI
-  manager.paddockInspector.remove(infoPanel);
-
+  manager.infoPanels.forEach(function (value, index, array) {
+    if (value[0] === paddock) {
+      var infoPanel = manager.infoPanels[manager.numPanels][1];
+      // Remove the info panel and paddock from the dictionary
+      manager.infoPanels[manager.numPanels] = 0;
+      debug.info('infoPanels after deletion of paddock:', manager.infoPanels);
+      // Remove the info panel to the inspector UI
+      manager.paddockInspector.remove(infoPanel);
+    }
+  });
   // Check if this removed paddock was the only selected paddock
   if (manager.numPanels === 0) {
     removeFromApp();
