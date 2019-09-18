@@ -43,6 +43,15 @@ var selectedVisParams = {
   palette:'FF0000'
 };
 
+
+//li 
+// var elevationVisParams = {
+// // black 
+//   palette:'#000000'
+// }
+
+//
+
 // Layer titles
 var LAYER_NAME_OUTLINES = 'All paddock outlines';
 var LAYER_NAME_SELECTED = 'Currently selected paddock: ';
@@ -178,9 +187,10 @@ var setElevationLayer = function() {
   //     shown: SHOWN_ELEVATION,
   // });
   
-  var visParams = {bands: ['elevation'], min: 0, max: 3000, palette: ['blue', 'green', 'red']};
+  vvar visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
+      '#ffc623', '#ffa114','#ff5a0c']};
   
-  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams);
+  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams, "Elevation");
   
   manager.elevation.setOpacity(0.5);
   
