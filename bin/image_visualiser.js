@@ -50,6 +50,7 @@ exports.clearCurrentNdviLayer = function (currentLayer) {
   Map.remove(currentLayer);
   var layerIndex = manager.ndviLayers.indexOf(currentLayer);
   manager.ndviLayers.splice(layerIndex, 1);
+  debug.info("remove current layer", currentLayer)
 };
 
 /**
