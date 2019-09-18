@@ -30,6 +30,9 @@ app.mapClickHandler = require('users/balddinosaur/sugarbyte:bin/map_click_handle
 app.input = require('users/balddinosaur/sugarbyte:bin/ui_widgets/input.js');
 app.legendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/legend_widget.js');
 
+//elevation widget
+app.elevationLegendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/elevation_legend_widget.js')
+
 /**
  * Adds global application constants as properties of the root app object.
  */
@@ -153,8 +156,8 @@ var initialiseInternalModules = function() {
 	// Legend Widget
 	app.legendWidget.initialise(app);
 	
-// 	// Elevation legend widget
-//   app.elevation_legend_widget.initialise(app);
+	// Elevation legend widget
+  app.elevationLegendWidget.initialise(app);
 	
 };
 
