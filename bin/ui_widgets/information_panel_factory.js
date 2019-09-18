@@ -28,10 +28,6 @@ exports.initialise = function(app) {
       height: '40px',
     }
   });
-
-  // add time label on the map
-  Map.add(manager.time_label);
-  debug.info("show time label on map");
 };
 
 
@@ -180,6 +176,9 @@ var createNDVIVisualiser = function(paddock) {
 
     // Clear the chart container panel and add the new chart
     chartContainer.clear().add(ndviChart);
+    // add time label on the map
+    Map.add(manager.time_label);
+    debug.info("show time label on map");
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function(xValue, yValue, seriesName) {
