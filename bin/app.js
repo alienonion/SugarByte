@@ -333,7 +333,7 @@ exports.refreshSelectedOutlines = function() {
 
 // by li, can delete 
 exports.addElevation = function() {
-  debug.info('Attempting to add elevation paddock outlines.');
+  debug.info('Attempting to add elevation layer.');
   // Remove the current layer of selected paddock outlines. 
   // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
   Map.remove(manager.elevation); 
@@ -341,7 +341,7 @@ exports.addElevation = function() {
   setElevationLayer();
   // Add the layer to the map.
   Map.add(manager.elevation); 
-  debug.info('Finished refreshing elevation paddock outlines.');
+  debug.info('Finished add elevation layer.');
 };
 
 exports.deleteElevation = function() {
@@ -349,5 +349,5 @@ exports.deleteElevation = function() {
   // Remove the current layer of selected paddock outlines. 
   // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
   Map.remove(manager.elevation); 
-  debug.info('Finished deleting elevation paddock outlines.');
+  debug.info('Finished deleting elevation layer.');
 };
