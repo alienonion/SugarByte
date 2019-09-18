@@ -219,14 +219,14 @@ var createNDVIVisualiser = function(paddock) {
     onClick: visualise,
   });
   
-  
+  // Layer selection
+  // keys
   var keys = {
     Soil: 'select soil layer',
     Evelation: 'select evelation layer'
   };
-  
+  // Select
   var selectBox = ui.Select({
-    label: 'Show a layer',
     items: Object.keys(keys),
     //onChange: function(key) {
       // change layer
