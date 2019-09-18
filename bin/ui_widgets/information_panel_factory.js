@@ -25,8 +25,8 @@ exports.initialise = function(app) {
   manager.selectContainer = ui.Panel({
     style:{
       position:'top-left',
-      width: '100px',
-      height:'30px',
+      width: '400px',
+      height:'200px',
     }
   });
   manager.time_label  = ui.Label({
