@@ -63,6 +63,7 @@ var createHeading = function(paddock) {
   // title and description labels to include the ID.
   var getPaddockId = function(id) {
     debug.info('Paddock ID:', id);
+    manager.id = id;
     title += id;
     description += id;
     titleLabel.setValue(title);
@@ -201,7 +202,7 @@ var createNDVIVisualiser = function(paddock) {
           // the paddock chosen by user
           paddock.geometry(),
           // the layer name
-          'NDVI for paddock'+ paddock.get("ID"),
+          'NDVI for paddock'+ manager.id,
           true);
           
       // Show a label with the date on the map.
