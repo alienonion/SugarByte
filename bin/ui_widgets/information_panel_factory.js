@@ -218,9 +218,15 @@ var createNDVIVisualiser = function(paddock) {
     onClick: visualise,
   });
   
-  var checkbox = ui.Checkbox({
-    label: 'check',
+  var soilBox = ui.Checkbox({
+    label: 'show Soil Layer',
+    //onClick?
   });
+  
+  var evlBox = ui.Checkbox({
+    label: 'show Evl Layer',
+    //onSelect?
+  })
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
@@ -228,7 +234,8 @@ var createNDVIVisualiser = function(paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButton,
-      checkbox,
+      soilBox,
+      evlBox,
       chartContainer
     ],
   });
