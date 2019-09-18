@@ -77,13 +77,11 @@ var createHeading = function(paddock) {
    * @param {ui.Button} button - The button that executed this onClick function.
    */
   var closeEvent = function(button) {
-
+    manager.app.paddockManager.deselectPaddock(paddock);
     // remove time label
     Map.remove(manager.time_label);
     // remove this panel's NDVI layer after closing
     manager.app.imageVisualiser.clearCurrentNdviLayer(manager.currenttLayer);
-    // deselect paddock and close current info panel
-    manager.app.paddockManager.deselectPaddock(paddock);
   };
 
   var closeButton = ui.Button('Close', closeEvent, false, {});
@@ -186,6 +184,7 @@ var createNDVIVisualiser = function(paddock) {
 
       // Show the image for the clicked date.
       var date = ee.Date(new Date(xValue));
+      
       debug.info("clicked data is", date);
 
       // Get the 5 day range (guarantees that at least one data point will be present
@@ -203,9 +202,9 @@ var createNDVIVisualiser = function(paddock) {
           // the paddock chosen by user
           paddock.geometry(),
           // the layer name
-          'NDVI layer for paddock: '+ manager.id,
+          'NDVI for paddock'+ manager.id,
           true);
-
+          
       // Show a label with the date on the map.
       manager.time_label.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
@@ -219,15 +218,16 @@ var createNDVIVisualiser = function(paddock) {
     onClick: visualise,
   });
   
-  var soilBox = ui.Select({
-    label: 'show Soil Layer',
-    //onClick?
+  var keys = {
+    Key_1: 'Soil Layer',
+    Key_2: 'Evelation Layer'
+  };
+
+  var selectBox = ui.Select({
+    items: Object.keys(keys),
+    //onChange: function(key){}
   });
-  
-  var eleBox = ui.Checkbox({
-    label: 'show Elevation Layer',
-    //onSelect?
-  })
+    
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
@@ -235,8 +235,7 @@ var createNDVIVisualiser = function(paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButton,
-      soilBox,
-      eleBox,
+      selectBox,
       chartContainer
     ],
   });
