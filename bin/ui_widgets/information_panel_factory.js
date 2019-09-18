@@ -226,6 +226,7 @@ var createNDVIVisualiser = function(paddock) {
   };
   
   var selectBox = ui.Select({
+    value: 'Show a layer',
     items: Object.keys(keys),
     //onChange: function(key) {
       // change layer
