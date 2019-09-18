@@ -25,7 +25,7 @@ exports.initialise = function(app) {
     value: 'Click a point on the chart to show the NDVI for that date.',
     style: {
       position: 'top-left',
-      height: '40px',
+      height: '35px',
     }
   });
 };
