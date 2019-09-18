@@ -31,6 +31,13 @@ exports.initialise = function(app) {
 };
 
 var layerButton = function(button) {
+  var brPanel = ui.Panel({
+    style:{
+      postion: 'buttom-right',
+      padding: '5px',
+    }
+  });
+  
   var tButton = ui.Button('test');
   
 }
