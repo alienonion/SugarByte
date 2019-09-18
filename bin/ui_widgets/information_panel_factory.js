@@ -219,8 +219,8 @@ var createNDVIVisualiser = function(paddock) {
   });
   
   var keys = {
-    Soil: 'Soil Layer',
-    Evelation: 'Evelation Layer'
+    key1: 'Soil Layer',
+    key2: 'Evelation Layer'
   };
 
   var selectBox = ui.Select({
