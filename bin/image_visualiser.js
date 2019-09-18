@@ -36,10 +36,20 @@ exports.clearAllNdviLayers = function() {
   var removeFromMap = function(layer) {
     Map.remove(layer);
   };
-  // Remove all  layers
+  // Remove all layers
   manager.ndviLayers.map(removeFromMap);
   // Reset list
   manager.ndviLayers = [];
+};
+
+/**
+ * Clear the layer of current information panel
+ */
+exports.clearCurrentNdviLayer = function (currentLayer) {
+  // remove current layer when closing a information panel
+  Map.remove(currentLayer);
+  let layerIndex = manager.ndviLayers.indexOf(currentLayer);
+  manager.ndviLayers.splice(layerIndex, 1);
 };
 
 /**

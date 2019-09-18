@@ -77,8 +77,8 @@ var createHeading = function(paddock) {
     manager.app.paddockManager.deselectPaddock(paddock);
     // remove time label
     Map.remove(manager.time_label);
-    // remove all NDVI layers after close
-    manager.app.imageVisualiser.clearAllNdviLayers();
+    // remove this panel's NDVI layer after closing
+    manager.app.imageVisualiser.clearCurrentNdviLayer(manager.currenttLayer);
   };
 
   var closeButton = ui.Button('Close', closeEvent, false, {});
@@ -188,14 +188,16 @@ var createNDVIVisualiser = function(paddock) {
 
       // // clear all NDVI layers before displaying new one
       // manager.app.imageVisualiser.clearAllNdviLayers();
-      //visualizing NDVI of chosen time point of scatter chart on the map
-      manager.app.imageVisualiser.displayPaddockNDVIOnDate(
+
+      //visualizing NDVI of chosen time point of scatter chart on the map,
+      // then assign returned layer to manager.currentLayer
+      manager.currenttLayer = manager.app.imageVisualiser.displayPaddockNDVIOnDate(
 
           //the clicked date on the scatter chart
           date,
           // the paddock chosen by user
           paddock.geometry(),
-          'Paddock NDVI on chosen date ',
+          'NDVI for paddock'+ paddock.get("ID"),
           true);
       // Show a label with the date on the map.
       manager.time_label.setValue(new Date(xValue).toUTCString());
