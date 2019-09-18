@@ -219,21 +219,21 @@ var createNDVIVisualiser = function(paddock) {
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
       debug.info("added NDVI imagery to time series", date);
 
-    // Layer selection
-    // keys
-    var keys = {
-        NDVI: 'select NDVI layer',
-        Evelation: 'select evelation layer'
-    };
-    // Select
-    var selectBox = ui.Select({
-        items: Object.keys(keys),
-        //onChange: function(key) {
-        // change layer
-        //}
-    });
+    // // Layer selection
+    // // keys
+    // var keys = {
+    //     NDVI: 'select NDVI layer',
+    //     Evelation: 'select evelation layer'
+    // };
+    // // Select
+    // var selectBox = ui.Select({
+    //     items: Object.keys(keys),
+    //     //onChange: function(key) {
+    //     // change layer
+    //     //}
+    // });
 
-    manager.selectContainer.add(selectBox);
+    // manager.selectContainer.add(selectBox);
     })
   };
 
