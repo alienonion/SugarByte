@@ -30,6 +30,8 @@ exports.initialise = function(app) {
   });
 };
 
+
+
 /**
  * Creates an information panel heading for the given paddock.
  * Includes a title with the paddock's ID and the close button, among other things.
@@ -197,7 +199,7 @@ var createNDVIVisualiser = function(paddock) {
           date,
           // the paddock chosen by user
           paddock.geometry(),
-          'NDVI for paddock'+ id,
+          'NDVI for paddock'+ paddock.get("ID"),
           true);
       // Show a label with the date on the map.
       manager.time_label.setValue(new Date(xValue).toUTCString());
