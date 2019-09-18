@@ -218,7 +218,7 @@ var createNDVIVisualiser = function(paddock) {
     onClick: visualise,
   });
   
-  var soilBox = ui.Checkbox({
+  var soilBox = ui.Select({
     label: 'show Soil Layer',
     //onClick?
   });
