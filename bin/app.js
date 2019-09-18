@@ -155,10 +155,6 @@ var initialiseInternalModules = function() {
 	
 	// Legend Widget
 	app.legendWidget.initialise(app);
-	
-	// Elevation legend widget
-  app.elevationLegendWidget.initialise(app);
-	
 };
 
 /**
