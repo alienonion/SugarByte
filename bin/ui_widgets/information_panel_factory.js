@@ -223,8 +223,8 @@ var createNDVIVisualiser = function(paddock) {
     //onClick?
   });
   
-  var evlBox = ui.Checkbox({
-    label: 'show Evl Layer',
+  var eleBox = ui.Checkbox({
+    label: 'show Elevation Layer',
     //onSelect?
   })
 
@@ -235,7 +235,7 @@ var createNDVIVisualiser = function(paddock) {
       endDatePanel,
       visualiseButton,
       soilBox,
-      evlBox,
+      eleBox,
       chartContainer
     ],
   });
