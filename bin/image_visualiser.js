@@ -45,12 +45,12 @@ exports.clearAllNdviLayers = function() {
 /**
  * Clear the layer of current information panel
  */
-exports.clearCurrentNdviLayer = function (currentLayer) {
-  // remove current layer when closing a information panel
-  Map.remove(currentLayer);
-  let layerIndex = manager.ndviLayers.indexOf(currentLayer);
-  manager.ndviLayers.splice(layerIndex, 1);
-};
+// exports.clearCurrentNdviLayer = function (currentLayer) {
+//   // remove current layer when closing a information panel
+//   Map.remove(currentLayer);
+//   let layerIndex = manager.ndviLayers.indexOf(currentLayer);
+//   manager.ndviLayers.splice(layerIndex, 1);
+// };
 
 /**
  * Finds a collection of images that intersect any of the given features within the given date range.
