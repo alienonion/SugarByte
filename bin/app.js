@@ -152,6 +152,9 @@ var initialiseInternalModules = function() {
 	// Image visualisation and paddock selection widget (panel along the top)
 	debug.info('Initialising input.js widget.');
 	app.input.initialise(app);
+
+	// Legend Widget
+	app.legendWidget.initialise(app);
 };
 
 /**
