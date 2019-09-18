@@ -26,7 +26,6 @@ exports.initialise = function(app) {
     style:{
       position:'top-left',
       width: '400px',
-      height:'200px',
     }
   });
   manager.time_label  = ui.Label({
