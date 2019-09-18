@@ -25,46 +25,10 @@ exports.initialise = function(app) {
     value: 'Click a point on the chart to show the NDVI for that date.',
     style: {
       position: 'top-left',
-      height: '35px',
+      height: '40px',
     }
   });
 };
-
-// /**
-// * to create the time label shows clicked time
-// */
-// var createSelectWidget = function () {
-//   debug.info('Creating selectTitle label');
-//   var selectTitle  = ui.Label({
-//       value: 'Please select the layer to show',
-//       style: {
-//           position: 'top-center',
-//           height: '40px',
-//       }
-//   });
-
-//   // Layer selection
-//   // keys
-//   var keys = {
-//       Soil: 'select NDVI layer',
-//       Evelation: 'select evelation layer'
-//   };
-//   // Select
-//   var selectBox = ui.Select({
-//       items: Object.keys(keys),
-//       //onChange: function(key) {
-//       // change layer
-//       //}
-//   });
-
-//   manager.layerSelectPanel = ui.Panel({
-//     widgets: [selectTitle, selectBox],
-//     layout: ui.Panel.Layout.flow('vertical'),
-//     style: {
-//       position: 'middle-right',
-//     }
-//   });
-// };
 
 
 
@@ -170,6 +134,7 @@ var createNDVIVisualiser = function(paddock) {
   });
 
 
+
   /**
    * The function to run when the visualise button's onClick event is triggered.
    * Updates the graph to use the new dates in the start/end date textboxes
@@ -214,9 +179,6 @@ var createNDVIVisualiser = function(paddock) {
     // add time label on the map
     Map.add(manager.time_label);
     debug.info("show time label on map");
-    // add select Panel to the map
-    Map.add(manager.layerSelectPanel);
-    debug.info("show layer select panel on map");
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function(xValue, yValue, seriesName) {
@@ -227,7 +189,10 @@ var createNDVIVisualiser = function(paddock) {
       debug.info("clicked data is", date);
 
       // Get the 5 day range (guarantees that at least one data point will be present
-      var dateRange = ee.DateRange(date, date.advance(5, 'day'));
+      // var dateRange = ee.DateRange(date, date.advance(5, 'day'));
+
+      // // clear all NDVI layers before displaying new one
+      // manager.app.imageVisualiser.clearAllNdviLayers();
 
       //visualizing NDVI of chosen time point of scatter chart on the map,
       // then assign returned layer to manager.currentLayer
@@ -245,7 +210,7 @@ var createNDVIVisualiser = function(paddock) {
       manager.time_label.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
       debug.info("added NDVI imagery to time series", date);
-    });
+    })
   };
     ////////////////////////////
   // Visualise button
@@ -253,6 +218,21 @@ var createNDVIVisualiser = function(paddock) {
     label: 'Visualise',
     onClick: visualise,
   });
+  
+  // Layer selection
+  // keys
+  var keys = {
+    Soil: 'select soil layer',
+    Evelation: 'select evelation layer'
+  };
+  // Select
+  var selectBox = ui.Select({
+    items: Object.keys(keys),
+    //onChange: function(key) {
+      // change layer
+    //}
+  });
+
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
@@ -280,7 +260,7 @@ var createSeasonComparator = function(paddock) {
   var growingSeasons = [];
 
   // Title label for growing season comparison
-  debug.info('Creating title label for growing season comparison.');
+  debug.info('Creating title label for growing season comparison.')
   var titleLabel = ui.Label({
     value: 'Growing Season Comparison',
     style: {
@@ -430,7 +410,7 @@ var createSeasonComparator = function(paddock) {
   var compareButton = ui.Button({
       label: 'Create/Update Comparison Chart',
       onClick: refreshComparisonChart,
-  });
+  })
 
   // Create and return the season comparator panel
   var seasonComparatorPanel = ui.Panel({
@@ -459,8 +439,6 @@ exports.createInfoPanel = function(paddock) {
   debug.info('Creating an info panel for the paddock:', paddock);
   // Create and add a heading for the info panel
   var headingWidget = createHeading(paddock);
-
-  createSelectWidget();
 
   // ndvi chart visualiser
   var visualiserWidget = createNDVIVisualiser(paddock);
