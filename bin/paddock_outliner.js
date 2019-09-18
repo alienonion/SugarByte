@@ -350,12 +350,11 @@ exports.refreshSelectedOutlines = function() {
   setSelectedLayer();
   // Add the layer to the map.
   debug.info('Selected paddock outlines layer:', manager.selected);
-  // Map.add(manager.elevation); 
+  Map.add(manager.elevation); 
   
   Map.add(manager.soil);
   
   Map.add(manager.selected); 
-  Map.add(manager.elevation); 
   debug.info('Finished refreshing selected paddock outlines.');
 };
 
