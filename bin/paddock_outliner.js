@@ -147,137 +147,137 @@ var setSelectedLayer = function() {
 
 
 
-/// li 
-var setElevationLayer = function() {
-  // Check if the data source for paddock outlines is empty
-  if (manager.app.paddocks === null) {
-    return;
-  }
-  // Filter to all the selected paddocks
+// /// li 
+// var setElevationLayer = function() {
+//   // Check if the data source for paddock outlines is empty
+//   if (manager.app.paddocks === null) {
+//     return;
+//   }
+//   // Filter to all the selected paddocks
   
   
-  var selectedPaddocks = ee.FeatureCollection(ee.FeatureCollection(manager.app.paddocks).filterMetadata(
-      manager.app.PROPERTY_SELECTED, 'equals', 1));
+//   var selectedPaddocks = ee.FeatureCollection(ee.FeatureCollection(manager.app.paddocks).filterMetadata(
+//       manager.app.PROPERTY_SELECTED, 'equals', 1));
   
   
-  //TODO: Check if this set is empty before creating a layer out of it.
+//   //TODO: Check if this set is empty before creating a layer out of it.
   
-  // Create a layer based off the currently selected paddocks
-  var elevationOfSelectedPaddocks = ee.Image('CGIAR/SRTM90_V4');
+//   // Create a layer based off the currently selected paddocks
+//   var elevationOfSelectedPaddocks = ee.Image('CGIAR/SRTM90_V4');
   
   
-  /**var mosaic = ee.Image('CGIAR/SRTM90_V4').mosaic();
-  var elevationOfSelectedPaddocks = mosaic.clip(selectedPaddocks);
-  manager.soil = ui.Map.Layer({
-      eeObject: elevationOfSelectedPaddocks, 
-      name: LAYER_NAME_ELEVATION,
-      shown: SHOWN_ELEVATION,
-  });
-  */
+//   /**var mosaic = ee.Image('CGIAR/SRTM90_V4').mosaic();
+//   var elevationOfSelectedPaddocks = mosaic.clip(selectedPaddocks);
+//   manager.soil = ui.Map.Layer({
+//       eeObject: elevationOfSelectedPaddocks, 
+//       name: LAYER_NAME_ELEVATION,
+//       shown: SHOWN_ELEVATION,
+//   });
+//   */
    
-  // var slope = ee.Terrain.slope(elevationOfSelectedPaddocks);
+//   // var slope = ee.Terrain.slope(elevationOfSelectedPaddocks);
   
 
-// // The region to reduce within.
-// var poly = manager.app.paddock.geometry();
+// // // The region to reduce within.
+// // var poly = manager.app.paddock.geometry();
 
-// // Reduce the image within the given region, using a reducer that
-// // computes the max pixel value.  We also specify the spatial
-// // resolution at which to perform the computation, in this case 200
-// // meters.
-// var max = elevationOfSelectedPaddocks.reduceRegion({
-//   reducer: ee.Reducer.max(),
-//   geometry: poly,
-//   scale: 200
-// });
+// // // Reduce the image within the given region, using a reducer that
+// // // computes the max pixel value.  We also specify the spatial
+// // // resolution at which to perform the computation, in this case 200
+// // // meters.
+// // var max = elevationOfSelectedPaddocks.reduceRegion({
+// //   reducer: ee.Reducer.max(),
+// //   geometry: poly,
+// //   scale: 200
+// // });
   
-  // manager.elevation = ui.Map.Layer({
-  //     eeObject: elevationOfSelectedPaddocks, 
-  //     // visParams: elevationVisParams, 
-  //     name: LAYER_NAME_ELEVATION,
-  //     shown: SHOWN_ELEVATION,
-  // });
+//   // manager.elevation = ui.Map.Layer({
+//   //     eeObject: elevationOfSelectedPaddocks, 
+//   //     // visParams: elevationVisParams, 
+//   //     name: LAYER_NAME_ELEVATION,
+//   //     shown: SHOWN_ELEVATION,
+//   // });
   
-  var visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
-      '#ffc623', '#ffa114','#ff5a0c']};
+//   var visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
+//       '#ffc623', '#ffa114','#ff5a0c']};
   
-  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams, "Elevation");
+//   manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams, "Elevation");
   
-  manager.elevation.setOpacity(0.5);
-  
-  
-  //https://developers.google.com/earth-engine/tutorial_api_03
-
-//   var image = ee.Image('CGIAR/SRTM90_V4');
-
-// // The region to reduce within.
-// var poly = ee.Geometry.Rectangle([-109.05, 41, -102.05, 37]);
-
-// // Reduce the image within the given region, using a reducer that
-// // computes the max pixel value.  We also specify the spatial
-// // resolution at which to perform the computation, in this case 200
-// // meters.
-// var max = image.reduceRegion({
-//   reducer: ee.Reducer.max(),
-//   geometry: poly,
-//   scale: 200
-// });
-
-// // Print the result (a Dictionary) to the console.
-// print(max);
+//   manager.elevation.setOpacity(0.5);
   
   
-//   var PointsSelected = [
-//   ee.Feature(
-//       ee.Geometry.Point([145.8960858217797, -17.56668979348206]),
-//       {'name': 'point 1'}),
-//   ee.Feature(
-//       ee.Geometry.Point([145.89668123185277, -17.566176769199103]), 
-//       {'name': 'point 2'}),
-//   ee.Feature(
-//       ee.Geometry.Point([145.89865533768773, -17.566054026681186]),
-//       {'name': 'point 3'}),
-//   ee.Feature(
-//       ee.Geometry.Point([145.89865533768773, -17.566054026681186]),
-//       {'name': 'point 4'}),
-//   ee.Feature(
-//       ee.Geometry.Point([145.89923234664957, -17.565685718404545]), 
-//       {'name': 'point 5'})
-// ];
+//   //https://developers.google.com/earth-engine/tutorial_api_03
 
-// var PointsSelected = ee.FeatureCollection(PointsSelected);
+// //   var image = ee.Image('CGIAR/SRTM90_V4');
 
-// var elevationTestChart = ui.Chart.image.byRegion({
-//   image: elevation,
-//   regions: PointsSelected,
-//   scale: 200,
-//   xProperty: 'name'
-// });
+// // // The region to reduce within.
+// // var poly = ee.Geometry.Rectangle([-109.05, 41, -102.05, 37]);
 
-// elevationTestChart.setOptions({
-//   title: 'Elevation test chart',
-//   vAxis: {
-//     title: 'Elevation (meters)'
-//   },
-//   legend: 'none',
-//   lineWidth: 1,
-//   pointSize: 4
-// });
+// // // Reduce the image within the given region, using a reducer that
+// // // computes the max pixel value.  We also specify the spatial
+// // // resolution at which to perform the computation, in this case 200
+// // // meters.
+// // var max = image.reduceRegion({
+// //   reducer: ee.Reducer.max(),
+// //   geometry: poly,
+// //   scale: 200
+// // });
 
-// print(elevationTestChart);
-
-// elevation = elevation.setName("hansen1"); 
-// elevation = elevation.setOpacity(0.5);
-
-// layer 1 = layer 1.setName("hansen1"); 
-// layer 1 = layer 1.setOpacity(0.5); 
-
-// Map.addLayer(elevation, {min: 500, max: 4500});
-// Map.addLayer(PointsSelected, {color: 'FF0000'});
-// Map.setCenter(145.89865533768773, -17.565685718404545, 11);
+// // // Print the result (a Dictionary) to the console.
+// // print(max);
   
   
-};
+// //   var PointsSelected = [
+// //   ee.Feature(
+// //       ee.Geometry.Point([145.8960858217797, -17.56668979348206]),
+// //       {'name': 'point 1'}),
+// //   ee.Feature(
+// //       ee.Geometry.Point([145.89668123185277, -17.566176769199103]), 
+// //       {'name': 'point 2'}),
+// //   ee.Feature(
+// //       ee.Geometry.Point([145.89865533768773, -17.566054026681186]),
+// //       {'name': 'point 3'}),
+// //   ee.Feature(
+// //       ee.Geometry.Point([145.89865533768773, -17.566054026681186]),
+// //       {'name': 'point 4'}),
+// //   ee.Feature(
+// //       ee.Geometry.Point([145.89923234664957, -17.565685718404545]), 
+// //       {'name': 'point 5'})
+// // ];
+
+// // var PointsSelected = ee.FeatureCollection(PointsSelected);
+
+// // var elevationTestChart = ui.Chart.image.byRegion({
+// //   image: elevation,
+// //   regions: PointsSelected,
+// //   scale: 200,
+// //   xProperty: 'name'
+// // });
+
+// // elevationTestChart.setOptions({
+// //   title: 'Elevation test chart',
+// //   vAxis: {
+// //     title: 'Elevation (meters)'
+// //   },
+// //   legend: 'none',
+// //   lineWidth: 1,
+// //   pointSize: 4
+// // });
+
+// // print(elevationTestChart);
+
+// // elevation = elevation.setName("hansen1"); 
+// // elevation = elevation.setOpacity(0.5);
+
+// // layer 1 = layer 1.setName("hansen1"); 
+// // layer 1 = layer 1.setOpacity(0.5); 
+
+// // Map.addLayer(elevation, {min: 500, max: 4500});
+// // Map.addLayer(PointsSelected, {color: 'FF0000'});
+// // Map.setCenter(145.89865533768773, -17.565685718404545, 11);
+  
+  
+// };
 
   // below is added by li   not sure whether it is right 
   
@@ -339,19 +339,19 @@ exports.refreshSelectedOutlines = function() {
   
   
   //li
-  Map.remove(manager.elevation); 
+  // Map.remove(manager.elevation); 
   
   Map.remove(manager.soil);
   
   // Create a new layer from the master list of paddocks
-  setElevationLayer();
+  // setElevationLayer();
   
   setSoilLayer();
   
   setSelectedLayer();
   // Add the layer to the map.
   debug.info('Selected paddock outlines layer:', manager.selected);
-  Map.add(manager.elevation); 
+  // Map.add(manager.elevation); 
   
   Map.add(manager.soil);
   
