@@ -199,15 +199,15 @@ var createNDVIVisualiser = function(paddock) {
           date,
           // the paddock chosen by user
           paddock.geometry(),
-          'NDVI for paddock'+ paddock.get("ID"),
+          'NDVI for paddock'+ paddock.get("ID").evaluate(),
           true);
+          
       // Show a label with the date on the map.
       manager.time_label.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.get("ID"));
       debug.info("added NDVI imagery to time series", date);
     })
   };
-
     ////////////////////////////
   // Visualise button
   var visualiseButton = ui.Button({
