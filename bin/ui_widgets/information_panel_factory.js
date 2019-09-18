@@ -28,6 +28,14 @@ exports.initialise = function(app) {
       height: '40px',
     }
   });
+  
+  manager.testButton = ui.Button({
+    value: 'test',
+    style:{
+      position: 'top-left',
+      height: '40px',
+    }
+  )};
 };
 
 
