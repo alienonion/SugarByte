@@ -219,11 +219,12 @@ var createNDVIVisualiser = function(paddock) {
   });
   
   var keys = {
-    Key_1: 'Soil Layer',
-    Key_2: 'Evelation Layer'
+    Soil: 'Soil Layer',
+    Evelation: 'Evelation Layer'
   };
 
   var selectBox = ui.Select({
+    value: 'Show a layer',
     items: Object.keys(keys),
     //onChange: function(key){}
   });
