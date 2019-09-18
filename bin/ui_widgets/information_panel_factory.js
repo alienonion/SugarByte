@@ -240,8 +240,8 @@ var createNDVIVisualiser = function(paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButton,
-      selectBox,
-      chartContainer
+      chartContainer,
+      selectBox
     ],
   });
   return visualiserPanel;
