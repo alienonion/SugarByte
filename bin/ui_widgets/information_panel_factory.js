@@ -24,6 +24,7 @@ exports.initialise = function(app) {
   //Container to show time label and select for layers
   manager.selectContainer = ui.Panel({
     style:{
+      position:'top-left',
       width: '100px',
       height:'30px',
     }
