@@ -163,8 +163,8 @@ var setElevationLayer = function() {
   //TODO: Check if this set is empty before creating a layer out of it.
   
   // Create a layer based off the currently selected paddocks
-  var mosaic = ee.Image('CGIAR/SRTM90_V4').mosaic();
-  var elevationOfSelectedPaddocks = mosaic.clip(selectedPaddocks);
+  
+  var elevationOfSelectedPaddocks = ee.Image('CGIAR/SRTM90_V4');
   // var slope = ee.Terrain.slope(elevationOfSelectedPaddocks);
   
 
