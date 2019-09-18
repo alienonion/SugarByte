@@ -217,6 +217,10 @@ var createNDVIVisualiser = function(paddock) {
     label: 'Visualise',
     onClick: visualise,
   });
+  
+  var checkbox = ui.Checkbox({
+    label: 'check',
+  });
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
@@ -224,6 +228,7 @@ var createNDVIVisualiser = function(paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButton,
+      checkbox,
       chartContainer
     ],
   });
