@@ -28,14 +28,6 @@ exports.initialise = function(app) {
       height: '40px',
     }
   });
-  
-  manager.testButton = ui.Button({
-    value: 'test',
-    style:{
-      position: 'top-left',
-      height: '40px',
-    }
-  )};
 };
 
 
@@ -191,6 +183,7 @@ var createNDVIVisualiser = function(paddock) {
 
       // Show the image for the clicked date.
       var date = ee.Date(new Date(xValue));
+      
       debug.info("clicked data is", date);
 
       // Get the 5 day range (guarantees that at least one data point will be present
@@ -207,7 +200,7 @@ var createNDVIVisualiser = function(paddock) {
           date,
           // the paddock chosen by user
           paddock.geometry(),
-          'NDVI for paddock'+ paddock.get("ID").evaluate(),
+          'NDVI for paddock'+ paddock.getString("ID"),
           true);
           
       // Show a label with the date on the map.
