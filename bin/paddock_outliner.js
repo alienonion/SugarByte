@@ -355,6 +355,7 @@ exports.refreshSelectedOutlines = function() {
   Map.add(manager.soil);
   
   Map.add(manager.selected); 
+  Map.add(manager.elevation); 
   debug.info('Finished refreshing selected paddock outlines.');
 };
 
