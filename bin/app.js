@@ -48,10 +48,10 @@ var createConstants = function() {
 	};
 	
 	// elevation visualisation parameters
-	app.elevation = {
-		min: 0, max: 100, 
-		palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d','#ffc623','#ffa114','#ff5a0c']
-    };
+// 	app.elevation = {
+// 		min: 0, max: 100, 
+// 		palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d','#ffc623','#ffa114','#ff5a0c']
+//     };
   
   // Defaults
   app.default = {
