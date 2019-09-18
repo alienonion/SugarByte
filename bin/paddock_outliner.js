@@ -370,5 +370,6 @@ exports.refreshElevationOutlines = function() {
   setElevationLayer();
   // Add the layer to the map.
   debug.info('elevation paddock outlines layer:', manager.elevation);
+  Map.add(manager.elevation); 
   debug.info('Finished refreshing elevation paddock outlines.');
 };
