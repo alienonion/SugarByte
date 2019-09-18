@@ -30,41 +30,41 @@ exports.initialise = function(app) {
   });
 };
 
-/**
- * to create the time label shows clicked time
- */
-var createSelectWidget = function () {
-    debug.info('Creating tip label');
-    var selectTitle  = ui.Label({
-        value: 'Please select the layer to show',
-        style: {
-            position: 'top-center',
-            height: '40px',
-        }
-    });
+// /**
+// * to create the time label shows clicked time
+// */
+// var createSelectWidget = function () {
+//   debug.info('Creating selectTitle label');
+//   var selectTitle  = ui.Label({
+//       value: 'Please select the layer to show',
+//       style: {
+//           position: 'top-center',
+//           height: '40px',
+//       }
+//   });
 
-    // Layer selection
-    // keys
-    var keys = {
-        Soil: 'select NDVI layer',
-        Evelation: 'select evelation layer'
-    };
-    // Select
-    var selectBox = ui.Select({
-        items: Object.keys(keys),
-        //onChange: function(key) {
-        // change layer
-        //}
-    });
+//   // Layer selection
+//   // keys
+//   var keys = {
+//       Soil: 'select NDVI layer',
+//       Evelation: 'select evelation layer'
+//   };
+//   // Select
+//   var selectBox = ui.Select({
+//       items: Object.keys(keys),
+//       //onChange: function(key) {
+//       // change layer
+//       //}
+//   });
 
-  manager.layerSelectPanel = ui.Panel({
-    widgets: [selectTitle, selectBox],
-    layout: ui.Panel.Layout.flow('vertical'),
-    style: {
-      position: 'middle-right',
-    }
-  });
-};
+//   manager.layerSelectPanel = ui.Panel({
+//     widgets: [selectTitle, selectBox],
+//     layout: ui.Panel.Layout.flow('vertical'),
+//     style: {
+//       position: 'middle-right',
+//     }
+//   });
+// };
 
 
 
