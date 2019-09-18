@@ -190,6 +190,7 @@ var createNDVIVisualiser = function(paddock) {
       manager.app.imageVisualiser.clearAllNdviLayers();
       //visualizing NDVI of chosen time point of scatter chart on the map
       manager.app.imageVisualiser.displayPaddockNDVIOnDate(
+
           //the clicked date on the scatter chart
           date,
           // the paddock chosen by user
@@ -198,6 +199,7 @@ var createNDVIVisualiser = function(paddock) {
           true);
       // Show a label with the date on the map.
       manager.time_label.setValue(new Date(xValue).toUTCString());
+      debug.info("display NDVI imagery for paddock:", paddock.get("ID"));
       debug.info("added NDVI imagery to time series", date);
     })
   };
