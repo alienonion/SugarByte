@@ -215,8 +215,8 @@ var createNDVIVisualiser = function(paddock) {
     Map.add(manager.time_label);
     debug.info("show time label on map");
     // add select Panel to the map
-    Map.add(manager.layerSelectPanel);
-    debug.info("show layer select panel on map");
+    // Map.add(manager.layerSelectPanel);
+    // debug.info("show layer select panel on map");
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function(xValue, yValue, seriesName) {
