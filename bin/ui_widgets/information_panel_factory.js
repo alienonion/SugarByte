@@ -226,9 +226,6 @@ var createNDVIVisualiser = function(paddock) {
       var date = ee.Date(new Date(xValue));
       debug.info("clicked data is", date);
 
-      // Get the 5 day range (guarantees that at least one data point will be present
-      var dateRange = ee.DateRange(date, date.advance(5, 'day'));
-
       //visualizing NDVI of chosen time point of scatter chart on the map,
       // then assign returned layer to manager.currentLayer
       manager.currenttLayer = manager.app.imageVisualiser.displayPaddockNDVIOnDate(
