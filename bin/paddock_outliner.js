@@ -135,8 +135,10 @@ var setSelectedLayer = function() {
   //TODO: Check if this set is empty before creating a layer out of it.
   
   // Create a layer based off the currently selected paddocks
-  var soilLayerOfSelectedPaddocks = ee.ImageCollection('CSIRO/SLGA').filterDate('2000-01-01', '2013-05-01');
-  manager.selected = ui.Map.Layer({
+  var mosaic = ee.ImageCollection('CSIRO/SLGA')
+  .filterDate('2000-01-01', '2013-05-01').mosaic();
+  var soilLayerOfSelectedPaddocks = mosaic.clip(selectedPaddocks);
+  manager.soil = ui.Map.Layer({
       eeObject: soilLayerOfSelectedPaddocks, 
       name: LAYER_NAME_SOIL,
       shown: SHOWN_SOIL,
@@ -184,11 +186,10 @@ var setElevationLayer = function() {
   //     name: LAYER_NAME_ELEVATION,
   //     shown: SHOWN_ELEVATION,
   // });
-
-  var visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
-      '#ffc623', '#ffa114','#ff5a0c']};
   
-  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams, "Elevation");
+  var visParams = {bands: ['elevation'], min: 0, max: 3000, palette: ['blue', 'green', 'red']};
+  
+  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams);
   
   manager.elevation.setOpacity(0.5);
   
