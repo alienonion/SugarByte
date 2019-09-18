@@ -164,7 +164,14 @@ var setElevationLayer = function() {
   
   // Create a layer based off the currently selected paddocks
   
-  var elevationOfSelectedPaddocks = ee.Image('CGIAR/SRTM90_V4');
+  
+  var mosaic = ee.Image('CGIAR/SRTM90_V4').mosaic();
+  var elevationOfSelectedPaddocks = mosaic.clip(selectedPaddocks);
+  manager.soil = ui.Map.Layer({
+      eeObject: elevationOfSelectedPaddocks, 
+      name: LAYER_NAME_ELEVATION,
+      shown: SHOWN_ELEVATION,
+  });
   // var slope = ee.Terrain.slope(elevationOfSelectedPaddocks);
   
 
@@ -188,12 +195,13 @@ var setElevationLayer = function() {
   //     shown: SHOWN_ELEVATION,
   // });
   
-  var visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
+  /**var visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
       '#ffc623', '#ffa114','#ff5a0c']};
   
   manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams, "Elevation");
   
   manager.elevation.setOpacity(0.5);
+  */
   
   //https://developers.google.com/earth-engine/tutorial_api_03
 
