@@ -1,182 +1,353 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
 var farmer = ee.FeatureCollection("projects/1622crop/regions");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
+/**
+ * @fileoverview This script contains functions for 
+ * rendering one or more feature collections on to the map as outlines.
+ * 
+ * 
+ */
 
-// The base application object.
-var app = {};
-
-// Get now date
-var date = new Date();
-var nowYear = date.getFullYear();
-var nowMonth = date.getMonth()+1;
-var nowDate = date.getDate();
-var fullDate = nowYear + '-' + nowMonth + '-' + nowDate;
+var manager = {};
 
 var debug = require('users/balddinosaur/sugarbyte:bin/debug.js');
 
-// Import all required scripts, including those required by imported scripts.
-// ui widgets
-app.draw = require('users/balddinosaur/sugarbyte:bin/ui_widgets/draw.js');
-app.infoPanelFactory = require('users/balddinosaur/sugarbyte:bin/ui_widgets/information_panel_factory.js');
-app.paddockInspector = require('users/balddinosaur/sugarbyte:bin/ui_widgets/paddock_inspector.js');
-// paddock management
-app.paddockOutliner = require('users/balddinosaur/sugarbyte:bin/paddock_outliner.js');
-app.paddockManager = require('users/balddinosaur/sugarbyte:bin/paddock_manager.js');
-// extras
-app.cloudMasker = require('users/balddinosaur/sugarbyte:bin/cloud_masking.js');
-app.smoother = require('users/balddinosaur/sugarbyte:bin/smooth_filter.js');
-app.imageVisualiser = require('users/balddinosaur/sugarbyte:bin/image_visualiser.js');
-app.mapClickHandler = require('users/balddinosaur/sugarbyte:bin/map_click_handler.js');
-app.input = require('users/balddinosaur/sugarbyte:bin/ui_widgets/input.js');
-app.legendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/legend_widget.js');
-
 /**
- * Adds global application constants as properties of the root app object.
+ * Instantiate the paddock outline visualiser tool.
+ * @param {Object} app - The root application object. This must be configured
+ * @param {String} app.PROPERTY_SELECTED - The name of the property that flags a paddock as selected.
+ * @param {ee.FeatureCollection} app.paddocks - The complete list of paddocks.
  */
-var createConstants = function() {
-	// Selection property. Dictates whether or not a paddock is currently selected.
-  app.PROPERTY_SELECTED = 'inspected';
-  app.PROPERTY_TIME = 'system:time_start';
-	
-	// NDVI Visualisation parameters
-	app.vis = {
-		min: -0.1, max: 1, 
-	//  palette: ['FFFFFF', 'CE7E45', 'FCD163', '66A000', '207401',
-  //       '056201', '004C00', '023B01', '012E01', '011301']
-    palette: ['red', 'CE7E45', 'FCD163', '66A000', '207401',
-        '056201', '011301']
-	};
-  
-  // Defaults
-  app.default = {
-    CHART_START_DATE: '2018-01-01',
-    CHART_END_DATE: fullDate, 
-    MAP_ZOOM: 15,
-    MAP_ZOOM_SELECTED: 16,
-    mapCoordinates: {
-      LON: 145.9222,
-      LAT: -17.566
-    },
-    DATE_PLACEHOLDER: 'yyyy-mm-dd',
-  };
+exports.initialise = function(app) {
+	debug.info('Initialising paddockOutliner.');
+  // Save a reference to the app
+  manager.app = app;
+  manager.outlines = ui.Map.Layer();
+  manager.selected = ui.Map.Layer();
+  manager.elevation = ui.Map.Layer();
+  // Save a soil layer to the app
+  manager.soil = ui.Map.Layer();
 };
 
-/**
- * Adds global application variables as properties of the root app object.
- * These are variables that may be reassigned or altered by other app modules.
- * Altogether these variables should amount to the current application state.
- */
-var createVariables = function() {
-	// The complete list of paddocks. If the value of this is null at any point then it is considered empty.
-	app.paddocks = null; // ee.FeatureCollection
-	
-	// The complete available set of satellite imagery data.
-	app.dataset; // ee.ImageCollection
-	
-	// Boolean of whether or not the user is drawing a paddock on the map
-	app.drawing = false;
+// --------------------------------------------
+// Module constants
+// --------------------------------------------
+// visParams objects for outlines.
+var outlineVisParams = {
+  palette:'FFFFFF'
+};
+var selectedVisParams = {
+  palette:'FF0000'
 };
 
-/**
- * Generates and assigns a complete set of satellite imagery data to app.dataset.
- * This includes:
- *    - fetching the entire set of Sentinel2-1C data
- *    - filtering it by location to a smaller set (near checci paddocks)
- *    - masks clouds
- *    - adds an NDVI band
- *    - removes all bands except the NDVI band
- */
-var generateDataset = function() {
-  var SATELLITE_STRING_SENTINEL = 'COPERNICUS/S2';
-  var band = {
-    NIR: 'B8',
-    RED: 'B4',
-    NDVI: 'NDVI'
-  };
-	// Fetch and filter Sentinel2 dataset to a small area
-	var point = ee.Geometry.Point(app.default.mapCoordinates.LON, app.default.mapCoordinates.LAT); // This is somewhere near cecchi paddocks
-	app.dataset = ee.ImageCollection(SATELLITE_STRING_SENTINEL).filterBounds(point);
-	// Mask clouds from dataset
-	app.dataset = ee.ImageCollection(app.cloudMasker.maskCloudsScoring(
-	    app.dataset, app.cloudMasker.SATELLITE.SENTINEL, 1, 1, 1));
-	// Calculate and add NDVI band
-	app.dataset = app.dataset.map(function(image) {
-				var ndvi = image.normalizedDifference([band.NIR, band.RED]).rename(band.NDVI);
-				return image.addBands(ndvi).copyProperties(image, [app.PROPERTY_TIME]); // preserve the time property
-	});
-	// Remove all other bands that are no longer used.
-	app.dataset = app.dataset.select(band.NDVI);
-};
+// Layer titles
+var LAYER_NAME_OUTLINES = 'All paddock outlines';
+var LAYER_NAME_SELECTED = 'Currently selected paddock: ';
+var LAYER_NAME_ELEVATION = 'Elevation layer of selected paddock: ';
+
+// soil layer title
+var LAYER_NAME_SOIL = 'Soil layer: ';
+
+// Whether or not the outlines should be shown automatically.
+// Setting these to false can speed up app performance.
+var SHOWN_OUTLINES = true;
+var SHOWN_SELECTED = true;
+var SHOWN_ELEVATION= true;
+
+// Setting soil layer to be shown automatically.
+var SHOWN_SOIL = true;
 
 /**
- * Initialises or instantiates all internal modules utilised by the application.
+ * Resets the outline layer to the current master list of paddocks.
  */
-var initialiseInternalModules = function() {
-	// Paddock manager
-	app.paddockManager.initialise(app);
-	
-  //--------------------------------------------------------------------------------
-  // Hardcoded to start with cecchi2016 paddocks pre-drawn. 
-  // These need to be added before app.inputWidget is instantiated. Should be refactored later to not matter.
-  app.paddockManager.addPaddocksWithoutUpdating(ee.FeatureCollection(farmer));
-  //--------------------------------------------------------------------------------
-  
-	// Paddock outliner manager
-	app.paddockOutliner.initialise(app);
-	
-	// Paddock inspector UI widget
-	app.paddockInspector.initialise(app);
-	
-	// Paddock Inspector Informaion Panel factory
-	app.infoPanelFactory.initialise(app);
-	
-	// Map click Handler
-	app.mapClickHandler.initialise(app);
-	
-	// Image visualisation manager
-	app.imageVisualiser.initialise(app);
-	
-	// Geometry input.js widget (for drawing new paddocks)
-	debug.info('Initialising drawing widget.');
-	app.drawingWidget = app.draw.create('Custom Geometry', app, true);
-	
-	// Image visualisation and paddock selection widget (panel along the top)
-	debug.info('Initialising input.js widget.');
-	app.input.initialise(app);
-	
-	// Legend Widget
-	app.legendWidget.initialise(app);
-	
-};
-
-/**
- * Initialises map settings.
- */
-var initialiseMapSettings = function() {
-  Map.setControlVisibility({
-    all: true,
-    zoomControl: true,
-    scaleControl: true,
-    fullscreenControl: true
+var setOutlineLayer = function() {
+  debug.info('Setting the basic paddocks outline map layer.');
+  // Check if the data source for paddock outlines is empty
+  if (manager.app.paddocks === null) {
+    return;
+  }
+  // Create a layer for the outlines of all recognised paddocks
+  var outlinesOfPaddocks = ee.Image().paint(manager.app.paddocks, 0, 1);
+  manager.outlines = ui.Map.Layer({
+      eeObject: outlinesOfPaddocks, 
+      visParams: outlineVisParams, 
+      name: LAYER_NAME_OUTLINES,
+      shown: SHOWN_OUTLINES,
   });
-	Map.style().set('cursor', 'crosshair');
-	Map.setOptions('satellite');
-	Map.onClick(app.mapClickHandler.handleClick);
-	Map.setCenter(app.default.mapCoordinates.LON, app.default.mapCoordinates.LAT, app.default.MAP_ZOOM);
 };
 
 /**
- * Initialises the entire application. 
- * The order of functions executed here matters significantly.
+ * Resets the selected layer to the current master list of selected paddocks.
  */
-var initialiseApp = function() {
-  createConstants();
-  createVariables();
-  generateDataset();
-  initialiseInternalModules();
-  initialiseMapSettings();
-  // Refresh paddock outlines now that there are some paddocks.
-	app.paddockOutliner.refreshOutlines();
+var setSelectedLayer = function() {
+  debug.info('Setting the selected paddocks indicator map layer.');
+  // Check if the data source for paddock outlines is empty
+  if (manager.app.paddocks === null) {
+    return;
+  }
+  // Filter to all the selected paddocks
+  var selectedPaddocks = ee.FeatureCollection(ee.FeatureCollection(manager.app.paddocks).filterMetadata(
+      manager.app.PROPERTY_SELECTED, 'equals', 1));
+  debug.info('selectedPaddocks:', selectedPaddocks);
+  
+  //TODO: Check if this set is empty before creating a layer out of it.
+  
+  // Create a layer based off the currently selected paddocks
+  var outlinesOfSelectedPaddocks = ee.Image().paint(selectedPaddocks, 0, 5);
+  manager.selected = ui.Map.Layer({
+      eeObject: outlinesOfSelectedPaddocks, 
+      visParams: selectedVisParams, 
+      name: LAYER_NAME_SELECTED,
+      shown: SHOWN_SELECTED,
+  });
 };
 
-initialiseApp();
+/**
+ * Resets the soil layer to the current master list of selected paddocks.
+ */
+  var setSoilLayer = function() {
+  debug.info('Setting the selected paddocks soil map layer.');
+  // Check if the data source for paddock outlines is empty
+  if (manager.app.paddocks === null) {
+    return;
+  }
+  // Filter to all the selected paddocks
+  var selectedPaddocks = ee.FeatureCollection(ee.FeatureCollection(manager.app.paddocks).filterMetadata(
+      manager.app.PROPERTY_SELECTED, 'equals', 1));
+  debug.info('selectedPaddocks:', selectedPaddocks);
+  
+  //TODO: Check if this set is empty before creating a layer out of it.
+  
+  // Create a layer based off the currently selected paddocks
+  var mosaic = ee.ImageCollection('CSIRO/SLGA')
+  .filterDate('2000-01-01', '2013-05-01').mosaic();
+  var soilLayerOfSelectedPaddocks = mosaic.clip(selectedPaddocks);
+  manager.soil = ui.Map.Layer({
+      eeObject: soilLayerOfSelectedPaddocks, 
+      name: LAYER_NAME_SOIL,
+      shown: SHOWN_SOIL,
+  });
+};
+
+
+var setElevationLayer = function() {
+  // Check if the data source for paddock outlines is empty
+  if (manager.app.paddocks === null) {
+    return;
+  }
+  // Filter to all the selected paddocks
+  
+  // var selectedPaddocks = ee.FeatureCollection(ee.FeatureCollection(manager.app.paddocks).filterMetadata(
+  //     manager.app.PROPERTY_SELECTED, 'equals', 1));
+  
+  
+  // Create a layer based off the currently selected paddocks
+  var elevationOfSelectedPaddocks = ee.Image('CGIAR/SRTM90_V4');
+  
+
+   
+  // var slope = ee.Terrain.slope(elevationOfSelectedPaddocks);
+  
+
+// // The region to reduce within.
+// var poly = manager.app.paddock.geometry();
+
+// // Reduce the image within the given region, using a reducer that
+// // computes the max pixel value.  We also specify the spatial
+// // resolution at which to perform the computation, in this case 200
+// // meters.
+// var max = elevationOfSelectedPaddocks.reduceRegion({
+//   reducer: ee.Reducer.max(),
+//   geometry: poly,
+//   scale: 200
+// });
+  
+  // manager.elevation = ui.Map.Layer({
+  //     eeObject: elevationOfSelectedPaddocks, 
+  //     // visParams: elevationVisParams, 
+  //     name: LAYER_NAME_ELEVATION,
+  //     shown: SHOWN_ELEVATION,
+  // });
+  
+  var visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
+      '#ffc623', '#ffa114','#ff5a0c']};
+  
+  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams, "Elevation");
+  
+  manager.elevation.setOpacity(0.5);
+  
+  
+  //https://developers.google.com/earth-engine/tutorial_api_03
+
+//   var image = ee.Image('CGIAR/SRTM90_V4');
+
+// // The region to reduce within.
+// var poly = ee.Geometry.Rectangle([-109.05, 41, -102.05, 37]);
+
+// // Reduce the image within the given region, using a reducer that
+// // computes the max pixel value.  We also specify the spatial
+// // resolution at which to perform the computation, in this case 200
+// // meters.
+// var max = image.reduceRegion({
+//   reducer: ee.Reducer.max(),
+//   geometry: poly,
+//   scale: 200
+// });
+
+// // Print the result (a Dictionary) to the console.
+// print(max);
+  
+  
+//   var PointsSelected = [
+//   ee.Feature(
+//       ee.Geometry.Point([145.8960858217797, -17.56668979348206]),
+//       {'name': 'point 1'}),
+//   ee.Feature(
+//       ee.Geometry.Point([145.89668123185277, -17.566176769199103]), 
+//       {'name': 'point 2'}),
+//   ee.Feature(
+//       ee.Geometry.Point([145.89865533768773, -17.566054026681186]),
+//       {'name': 'point 3'}),
+//   ee.Feature(
+//       ee.Geometry.Point([145.89865533768773, -17.566054026681186]),
+//       {'name': 'point 4'}),
+//   ee.Feature(
+//       ee.Geometry.Point([145.89923234664957, -17.565685718404545]), 
+//       {'name': 'point 5'})
+// ];
+
+// var PointsSelected = ee.FeatureCollection(PointsSelected);
+
+// var elevationTestChart = ui.Chart.image.byRegion({
+//   image: elevation,
+//   regions: PointsSelected,
+//   scale: 200,
+//   xProperty: 'name'
+// });
+
+// elevationTestChart.setOptions({
+//   title: 'Elevation test chart',
+//   vAxis: {
+//     title: 'Elevation (meters)'
+//   },
+//   legend: 'none',
+//   lineWidth: 1,
+//   pointSize: 4
+// });
+
+// print(elevationTestChart);
+
+// elevation = elevation.setName("hansen1"); 
+// elevation = elevation.setOpacity(0.5);
+
+// layer 1 = layer 1.setName("hansen1"); 
+// layer 1 = layer 1.setOpacity(0.5); 
+
+// Map.addLayer(elevation, {min: 500, max: 4500});
+// Map.addLayer(PointsSelected, {color: 'FF0000'});
+// Map.setCenter(145.89865533768773, -17.565685718404545, 11);
+  
+  
+};
+
+//   below is added by li   not sure whether it is right 
+  
+  
+//   var elevation = ee.Image('CGIAR/SRTM90_V4');
+
+// var allPointsSelected = [
+//   ee.Feature(
+//       ee.Geometry.Point([145.8960858217797, -17.56668979348206]),
+//       {'name': 'point 1'}),
+//   ee.Feature(
+//       ee.Geometry.Point([145.89668123185277, -17.566176769199103]), 
+//       {'name': 'point 2'}),
+//   ee.Feature(
+//       ee.Geometry.Point([145.89865533768773, -17.566054026681186]),
+//       {'name': 'point 3'}),
+//   ee.Feature(
+//       ee.Geometry.Point([145.89865533768773, -17.566054026681186]),
+//       {'name': 'point 4'}),
+//   ee.Feature(
+//       ee.Geometry.Point([145.89923234664957, -17.565685718404545]), 
+//       {'name': 'point 5'})
+// ];
+
+// var allPointsSelected = ee.FeatureCollection(allPointsSelected);
+
+
+//   above Li
+
+
+
+
+/**
+ * Resets the basic outlines of all paddocks. Does not touch the selected paddocks.
+ * This should be called whenever the master of paddocks is altered.
+ */
+exports.refreshOutlines = function() {
+  debug.info('Attempting to refresh paddock outlines.');
+  // Remove the current layer of outlines. 
+  // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
+  Map.remove(manager.outlines); 
+  // Create a new layer from the master list of paddocks
+  setOutlineLayer();
+  // Add the layer to the map.
+  debug.info('Paddock outlines layer:', manager.outlines);
+  Map.add(manager.outlines); 
+  debug.info('Finished refreshing paddock outlines.');
+};
+
+/**
+ * Resets the outlines of all  selected paddocks. Does not touch the basic paddock outlines.
+ * This should be called whenever the list of selected paddocks is altered.
+ */
+exports.refreshSelectedOutlines = function() {
+  debug.info('Attempting to refresh selected paddock outlines.');
+  // Remove the current layer of selected paddock outlines. 
+  // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
+  Map.remove(manager.selected); 
+  
+  
+  //li
+  Map.remove(manager.elevation); 
+  
+  Map.remove(manager.soil);
+  
+  //Create a new layer from the master list of paddocks
+  setElevationLayer();
+  
+  setSoilLayer();
+  
+  setSelectedLayer();
+  // Add the layer to the map.
+  debug.info('Selected paddock outlines layer:', manager.selected);
+  Map.add(manager.elevation); 
+  
+  Map.add(manager.soil);
+  
+  Map.add(manager.selected); 
+  debug.info('Finished refreshing selected paddock outlines.');
+};
+
+
+// by li, can delete 
+exports.addElevation = function() {
+  debug.info('Attempting to add elevation paddock outlines.');
+  // Remove the current layer of selected paddock outlines. 
+  // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
+  Map.remove(manager.elevation); 
+  // Create a new layer from the master list of paddocks
+  setElevationLayer();
+  // Add the layer to the map.
+  Map.add(manager.elevation); 
+  debug.info('Finished refreshing elevation paddock outlines.');
+};
+
+exports.deleteElevation = function() {
+  debug.info('Attempting to delete elevation layer');
+  // Remove the current layer of selected paddock outlines. 
+  // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
+  Map.remove(manager.elevation); 
+  debug.info('Finished deleting elevation paddock outlines.');
+};
