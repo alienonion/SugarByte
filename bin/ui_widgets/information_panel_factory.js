@@ -62,7 +62,7 @@ var createSelectWidget = function (paddock) {
     widgets: [selectTitle, selectBox],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      position: 'middle-right',
+      position: 'middle-left',
     }
   });
   
