@@ -286,8 +286,8 @@ var createNDVIVisualiser = function(paddock) {
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
+      debug.info("added NDVI imagery to time series", date);
     });
-    debug.info("added NDVI imagery to time series", date);
   };
     ////////////////////////////
   // Visualise button
