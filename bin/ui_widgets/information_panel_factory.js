@@ -28,13 +28,13 @@ exports.initialise = function(app) {
 */
 var createSelectWidget = function (paddock) {
   
-  manager.timeLabel  = ui.Label({
-    value: 'Click a point on the chart to show the NDVI for that date.',
-    style: {
-      position: 'top-left',
-      height: '30px',
-    }
-  });
+  // manager.timeLabel  = ui.Label({
+  //   value: 'Click a point on the chart to show the NDVI for that date.',
+  //   style: {
+  //     position: 'top-center',
+  //     height: '30px',
+  //   }
+  // });
   debug.info("created time label");
 
   var selectTitle  = ui.Label({
