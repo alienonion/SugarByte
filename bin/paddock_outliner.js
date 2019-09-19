@@ -109,7 +109,7 @@ var setSelectedLayer = function() {
  */
   var setSoilLayer = function() {
   debug.info('Setting the selected paddocks soil map layer.');
-  // Check if the data source for paddock outlines is empty
+  // Check if the data source for paddock soil is empty
   if (manager.app.paddocks === null) {
     return;
   }
@@ -120,7 +120,7 @@ var setSelectedLayer = function() {
   
   //TODO: Check if this set is empty before creating a layer out of it.
   
-  // Create a layer based off the currently selected paddocks
+  // Create a soil layer based off the currently selected paddocks
   var mosaic = ee.ImageCollection('CSIRO/SLGA')
   .filterDate('2000-01-01', '2013-05-01').mosaic();
   var soilLayerOfSelectedPaddocks = mosaic.clip(selectedPaddocks);
@@ -145,13 +145,6 @@ var setElevationLayer = function() {
   
   // Create a layer based off the currently selected paddocks
   var elevationOfSelectedPaddocks = ee.Image('CGIAR/SRTM90_V4');
-  
-  // manager.elevation = ui.Map.Layer({
-  //     eeObject: elevationOfSelectedPaddocks, 
-  //     // visParams: elevationVisParams, 
-  //     name: LAYER_NAME_ELEVATION,
-  //     shown: SHOWN_ELEVATION,
-  // });
   
   var visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
       '#ffc623', '#ffa114','#ff5a0c']};
