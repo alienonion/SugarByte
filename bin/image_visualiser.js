@@ -40,10 +40,6 @@ exports.clearAllNdviLayers = function() {
   manager.ndviLayers.map(removeFromMap);
   // Reset list
   manager.ndviLayers = [];
-  // remove elevation layer
-  Map.remove(manager.elevationLayer);
-  // reset elevation layer
-  manager.elevationLayer = null;
 };
 
 /**
@@ -143,6 +139,6 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   }
 
   var layer = Map.addLayer(elevationOfPaddocks, visParams, layerName);
-  manager.elevationLayer = layer;
+  manager.ndviLayers.push(layer);
   return layer;
 }
