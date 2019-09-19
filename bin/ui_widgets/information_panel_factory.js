@@ -20,31 +20,33 @@ exports.initialise = function(app) {
   debug.info('Initialising informationPanelFactory.');
   // Grab a reference to the app
   manager.app = app;// create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
-  manager.time_label  = ui.Label({
-    value: 'Click a point on the chart to show the NDVI for that date.',
-    style: {
-      position: 'top-left',
-      height: '40px',
-    }
-  });
+
   
-  // add time label on the map
-  Map.add(manager.time_label);
-  debug.info("show time label on map");
+
 };
 
 /**
 * to create the time label shows clicked time
 */
 var createSelectWidget = function (paddock) {
-  debug.info('Creating selectTitle label');
+  
+  manager.time_label  = ui.Label({
+    value: 'Click a point on the chart to show the NDVI for that date.',
+    style: {
+      position: 'top-left',
+      height: '30px',
+    }
+  });
+  debug.info("created time label");
+
   var selectTitle  = ui.Label({
       value: 'Please select the layer to show',
       style: {
           position: 'top-center',
-          height: '40px',
+          height: '30px',
       }
   });
+  debug.info('Created selectTitle label');
   // Layer selection
   // keys
   var keys = {
@@ -62,6 +64,7 @@ var createSelectWidget = function (paddock) {
     widgets: [selectTitle, selectBox],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
+      width: "80px",
       position: 'middle-left',
     }
   });
