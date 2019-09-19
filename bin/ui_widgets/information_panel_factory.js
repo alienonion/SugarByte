@@ -28,13 +28,13 @@ exports.initialise = function(app) {
 */
 var createSelectWidget = function (paddock) {
   
-  // manager.timeLabel  = ui.Label({
-  //   value: 'Click a point on the chart to show the NDVI for that date.',
-  //   style: {
-  //     position: 'top-center',
-  //     height: '30px',
-  //   }
-  // });
+  manager.timeLabel  = ui.Label({
+    value: 'Click a point on the chart to show the NDVI for that date.',
+    style: {
+      position: 'top-center',
+      height: '30px',
+    }
+  });
   debug.info("created time label");
 
   var selectTitle  = ui.Label({
@@ -59,7 +59,7 @@ var createSelectWidget = function (paddock) {
       //}
   });
   manager.layerSelectPanel = ui.Panel({
-    widgets: [selectTitle, selectBox],
+    widgets: [manager.timeLabel, selectTitle, selectBox],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
       width: '300px',
