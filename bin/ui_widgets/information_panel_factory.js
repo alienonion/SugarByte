@@ -42,6 +42,7 @@ var createSelectWidget = function (paddock) {
       style: {
           position: 'top-center',
           height: '30px',
+          backgroundColor:'#dcf0e4',
       }
   });
   debug.info('Created selectTitle label');
@@ -62,7 +63,7 @@ var createSelectWidget = function (paddock) {
     widgets: [manager.timeLabel, selectTitle, selectBox],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      width: '300px',
+      width: '250px',
       position: 'middle-left',
     }
   });
