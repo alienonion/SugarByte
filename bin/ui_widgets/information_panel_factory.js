@@ -59,6 +59,7 @@ var createSelectWidget = function (paddock) {
   Select
 */
 var createSelectButton = function() {
+  manager.layerSelectPanel.remove(manager.selectBoxContainer);
   
   var selectBoxTitle  = ui.Label({
     value: 'Please select the layer to show',
@@ -91,11 +92,19 @@ var createSelectButton = function() {
         debug.info("undisplay ndvi layer");
         break;
     }
-
   }
   });
+  
+  manager.selectBoxContainer = ui.Panel({
+    widgets: [selectBoxTitle, manager.selectBox],
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      maxWidth: '250px',
+      position: 'top-center',
+    }
+  })
+  
   manager.layerSelectPanel.add(selectBoxTitle);
-  manager.layerSelectPanel.add(manager.selectBox);
 }
 
 /**
