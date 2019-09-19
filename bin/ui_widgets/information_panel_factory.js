@@ -25,6 +25,14 @@ exports.initialise = function(app) {
   manager.layerSelectPanel = null;
   //
   manager.currentLayers = {};
+  //
+  manager.selectBoxContainer = ui.Panel({
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      maxWidth: '250px',
+      position: 'top-center',
+    }
+  })
 };
 
 /**
@@ -60,6 +68,7 @@ var createSelectWidget = function (paddock) {
 */
 var createSelectButton = function() {
   manager.layerSelectPanel.remove(manager.selectBoxContainer);
+  manager.selectBoxContainer.clear();
   
   var selectBoxTitle  = ui.Label({
     value: 'Please select the layer to show',
@@ -73,7 +82,7 @@ var createSelectButton = function() {
   });
   debug.info('Created selectTitle label');
   
-  manager.selectBox = ui.Select({
+  var selectBox = ui.Select({
   items: Object.keys(manager.currentLayers),
   onChange: function(key) {
     print(manager.currentLayers[key]);
@@ -95,14 +104,9 @@ var createSelectButton = function() {
   }
   });
   
-  manager.selectBoxContainer = ui.Panel({
-    widgets: [selectBoxTitle, manager.selectBox],
-    layout: ui.Panel.Layout.flow('vertical'),
-    style: {
-      maxWidth: '250px',
-      position: 'top-center',
-    }
-  })
+  manager.selectBoxContainer.add(selectBoxTitle);
+  manager.selectBoxContainer.add(selectBox);
+
   
   manager.layerSelectPanel.add(selectBoxTitle);
 }
