@@ -135,10 +135,10 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
       '#ffc623', '#ffa114','#ff5a0c'], shown: false};
 
   if (clipToPaddocks) {
-    elevationOfSelectedPaddock= elevationImage.clipToCollection(paddockCollection);
+    var elevationOfPaddocks = elevationImage.clipToCollection(paddockCollection);
   }
 
-  var layer = Map.addLayer(paddockCollection, visParams, layerName);
+  var layer = Map.addLayer(elevationOfPaddocks, visParams, layerName);
   manager.elevationLayer = layer;
   return layer;
 }
