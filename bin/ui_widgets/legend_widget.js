@@ -57,7 +57,9 @@ manager.createUi = function() {
   Map.add(manager.legend);
 };
 
-
+/**
+ * Initialises the NDVI legend widget.
+ */
 exports.initialise = function(app) {
   debug.info('Initialising legendWidget.');
 
@@ -65,6 +67,9 @@ exports.initialise = function(app) {
   manager.createUi();
 };
 
+/**
+ * Removes the NDVI legend widget if it already exists.
+ */
 exports.removeWidget = function() {
   if (manager.legend != null) {
     debug.info('Remove elevation legend widget. ');

@@ -57,14 +57,20 @@ manager.createUi = function() {
     Map.add(manager.legend);
 };
 
-
+/**
+ * Initialises the elevation legend widget.
+ */
 exports.initialise = function(app) {
-    debug.info('Initialising elevationLegendWidget.');
-
-    manager.createVariables(app);
-    manager.createUi();
+    if(manager.app == null) {
+        debug.info('Initialising elevationLegendWidget.');
+        manager.createVariables(app);
+        manager.createUi();
+    }
 };
 
+/**
+ * Removes the elevation legend widget if it already exists.
+ */
 exports.removeWidget = function () {
     if (manager.legend != null) {
         debug.info('Remove elevation legend widget. ');
