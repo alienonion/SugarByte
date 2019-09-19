@@ -78,7 +78,6 @@ var createSelectButton = function() {
     print(manager.currentLayers[key]);
     print(manager.currentLayers["NDVI"]);
     var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
-    Map.layers().get(0).setShown(false);
 
     switch (manager.currentLayers[key]) {
       case manager.currentLayers.NDVI:
