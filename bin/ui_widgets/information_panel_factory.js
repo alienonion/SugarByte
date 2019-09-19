@@ -95,6 +95,7 @@ var createSelectWidget = function (paddock) {
       position: 'middle-left',
     }
   });
+
   return layerSelectPanel;
 };
 
