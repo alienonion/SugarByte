@@ -83,7 +83,6 @@ var createSelectButton = function() {
       case manager.currentLayers.NDVI:
         var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.elevation);
         Map.layers().get(UnshownLayerIndex).setShown(false);
-        manager.app.legend_widget.removeWidget();
         break;
       case manager.currentLayers.elevation:
         var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.NDVI);
@@ -279,6 +278,12 @@ var createNDVIVisualiser = function(paddock) {
           'NDVI layer for paddock: '+ manager.id,
           true);
 
+      manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
+          // the paddock chosen by user
+          manager.app.paddocks,
+          // the layer name
+          'elvation',
+          true);
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
