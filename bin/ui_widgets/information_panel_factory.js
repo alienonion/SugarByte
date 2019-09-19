@@ -13,6 +13,7 @@ var manager = {};
 
 var debug = require('users/balddinosaur/sugarbyte:bin/debug.js');
 
+
 /**
  * Initialises the information panel factory.
  */
@@ -20,7 +21,8 @@ exports.initialise = function(app) {
   debug.info('Initialising informationPanelFactory.');
   // Grab a reference to the app
   manager.app = app;// create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
-  
+  // no default layer select panel
+  manager.layerSelectPanel = null;
 };
 
 /**
@@ -72,8 +74,8 @@ var createSelectWidget = function (paddock) {
       }
   )
 
-  manager.layerSelectPanel = ui.Panel({
-    widgets: [],
+  var layerSelectPanel = ui.Panel({
+    widgets: [manager.timeLabel],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
       maxWidth: '250px',
@@ -81,8 +83,9 @@ var createSelectWidget = function (paddock) {
     }
   });
   // add the layer select panel to the map
-  Map.add(manager.layerSelectPanel);
+  Map.add(layerSelectPanel);
   debug.info("added the layer select panel");
+  return layerSelectPanel;
 };
 
 /**
@@ -133,8 +136,11 @@ var createHeading = function(paddock) {
     // deselect paddock and close current info panel
     manager.app.paddockManager.deselectPaddock(paddock);
     //remove layer select panel
-    Map.remove(manager.layerSelectPanel);
-    debug.info("layer select panel removed");
+    if (manager.layerSelectPanel !== null) {
+      Map.remove(manager.layerSelectPanel);
+      debug.info("layer select panel removed");
+    }
+
     // remove this panel's NDVI layer after closing
     manager.app.imageVisualiser.clearAllNdviLayers();
   };
@@ -227,9 +233,11 @@ var createNDVIVisualiser = function(paddock) {
     debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
     ndviChart.setChartType('ScatterChart');
 
+    // create layer select panel
+    manager.layerSelectPanel = createSelectWidget(paddock);
+
     // Clear the chart container panel and add the new chart
     chartContainer.clear().add(ndviChart);
-    manager.layerSelectPanel.clear().add(manager.timeLabel);
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function(xValue, yValue, seriesName) {
@@ -497,7 +505,7 @@ exports.createInfoPanel = function(paddock) {
   // Create and add a heading for the info panel
   var headingWidget = createHeading(paddock);
   
-  createSelectWidget(paddock);
+
 
   // ndvi chart visualiser
   var visualiserWidget = createNDVIVisualiser(paddock);
