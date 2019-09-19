@@ -23,8 +23,8 @@ exports.initialise = function(app) {
   manager.app = app;// create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
   // no default layer select panel
   manager.layerSelectPanel = null;
-  // current layers
-  manager.currentLayers = {};
+  //
+  manager.currentLayers = {elevation : manager.app.elevationLayer};
 };
 
 /**
@@ -75,8 +75,9 @@ var createSelectButton = function() {
   manager.selectBox = ui.Select({
   items: Object.keys(manager.currentLayers),
   onChange: function(key) {
+    print(manager.currentLayers[key]);
+    print(manager.currentLayers["NDVI"]);
     var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
-    Map.layers().get(indexOfshownLayer).setShown(true);
 
     switch (manager.currentLayers[key]) {
       case manager.currentLayers.NDVI:
@@ -277,13 +278,6 @@ var createNDVIVisualiser = function(paddock) {
           'NDVI layer for paddock: '+ manager.id,
           true);
 
-      //
-      manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
-          // the paddock chosen by user
-          manager.app.paddocks,
-          // the layer name
-          'elvation',
-          true);
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
@@ -298,6 +292,23 @@ var createNDVIVisualiser = function(paddock) {
     label: 'Visualise',
     onClick: visualise,
   });
+  
+  // Layer selection
+  // keys
+  var keys = {
+    Soil: 'select soil layer',
+    Evelation: 'select evelation layer'
+  };
+  // Select
+  var selectBox = ui.Select({
+    items: Object.keys(keys),
+    //onChange: function(key) {
+      // change layer
+    //}
+  });
+  
+
+
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
