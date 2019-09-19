@@ -23,6 +23,8 @@ exports.initialise = function(app) {
   manager.app = app;// create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
   // no default layer select panel
   manager.layerSelectPanel = null;
+  // current layers
+  manager.currentLayers = {};
 };
 
 /**
@@ -275,13 +277,14 @@ var createNDVIVisualiser = function(paddock) {
           'NDVI layer for paddock: '+ manager.id,
           true);
 
-      // manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
-      //     // the paddock chosen by user
-      //     manager.app.paddocks,
-      //     // the layer name
-      //     'elvation',
-      //     true);
-      // // Show a label with the date on the map.
+      //
+      manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
+          // the paddock chosen by user
+          manager.app.paddocks,
+          // the layer name
+          'elvation',
+          true);
+      // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
       debug.info("added NDVI imagery to time series", date);
