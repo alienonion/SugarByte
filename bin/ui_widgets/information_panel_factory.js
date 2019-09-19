@@ -296,7 +296,7 @@ var createNDVIVisualiser = function(paddock) {
           
       manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
           // the paddock chosen by user
-          paddock.geometry(),
+          manager.app.paddocks,
           // the layer name
           'elvation',
           true);
