@@ -65,6 +65,6 @@ exports.initialise = function(app) {
   manager.createUi();
 };
 
-exports.removeWidget = function(app) {
+exports.removeWidget = function() {
   Map.remove(manager.legend)
 }
