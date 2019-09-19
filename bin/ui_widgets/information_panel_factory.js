@@ -100,6 +100,7 @@ var createSelectButton = function() {
         var UnshownLayerIndex1 = Map.layers().indexOf(manager.currentLayers.NDVI);
         Map.layers().get(UnshownLayerIndex1).setShown(false);
         debug.info("undisplay ndvi layer");
+        manager.app.elevationLegendWidget(manager.app);
         break;
     }
   }
