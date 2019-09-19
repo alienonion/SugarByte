@@ -41,20 +41,6 @@ var createSelectWidget = function (paddock) {
   });
   debug.info("created time label");
 
-  var selectBoxTitle  = ui.Label({
-      value: 'Please select the layer to show',
-      style: {
-          position: 'top-center',
-          height: '30px',
-          backgroundColor:'#dcf0e4',
-          fontWeight: 'bold',
-          fontFamily: 'Comic Sans MS',
-      }
-  });
-  debug.info('Created selectTitle label');
-
-
-
   var layerSelectPanel = ui.Panel({
     widgets: [manager.timeLabel, selectBoxTitle],
     layout: ui.Panel.Layout.flow('vertical'),
@@ -73,28 +59,42 @@ var createSelectWidget = function (paddock) {
   Select
 */
 var createSelectButton = function() {
-    manager.selectBox = ui.Select({
-      items: Object.keys(manager.currentLayers),
-      onChange: function(key) {
-        print(manager.currentLayers[key]);
-        print(manager.currentLayers[NDVI]);
-        var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
-        Map.layers().get(0).setShown(false);
-      }
-
-      //   switch (keys[key]) {
-      //     case manager.currentLayer:
-      //       var UnshownLayerIndex = Map.layers().indexOf(manager.app.elevationLayer);
-      //       Map.layers().get(UnshownLayerIndex).setShown(false);
-      //       break;
-      //     case manager.elevationLayer:
-      //       var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayer);
-      //       Map.layers().get(UnshownLayerIndex).setShown(false);
-      //       break;
-      //   }
-      // }
+  
+  var selectBoxTitle  = ui.Label({
+    value: 'Please select the layer to show',
+    style: {
+        position: 'top-center',
+        height: '30px',
+        backgroundColor:'#dcf0e4',
+        fontWeight: 'bold',
+        fontFamily: 'Comic Sans MS',
+    }
   });
-   manager.layerSelectPanel.add(manage.selectBox);
+  debug.info('Created selectTitle label');
+  
+    manager.selectBox = ui.Select({
+    items: Object.keys(manager.currentLayers),
+    onChange: function(key) {
+      print(manager.currentLayers[key]);
+      print(manager.currentLayers[NDVI]);
+      var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
+      Map.layers().get(0).setShown(false);
+    }
+
+    //   switch (keys[key]) {
+    //     case manager.currentLayer:
+    //       var UnshownLayerIndex = Map.layers().indexOf(manager.app.elevationLayer);
+    //       Map.layers().get(UnshownLayerIndex).setShown(false);
+    //       break;
+    //     case manager.elevationLayer:
+    //       var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayer);
+    //       Map.layers().get(UnshownLayerIndex).setShown(false);
+    //       break;
+    //   }
+    // }
+  });
+  manager.layerSelectPanel.add(manage.selectBoxTitle);
+  manager.layerSelectPanel.add(manage.selectBox);
 }
 
 /**
