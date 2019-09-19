@@ -61,7 +61,7 @@ var createSelectWidget = function (paddock) {
       items: Object.keys(layers),
       onChange: function(key) {
         var indexOfshownLayer = Map.layers().indexOf(layers[key]);
-        Map.layers().get(indexOfshownLayer).setShown(false);
+        Map.layers().get(0).setShown(false);
       }
 
       //   switch (keys[key]) {
