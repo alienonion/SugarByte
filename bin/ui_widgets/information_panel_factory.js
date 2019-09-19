@@ -119,8 +119,10 @@ var createHeading = function(paddock) {
     manager.app.paddockManager.deselectPaddock(paddock);
     // remove time label
     Map.remove(manager.time_label);
+    debug.info("time label removed");
     //remove layer select panel
     Map.remove(manager.layerSelectPanel);
+    debug.info("layer select panel removed");
     // remove this panel's NDVI layer after closing
     manager.app.imageVisualiser.clearAllNdviLayers();
   };
