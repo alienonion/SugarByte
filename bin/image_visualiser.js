@@ -40,6 +40,10 @@ exports.clearAllNdviLayers = function() {
   manager.ndviLayers.map(removeFromMap);
   // Reset list
   manager.ndviLayers = [];
+  // remove elevation layer
+  Map.remove(manager.elevationLayer);
+  // reset elevation layer
+  manager.elevationLayer = null;
 };
 
 /**
