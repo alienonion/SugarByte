@@ -24,7 +24,7 @@ exports.initialise = function(app) {
   // no default layer select panel
   manager.layerSelectPanel = null;
   //
-  manager.currentLayer = null;
+  manager.currentLayers = {Elevation : manager.app.elevationLayer};
 };
 
 /**
@@ -53,17 +53,13 @@ var createSelectWidget = function (paddock) {
   });
   debug.info('Created selectTitle label');
   // Layer selection
-  // keys
-  var layers = {
-      NDVI: manager.currentLayer,
-      Elevation: manager.app.elevationLayer,
-  };
+  // keys manager.currentLayers
   // Select
   manager.selectBox = ui.Select({
-      items: Object.keys(layers),
+      items: Object.keys(manager.currentLayers),
       onChange: function(key) {
         print(layers[key]);
-        var indexOfshownLayer = Map.layers().indexOf(layers[key]);
+        var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
         Map.layers().get(0).setShown(false);
       }
 
@@ -275,8 +271,8 @@ var createNDVIVisualiser = function(paddock) {
       // manager.app.imageVisualiser.clearAllNdviLayers();
 
       //visualizing NDVI of chosen time point of scatter chart on the map,
-      // then assign returned layer to manager.currentLayer
-      manager.currentLayer = manager.app.imageVisualiser.displayPaddockNDVIOnDate(
+      // then assign returned layer to Object manager.currentLayers
+      manager.currentLayers.NDVI = manager.app.imageVisualiser.displayPaddockNDVIOnDate(
 
           //the clicked date on the scatter chart
           date,
@@ -285,6 +281,9 @@ var createNDVIVisualiser = function(paddock) {
           // the layer name
           'NDVI layer for paddock: '+ manager.id,
           true);
+      
+      //
+      manager.currentLayers.push(currentNdviLayer);
 
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
