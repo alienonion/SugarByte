@@ -20,9 +20,7 @@ exports.initialise = function(app) {
   debug.info('Initialising informationPanelFactory.');
   // Grab a reference to the app
   manager.app = app;// create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
-
   
-
 };
 
 /**
@@ -64,7 +62,8 @@ var createSelectWidget = function (paddock) {
     widgets: [selectTitle, selectBox],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      width: "80px",
+      width: '300px',
+      height: '100%',
       position: 'middle-left',
     }
   });
