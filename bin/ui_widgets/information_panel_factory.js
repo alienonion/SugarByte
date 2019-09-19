@@ -553,7 +553,7 @@ exports.createInfoPanel = function(paddock) {
       headingWidget,
       visualiserWidget,
       seasonComparatorWidget],
-    style: {width: '500px'},
+    style: {width: '450px'},
   });
   return infoPanel;
 };
