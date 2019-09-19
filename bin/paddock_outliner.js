@@ -28,6 +28,7 @@ exports.initialise = function(app) {
   manager.elevation = ui.Map.Layer();
   // Save a soil layer to the app
   manager.soil = ui.Map.Layer();
+  manager.app.elevationLayer = manager.elevation;
 };
 
 // --------------------------------------------

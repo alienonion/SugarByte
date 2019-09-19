@@ -53,15 +53,27 @@ var createSelectWidget = function (paddock) {
   // Layer selection
   // keys
   var keys = {
-      Soil: 'select NDVI layer',
-      Evelation: 'select evelation layer'
+      NDVI: manager.currentLayer,
+      Elevation: manager.app.elevationLayer,
   };
   // Select
   manager.selectBox = ui.Select({
       items: Object.keys(keys),
-      //onChange: function(key) {
-      // change layer
-      //}
+      onChange: function(key) {
+        var indexOfshownLayer = Map.layers().indexOf(keys[key]);
+        Map.layers().get(indexOfshownLayer).setShown(true);
+
+        switch (keys[key]) {
+          case manager.currentLayer:
+            var UnshownLayerIndex = Map.layers().indexOf(manager.app.elevationLayer);
+            Map.layers().get(UnshownLayerIndex).setShown(false);
+            break;
+          case manager.elevationLayer:
+            var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayer);
+            Map.layers().get(UnshownLayerIndex).setShown(false);
+            break;
+        }
+      }
   });
 
   manager.selectBoxContainer = ui.Panel({
@@ -259,7 +271,7 @@ var createNDVIVisualiser = function(paddock) {
 
       //visualizing NDVI of chosen time point of scatter chart on the map,
       // then assign returned layer to manager.currentLayer
-      manager.currenttLayer = manager.app.imageVisualiser.displayPaddockNDVIOnDate(
+      manager.currentLayer = manager.app.imageVisualiser.displayPaddockNDVIOnDate(
 
           //the clicked date on the scatter chart
           date,
