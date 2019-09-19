@@ -82,14 +82,14 @@ var createSelectButton = function() {
   });
   debug.info('Created selectTitle label');
   
+  //select widget represents a drop-down menu of layers from which the user can choose one. 
   var selectBox = ui.Select({
   items: Object.keys(manager.currentLayers),
   onChange: function(key) {
-    print(manager.currentLayers[key]);
-    print(manager.currentLayers["NDVI"]);
     var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
      Map.layers().get(indexOfshownLayer).setShown(true);
 
+    // to hide the unselected layer
     switch (manager.currentLayers[key]) {
       case manager.currentLayers.NDVI:
         var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.elevation);
