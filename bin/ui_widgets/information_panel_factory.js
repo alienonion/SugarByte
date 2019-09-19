@@ -39,6 +39,7 @@ exports.initialise = function(app) {
 * to create the layer select panel.
 */
 var createSelectWidget = function (paddock) {
+
   
   manager.timeLabel  = ui.Label({
     value: 'Click a point on the chart to show the NDVI for that date.',
@@ -88,6 +89,7 @@ var createSelectButton = function() {
     print(manager.currentLayers[key]);
     print(manager.currentLayers["NDVI"]);
     var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
+     Map.layers().get(indexOfshownLayer).setShown(true);
 
     switch (manager.currentLayers[key]) {
       case manager.currentLayers.NDVI:
