@@ -107,7 +107,7 @@ var generateDataset = function() {
 	app.dataset = ee.ImageCollection(SATELLITE_STRING_SENTINEL).filterBounds(point);
 	// Mask clouds from dataset
 	app.dataset = ee.ImageCollection(app.cloudMasker.maskCloudsScoring(
-	    app.dataset, app.cloudMasker.SATELLITE.SENTINEL, 1, 1, 1));
+    app.dataset, app.cloudMasker.SATELLITE.SENTINEL, 1, 1, 1));
 	// Calculate and add NDVI band
 	app.dataset = app.dataset.map(function(image) {
 				var ndvi = image.normalizedDifference([band.NIR, band.RED]).rename(band.NDVI);
