@@ -173,7 +173,6 @@ exports.addSoilLayer = function() {
   // Add the layer to the map.
   Map.add(manager.soil); 
   debug.info('Finished refreshing soil paddock outlines.');
-  return manager.soil;
 };
 
 /**
