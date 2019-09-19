@@ -326,8 +326,19 @@ var createNDVIVisualiser = function(paddock) {
   });
   
   
-
-
+  // Layer selection
+  // keys
+  var keys = {
+    Soil: 'select soil layer',
+    Evelation: 'select evelation layer'
+  };
+  // Select
+  var selectBox = ui.Select({
+    items: Object.keys(keys),
+    //onChange: function(key) {
+      // change layer
+    //}
+  });
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
