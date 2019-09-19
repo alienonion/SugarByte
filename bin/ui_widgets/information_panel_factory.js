@@ -67,6 +67,7 @@ var createSelectWidget = function (paddock) {
   });
   
   Map.add(manager.layerSelectPanel);
+  debug.info("added layer select panel")
 };
 
 /**
