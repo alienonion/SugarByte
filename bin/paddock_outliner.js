@@ -160,24 +160,29 @@ exports.refreshSelectedOutlines = function() {
   debug.info('Finished refreshing selected paddock outlines.');
 };
 
-// fun
-exports.addElevation = function() {
-  debug.info('Attempting to add elevation paddock outlines.');
+/**
+ * Function used to add soil layer.
+ */
+exports.addSoilLayer = function() {
+  debug.info('Attempting to add soil paddock outlines.');
   // Remove the current layer of selected paddock outlines. 
   // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
-  Map.remove(manager.elevation); 
+  Map.remove(manager.soil); 
   // Create a new layer from the master list of paddocks
   setElevationLayer();
   // Add the layer to the map.
-  Map.add(manager.elevation); 
-  debug.info('Finished refreshing elevation paddock outlines.');
-  return manager.elevation;
+  Map.add(manager.soil); 
+  debug.info('Finished refreshing soil paddock outlines.');
+  return manager.soil;
 };
 
-exports.deleteElevation = function() {
-  debug.info('Attempting to delete elevation layer');
-  // Remove the current layer of selected paddock outlines. 
+/**
+ * Function used to delete soil layer.
+ */
+exports.deleteSoilLayer = function() {
+  debug.info('Attempting to delete soil layer');
+  // Remove the current layer. 
   // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
-  Map.remove(manager.elevation); 
-  debug.info('Finished deleting elevation paddock outlines.');
+  Map.remove(manager.soil); 
+  debug.info('Finished deleting soil paddock outlines.');
 };
