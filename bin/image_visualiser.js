@@ -131,7 +131,7 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   var paddockCollection = ee.FeatureCollection(paddocks);
   var elevationImage = ee.Image('CGIAR/SRTM90_V4');
 
-  var visParams = {bands: ['elevation'], min: 0, max: 50, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
+  var visParams = {bands: ['elevation'], min: 0, max: 150, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
       '#ffc623', '#ffa114','#ff5a0c'], shown: false};
 
   if (clipToPaddocks) {
