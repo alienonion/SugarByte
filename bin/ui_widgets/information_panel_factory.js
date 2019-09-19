@@ -24,7 +24,7 @@ exports.initialise = function(app) {
   // no default layer select panel
   manager.layerSelectPanel = null;
   //
-  manager.currentLayers = {Elevation : manager.app.elevationLayer};
+  manager.currentLayers = {elevation : manager.app.elevationLayer};
 };
 
 /**
@@ -79,19 +79,19 @@ var createSelectButton = function() {
     print(manager.currentLayers["NDVI"]);
     var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
     Map.layers().get(0).setShown(false);
-  }
 
-  //   switch (keys[key]) {
-  //     case manager.currentLayer:
-  //       var UnshownLayerIndex = Map.layers().indexOf(manager.app.elevationLayer);
-  //       Map.layers().get(UnshownLayerIndex).setShown(false);
-  //       break;
-  //     case manager.elevationLayer:
-  //       var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayer);
-  //       Map.layers().get(UnshownLayerIndex).setShown(false);
-  //       break;
-  //   }
-  // }
+    switch (manager.currentLayers[key]) {
+      case manager.currentLayers.NDVI:
+        var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers["elevation"]);
+        Map.layers().get(UnshownLayerIndex).setShown(false);
+        break;
+      case manager.elevationLayer:
+        var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers["NDVI"]);
+        Map.layers().get(UnshownLayerIndex).setShown(false);
+        break;
+    }
+
+  }
   });
   manager.layerSelectPanel.add(selectBoxTitle);
   manager.layerSelectPanel.add(manager.selectBox);
