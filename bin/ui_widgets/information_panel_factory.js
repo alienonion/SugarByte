@@ -118,9 +118,6 @@ var createHeading = function(paddock) {
   var closeEvent = function(button) {
     // deselect paddock and close current info panel
     manager.app.paddockManager.deselectPaddock(paddock);
-    // remove time label
-    Map.remove(manager.time_label);
-    debug.info("time label removed");
     //remove layer select panel
     Map.remove(manager.layerSelectPanel);
     debug.info("layer select panel removed");
@@ -248,8 +245,8 @@ var createNDVIVisualiser = function(paddock) {
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
-      debug.info("added NDVI imagery to time series", date);
     });
+    debug.info("added NDVI imagery to time series", date);
   };
     ////////////////////////////
   // Visualise button
