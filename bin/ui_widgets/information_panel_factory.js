@@ -95,7 +95,7 @@ var createSelectWidget = function (paddock) {
       position: 'middle-left',
     }
   });
-  // add the layer select panel to the map
+  
   return layerSelectPanel;
 };
 
@@ -247,6 +247,7 @@ var createNDVIVisualiser = function(paddock) {
     // create layer select panel
     manager.layerSelectPanel = createSelectWidget(paddock);
     
+    // add the layer select panel to the map
     Map.add(manager.layerSelectPanel);
 
     // Clear the chart container panel and add the new chart
@@ -254,8 +255,6 @@ var createNDVIVisualiser = function(paddock) {
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function(xValue, yValue, seriesName) {
-
-      debug.info("a user clicked a time point");
       if (!xValue) return;  // Selection was cleared.
 
       // add the selectBox container to the layer select panel
