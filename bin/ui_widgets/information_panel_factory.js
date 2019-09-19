@@ -73,10 +73,10 @@ var createSelectWidget = function (paddock) {
   )
 
   manager.layerSelectPanel = ui.Panel({
-    widgets: [manager.timeLabel],
+    widgets: [],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      width: '250px',
+      maxWidth: '250px',
       position: 'middle-left',
     }
   });
@@ -229,14 +229,15 @@ var createNDVIVisualiser = function(paddock) {
 
     // Clear the chart container panel and add the new chart
     chartContainer.clear().add(ndviChart);
-
-    // add the selectBox container to the layer select panel
-    manager.layerSelectPanel.add(manager.selectBoxContainer);
-    debug.info("added the layer select panel");
+    manager.layerSelectPanel.clear().add(manager.timeLabel);
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function(xValue, yValue, seriesName) {
       if (!xValue) return;  // Selection was cleared.
+
+      // add the selectBox container to the layer select panel
+      manager.layerSelectPanel.add(manager.selectBoxContainer);
+      debug.info("added the layer select panel");
 
       // Show the image for the clicked date.
       var date = ee.Date(new Date(xValue));
