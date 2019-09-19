@@ -284,9 +284,6 @@ var createNDVIVisualiser = function(paddock) {
       var date = ee.Date(new Date(xValue));
       debug.info("clicked data is", date);
 
-      // Get the 5 day range (guarantees that at least one data point will be present
-      // var dateRange = ee.DateRange(date, date.advance(5, 'day'));
-
       // clear all NDVI and elevation layers before displaying new one
       manager.app.imageVisualiser.clearAllNdviLayers();
 
@@ -321,26 +318,13 @@ var createNDVIVisualiser = function(paddock) {
       createSelectButton();
     });
   };
-    ////////////////////////////
+
   // Visualise button
   var visualiseButton = ui.Button({
     label: 'Visualise',
     onClick: visualise,
   });
   
-  // Layer selection
-  // keys
-  var keys = {
-    Soil: 'select soil layer',
-    Evelation: 'select evelation layer'
-  };
-  // Select
-  var selectBox = ui.Select({
-    items: Object.keys(keys),
-    //onChange: function(key) {
-      // change layer
-    //}
-  });
   
 
 
