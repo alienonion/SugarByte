@@ -87,8 +87,6 @@ var createSelectButton = function() {
       case manager.currentLayers.elevation:
         var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.NDVI);
         Map.layers().get(UnshownLayerIndex).setShown(false);
-        manager.app = app;
-        manager.app.elevationLegendWidget.initialise(app);
         break;
     }
 
