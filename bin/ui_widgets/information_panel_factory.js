@@ -94,7 +94,7 @@ var createSelectButton = function() {
     // }
   });
   manager.layerSelectPanel.add(selectBoxTitle);
-  manager.layerSelectPanel.add(manage.selectBox);
+  manager.layerSelectPanel.add(manager.selectBox);
 }
 
 /**
