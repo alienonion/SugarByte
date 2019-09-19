@@ -63,7 +63,6 @@ var createSelectWidget = function (paddock) {
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
       width: '300px',
-      height: '100%',
       position: 'middle-left',
     }
   });
