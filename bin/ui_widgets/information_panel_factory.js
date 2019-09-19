@@ -42,7 +42,7 @@ var createSelectWidget = function (paddock) {
   debug.info("created time label");
 
   var layerSelectPanel = ui.Panel({
-    widgets: [manager.timeLabel, selectBoxTitle],
+    widgets: [manager.timeLabel],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
       maxWidth: '250px',
@@ -72,26 +72,26 @@ var createSelectButton = function() {
   });
   debug.info('Created selectTitle label');
   
-    manager.selectBox = ui.Select({
-    items: Object.keys(manager.currentLayers),
-    onChange: function(key) {
-      print(manager.currentLayers[key]);
-      print(manager.currentLayers[NDVI]);
-      var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
-      Map.layers().get(0).setShown(false);
-    }
+  manager.selectBox = ui.Select({
+  items: Object.keys(manager.currentLayers),
+  onChange: function(key) {
+    print(manager.currentLayers[key]);
+    print(manager.currentLayers[NDVI]);
+    var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
+    Map.layers().get(0).setShown(false);
+  }
 
-    //   switch (keys[key]) {
-    //     case manager.currentLayer:
-    //       var UnshownLayerIndex = Map.layers().indexOf(manager.app.elevationLayer);
-    //       Map.layers().get(UnshownLayerIndex).setShown(false);
-    //       break;
-    //     case manager.elevationLayer:
-    //       var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayer);
-    //       Map.layers().get(UnshownLayerIndex).setShown(false);
-    //       break;
-    //   }
-    // }
+  //   switch (keys[key]) {
+  //     case manager.currentLayer:
+  //       var UnshownLayerIndex = Map.layers().indexOf(manager.app.elevationLayer);
+  //       Map.layers().get(UnshownLayerIndex).setShown(false);
+  //       break;
+  //     case manager.elevationLayer:
+  //       var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayer);
+  //       Map.layers().get(UnshownLayerIndex).setShown(false);
+  //       break;
+  //   }
+  // }
   });
   manager.layerSelectPanel.add(selectBoxTitle);
   manager.layerSelectPanel.add(manager.selectBox);
