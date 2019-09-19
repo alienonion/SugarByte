@@ -33,13 +33,15 @@ exports.initialise = function(app) {
       position: 'top-center',
     }
   })
+  
+  manager.layerSelectPanel = ui.Panel();
 };
 
 /**
 * to create the layer select panel.
 */
 var createSelectWidget = function (paddock) {
-
+  manager.layerSelectPanel.clear();
   
   manager.timeLabel  = ui.Label({
     value: 'Click a point on the chart to show the NDVI for that date.',
