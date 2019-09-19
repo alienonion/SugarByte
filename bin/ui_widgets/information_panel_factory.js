@@ -287,6 +287,7 @@ var createNDVIVisualiser = function(paddock) {
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
       debug.info("added NDVI imagery to time series", date);
+      print(manager.currentLayer);
     });
   };
     ////////////////////////////
