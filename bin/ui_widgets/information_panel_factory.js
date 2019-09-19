@@ -55,7 +55,22 @@ var createSelectWidget = function (paddock) {
   // Layer selection
   // keys manager.currentLayers
   // Select
-  manager.selectBox = ui.Select({
+
+
+  var layerSelectPanel = ui.Panel({
+    widgets: [manager.timeLabel, selectBoxTitle],
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      maxWidth: '250px',
+      position: 'middle-left',
+    }
+  });
+  
+  return layerSelectPanel;
+};
+
+var createSelectButton = function() {
+    manager.selectBox = ui.Select({
       items: Object.keys(manager.currentLayers),
       onChange: function(key) {
         print(manager.currentLayers[key]);
@@ -76,28 +91,8 @@ var createSelectWidget = function (paddock) {
       //   }
       // }
   });
-
-  manager.selectBoxContainer = ui.Panel({
-    widgets: [selectBoxTitle, manager.selectBox],
-    layout: ui.Panel.Layout.flow('vertical'),
-    style: {
-      width: '240px',
-      position: 'top-center',
-    }
-      }
-  )
-
-  var layerSelectPanel = ui.Panel({
-    widgets: [manager.timeLabel],
-    layout: ui.Panel.Layout.flow('vertical'),
-    style: {
-      maxWidth: '250px',
-      position: 'middle-left',
-    }
-  });
-  
-  return layerSelectPanel;
-};
+   manager.layerSelectPanel().add(manage.selectBox);
+}
 
 /**
  * Creates an information panel heading for the given paddock.
@@ -257,8 +252,6 @@ var createNDVIVisualiser = function(paddock) {
     ndviChart.onClick(function(xValue, yValue, seriesName) {
       if (!xValue) return;  // Selection was cleared.
 
-      // add the selectBox container to the layer select panel
-      manager.layerSelectPanel.add(manager.selectBoxContainer);
       debug.info("added the layer select panel");
 
       // Show the image for the clicked date.
@@ -287,6 +280,7 @@ var createNDVIVisualiser = function(paddock) {
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
       debug.info("added NDVI imagery to time series", date);
+      createSelectButton();
       print(manager.currentLayers.NDVI);
     });
   };
