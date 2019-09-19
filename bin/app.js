@@ -153,11 +153,11 @@ var initialiseInternalModules = function() {
 	debug.info('Initialising input.js widget.');
 	app.input.initialise(app);
 
-	// NDVI Legend Widget
-	app.legendWidget.initialise(app);
-	
-	// Elevation Legend Widget
-	app.elevationLegendWidget.initialise(app);
+	// // NDVI Legend Widget
+	// app.legendWidget.initialise(app);
+	//
+	// // Elevation Legend Widget
+	// app.elevationLegendWidget.initialise(app);
 };
 
 /**

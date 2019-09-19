@@ -96,11 +96,13 @@ var createSelectButton = function() {
         Map.layers().get(UnshownLayerIndex).setShown(false);
         debug.info("undisplay elevation layer");
         manager.app.elevationLegendWidget.removeWidget();
+        manager.app.legendWidget.initialise(manager.app);
         break;
       case manager.currentLayers.elevation:
         var UnshownLayerIndex1 = Map.layers().indexOf(manager.currentLayers.NDVI);
         Map.layers().get(UnshownLayerIndex1).setShown(false);
         debug.info("undisplay ndvi layer");
+        manager.app.legendWidget.removeWidget();
         manager.app.elevationLegendWidget.initialise(manager.app);
         break;
     }
