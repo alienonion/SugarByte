@@ -139,17 +139,19 @@ var setElevationLayer = function() {
   }
   // Filter to all the selected paddocks
   
-  // var selectedPaddocks = ee.FeatureCollection(ee.FeatureCollection(manager.app.paddocks).filterMetadata(
-  //     manager.app.PROPERTY_SELECTED, 'equals', 1));
+  var selectedPaddocks = ee.FeatureCollection(ee.FeatureCollection(manager.app.paddocks).filterMetadata(
+      manager.app.PROPERTY_SELECTED, 'equals', 1));
   
   
   // Create a layer based off the currently selected paddocks
   var elevationOfSelectedPaddocks = ee.Image('CGIAR/SRTM90_V4');
   
+  var elevationOfSelectedPaddocks2 = elevationOfSelectedPaddocks.clip(selectedPaddocks);
+  
   var visParams = {bands: ['elevation'], min: 0, max: 200, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
       '#ffc623', '#ffa114','#ff5a0c']};
   
-  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks, visParams, "Elevation");
+  manager.elevation = ui.Map.Layer(elevationOfSelectedPaddocks2, visParams, "Elevation");
   manager.elevation.setOpacity(0.5);
 };
 
