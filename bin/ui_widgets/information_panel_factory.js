@@ -30,8 +30,6 @@ exports.initialise = function(app) {
   });
 };
 
-
-
 /**
  * Creates an information panel heading for the given paddock.
  * Includes a title with the paddock's ID and the close button, among other things.
@@ -63,7 +61,6 @@ var createHeading = function(paddock) {
   // title and description labels to include the ID.
   var getPaddockId = function(id) {
     debug.info('Paddock ID:', id);
-    manager.id = id;
     title += id;
     description += id;
     titleLabel.setValue(title);
@@ -77,13 +74,11 @@ var createHeading = function(paddock) {
    * @param {ui.Button} button - The button that executed this onClick function.
    */
   var closeEvent = function(button) {
-
+    manager.app.paddockManager.deselectPaddock(paddock);
     // remove time label
     Map.remove(manager.time_label);
-    // remove this panel's NDVI layer after closing
-    manager.app.imageVisualiser.clearCurrentNdviLayer(manager.currenttLayer);
-    // deselect paddock and close current info panel
-    manager.app.paddockManager.deselectPaddock(paddock);
+    // remove all ndvi layers after close
+    manager.app.imageVisualiser.clearAllNdviLayers();
   };
 
   var closeButton = ui.Button('Close', closeEvent, false, {});
@@ -191,43 +186,30 @@ var createNDVIVisualiser = function(paddock) {
       // Get the 5 day range (guarantees that at least one data point will be present
       // var dateRange = ee.DateRange(date, date.advance(5, 'day'));
 
-      // // clear all NDVI layers before displaying new one
-      // manager.app.imageVisualiser.clearAllNdviLayers();
-
-      //visualizing NDVI of chosen time point of scatter chart on the map,
-      // then assign returned layer to manager.currentLayer
-      manager.currenttLayer = manager.app.imageVisualiser.displayPaddockNDVIOnDate(
+      // clear all NDVI layers before displaying new one
+      manager.app.imageVisualiser.clearAllNdviLayers();
+      //visualizing NDVI of chosen time point of scatter chart on the map
+      manager.app.imageVisualiser.displayPaddockNDVIOnDate(
 
           //the clicked date on the scatter chart
           date,
           // the paddock chosen by user
           paddock.geometry(),
-          // the layer name
-          'NDVI layer for paddock: '+ manager.id,
+          'Paddock NDVI on chosen date',
           true);
-
       // Show a label with the date on the map.
       manager.time_label.setValue(new Date(xValue).toUTCString());
-      debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
+      debug.info("display NDVI imagery for paddock:", paddock.get("ID"));
       debug.info("added NDVI imagery to time series", date);
     })
   };
+
     ////////////////////////////
   // Visualise button
   var visualiseButton = ui.Button({
     label: 'Visualise',
     onClick: visualise,
   });
-  
-  var soilBox = ui.Select({
-    label: 'show Soil Layer',
-    //onClick?
-  });
-  
-  var eleBox = ui.Checkbox({
-    label: 'show Elevation Layer',
-    //onSelect?
-  })
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
@@ -235,8 +217,6 @@ var createNDVIVisualiser = function(paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButton,
-      soilBox,
-      eleBox,
       chartContainer
     ],
   });
