@@ -43,6 +43,8 @@ var createSelectWidget = function (paddock) {
           position: 'top-center',
           height: '30px',
           backgroundColor:'#dcf0e4',
+          fontWeight: 'bold',
+          ontFamily: 'Comic Sans MS',
       }
   });
   debug.info('Created selectTitle label');
