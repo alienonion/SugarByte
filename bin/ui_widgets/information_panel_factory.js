@@ -73,9 +73,8 @@ var createSelectButton = function() {
   manager.selectBox = ui.Select({
   items: Object.keys(manager.currentLayers),
   onChange: function(key) {
-    print(manager.currentLayers[key]);
-    print(manager.currentLayers["NDVI"]);
     var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
+    Map.layers().get(indexOfshownLayer).setShown(true);
 
     switch (manager.currentLayers[key]) {
       case manager.currentLayers.NDVI:
@@ -296,23 +295,6 @@ var createNDVIVisualiser = function(paddock) {
     label: 'Visualise',
     onClick: visualise,
   });
-  
-  // Layer selection
-  // keys
-  var keys = {
-    Soil: 'select soil layer',
-    Evelation: 'select evelation layer'
-  };
-  // Select
-  var selectBox = ui.Select({
-    items: Object.keys(keys),
-    //onChange: function(key) {
-      // change layer
-    //}
-  });
-  
-
-
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
