@@ -37,7 +37,7 @@ var createSelectWidget = function (paddock) {
   });
   debug.info("created time label");
 
-  var selectTitle  = ui.Label({
+  var selectBoxTitle  = ui.Label({
       value: 'Please select the layer to show',
       style: {
           position: 'top-center',
@@ -55,23 +55,34 @@ var createSelectWidget = function (paddock) {
       Evelation: 'select evelation layer'
   };
   // Select
-  var selectBox = ui.Select({
+  manager.selectBox = ui.Select({
       items: Object.keys(keys),
       //onChange: function(key) {
       // change layer
       //}
   });
+
+  manager.selectBoxContainer = ui.Panel({
+    widgets: [selectBoxTitle, manager.selectBox],
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      width: '240px',
+      position: 'top-center',
+    }
+      }
+  )
+
   manager.layerSelectPanel = ui.Panel({
-    widgets: [manager.timeLabel, selectTitle, selectBox],
+    widgets: [manager.timeLabel],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
       width: '250px',
       position: 'middle-left',
     }
   });
-  
+  // add the layer select panel to the map
   Map.add(manager.layerSelectPanel);
-  debug.info("added layer select panel")
+  debug.info("added the layer select panel");
 };
 
 /**
@@ -218,6 +229,10 @@ var createNDVIVisualiser = function(paddock) {
 
     // Clear the chart container panel and add the new chart
     chartContainer.clear().add(ndviChart);
+
+    // add the selectBox container to the layer select panel
+    manager.layerSelectPanel.add(manager.selectBoxContainer);
+    debug.info("added the layer select panel");
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function(xValue, yValue, seriesName) {
