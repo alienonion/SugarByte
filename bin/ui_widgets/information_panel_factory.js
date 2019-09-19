@@ -174,7 +174,7 @@ var createHeading = function(paddock) {
 
     // remove this panel's legend widget after closing
     manager.app.legendWidget.removeWidget();
-    manager.app.elevationLegendWidget.initialise(manager.app);
+    manager.app.elevationLegendWidget.removeWidget();
   };
 
   var closeButton = ui.Button('Close', closeEvent, false, {});
@@ -311,7 +311,7 @@ var createNDVIVisualiser = function(paddock) {
 
       // remove this panel's legend widget if exists
       manager.app.legendWidget.removeWidget();
-      manager.app.elevationLegendWidget.initialise(manager.app);
+      manager.app.elevationLegendWidget.removeWidget();
 
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
