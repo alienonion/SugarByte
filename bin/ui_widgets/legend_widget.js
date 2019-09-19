@@ -66,6 +66,9 @@ exports.initialise = function(app) {
 };
 
 exports.removeWidget = function() {
+  if (manager.legend != null) {
     debug.info('Remove elevation legend widget. ');
-    Map.remove(manager.legend)
+    Map.remove(manager.legend);
+    manager.legend = null;
+  }
 }
