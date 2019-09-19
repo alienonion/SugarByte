@@ -171,6 +171,10 @@ var createHeading = function(paddock) {
 
     // remove this panel's NDVI layer after closing
     manager.app.imageVisualiser.clearAllNdviLayers();
+
+    // remove this panel's legen widget after closing
+    manager.app.legendWidget.removeWidget();
+    manager.app.elevationWidget.removeWidget();
   };
 
   var closeButton = ui.Button('Close', closeEvent, false, {});
