@@ -165,7 +165,7 @@ exports.refreshSelectedOutlines = function() {
  */
 exports.addSoilLayer = function() {
   debug.info('Attempting to add soil paddock outlines.');
-  // Remove the current layer of selected paddock outlines. 
+  // Remove the current layer. 
   // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
   Map.remove(manager.soil); 
   // Create a new layer from the master list of paddocks
