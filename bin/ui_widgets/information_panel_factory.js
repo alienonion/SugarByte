@@ -24,7 +24,7 @@ exports.initialise = function(app) {
   // no default layer select panel
   manager.layerSelectPanel = null;
   //
-  manager.currentLayers = {elevation : manager.app.elevationLayer};
+  manager.currentLayers = {};
 };
 
 /**
