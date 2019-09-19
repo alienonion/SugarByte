@@ -34,7 +34,13 @@ exports.initialise = function(app) {
     }
   })
   
-  manager.layerSelectPanel = ui.Panel();
+  manager.layerSelectPanel =  ui.Panel({
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      maxWidth: '250px',
+      position: 'middle-left',
+    }
+  });
 };
 
 /**
@@ -52,15 +58,7 @@ var createSelectWidget = function (paddock) {
   });
   debug.info("created time label");
 
-  var layerSelectPanel = ui.Panel({
-    widgets: [manager.timeLabel],
-    layout: ui.Panel.Layout.flow('vertical'),
-    style: {
-      maxWidth: '250px',
-      position: 'middle-left',
-    }
-  });
-  
+  manager.layerSelectPanel.add(manager.timeLabel)
   return layerSelectPanel;
 };
 
