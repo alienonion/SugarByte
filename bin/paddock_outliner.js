@@ -172,7 +172,7 @@ exports.refreshOutlines = function() {
   // Doesn't matter if it hasn't been added to the map yet, so long as it is a Layer object.
   Map.remove(manager.outlines); 
   // Create a new layer from the master list of paddocks
-  // setOutlineLayer();
+  setOutlineLayer();
   // Add the layer to the map.
   debug.info('Paddock outlines layer:', manager.outlines);
   Map.add(manager.outlines); 
@@ -192,7 +192,7 @@ exports.refreshSelectedOutlines = function() {
   Map.remove(manager.soil);
   
   //Create a new layer from the master list of paddocks
-  setElevationLayer();
+  // setElevationLayer();
   setSoilLayer();
   setSelectedLayer();
   // Add the layer to the map.
