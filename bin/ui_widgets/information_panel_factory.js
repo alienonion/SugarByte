@@ -46,7 +46,7 @@ exports.initialise = function(app) {
 /**
 * to create the layer select panel.
 */
-var createSelectWidget = function (paddock) {
+var createSelectWidget = function () {
   manager.layerSelectPanel.clear();
   
   manager.timeLabel  = ui.Label({
@@ -266,7 +266,7 @@ var createNDVIVisualiser = function(paddock) {
     ndviChart.setChartType('ScatterChart');
 
     // create layer select panel
-    createSelectWidget(paddock);
+    createSelectWidget();
     
     // add the layer select panel to the map
     Map.add(manager.layerSelectPanel);
@@ -321,29 +321,12 @@ var createNDVIVisualiser = function(paddock) {
       createSelectButton();
     });
   };
-    ////////////////////////////
+  
   // Visualise button
   var visualiseButton = ui.Button({
     label: 'Visualise',
     onClick: visualise,
   });
-  
-  // Layer selection
-  // keys
-  var keys = {
-    Soil: 'select soil layer',
-    Evelation: 'select evelation layer'
-  };
-  // Select
-  var selectBox = ui.Select({
-    items: Object.keys(keys),
-    //onChange: function(key) {
-      // change layer
-    //}
-  });
-  
-
-
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
