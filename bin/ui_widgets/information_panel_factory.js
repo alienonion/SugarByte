@@ -95,9 +95,6 @@ var createSelectWidget = function (paddock) {
       position: 'middle-left',
     }
   });
-  // add the layer select panel to the map
-  Map.add(layerSelectPanel);
-  debug.info("added the layer select panel");
   return layerSelectPanel;
 };
 
@@ -262,7 +259,7 @@ var createNDVIVisualiser = function(paddock) {
 
       // Show the image for the clicked date.
       var date = ee.Date(new Date(xValue));
-      debug.info("clicked data is", date);
+      debug.info("clicked date is", date);
 
       // Get the 5 day range (guarantees that at least one data point will be present
       // var dateRange = ee.DateRange(date, date.advance(5, 'day'));
