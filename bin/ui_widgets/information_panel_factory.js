@@ -60,8 +60,9 @@ var createSelectWidget = function (paddock) {
   manager.selectBox = ui.Select({
       items: Object.keys(layers),
       onChange: function(key) {
-        var indexOfshownLayer = Map.layers().indexOf(layers[key]);
-        Map.layers().get(indexOfshownLayer).setShown(false);
+        // var indexOfshownLayer = Map.layers().indexOf(layers[key]);
+        Map.layers().get(0).setShown(false);
+      }
 
       //   switch (keys[key]) {
       //     case manager.currentLayer:
