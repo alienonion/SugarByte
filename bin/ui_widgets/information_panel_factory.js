@@ -335,7 +335,6 @@ var createNDVIVisualiser = function(paddock) {
       endDatePanel,
       visualiseButton,
       chartContainer,
-      selectBox
     ],
   });
   return visualiserPanel;
