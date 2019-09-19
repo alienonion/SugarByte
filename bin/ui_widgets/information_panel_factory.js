@@ -278,8 +278,8 @@ var createNDVIVisualiser = function(paddock) {
       // Get the 5 day range (guarantees that at least one data point will be present
       // var dateRange = ee.DateRange(date, date.advance(5, 'day'));
 
-      // // clear all NDVI layers before displaying new one
-      // manager.app.imageVisualiser.clearAllNdviLayers();
+      // clear all NDVI and elevation layers before displaying new one
+      manager.app.imageVisualiser.clearAllNdviLayers();
 
       //visualizing NDVI of chosen time point of scatter chart on the map,
       // then assign returned layer to Object manager.currentLayers
