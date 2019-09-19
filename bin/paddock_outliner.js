@@ -215,6 +215,8 @@ exports.addElevation = function() {
   // Add the layer to the map.
   Map.add(manager.elevation); 
   debug.info('Finished refreshing elevation paddock outlines.');
+  
+  return manager.elevation;
 };
 
 exports.deleteElevation = function() {
