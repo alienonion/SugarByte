@@ -219,20 +219,15 @@ var createNDVIVisualiser = function(paddock) {
     onClick: visualise,
   });
   
-  // Layer selection
-  // keys
-  var keys = {
-    Soil: 'select soil layer',
-    Evelation: 'select evelation layer'
-  };
-  // Select
-  var selectBox = ui.Select({
-    items: Object.keys(keys),
-    //onChange: function(key) {
-      // change layer
-    //}
+  var soilBox = ui.Select({
+    label: 'show Soil Layer',
+    //onClick?
   });
-
+  
+  var eleBox = ui.Checkbox({
+    label: 'show Elevation Layer',
+    //onSelect?
+  })
 
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
@@ -240,8 +235,9 @@ var createNDVIVisualiser = function(paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButton,
-      chartContainer,
-      selectBox
+      soilBox,
+      eleBox,
+      chartContainer
     ],
   });
   return visualiserPanel;
