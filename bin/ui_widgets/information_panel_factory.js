@@ -52,28 +52,28 @@ var createSelectWidget = function (paddock) {
   debug.info('Created selectTitle label');
   // Layer selection
   // keys
-  var keys = {
+  var layers = {
       NDVI: manager.currentLayer,
       Elevation: manager.app.elevationLayer,
   };
   // Select
   manager.selectBox = ui.Select({
-      items: Object.keys(keys),
+      items: Object.keys(layers),
       onChange: function(key) {
-        var indexOfshownLayer = Map.layers().indexOf(keys[key]);
-        Map.layers().get(indexOfshownLayer).setShown(true);
+        var indexOfshownLayer = Map.layers().indexOf(layers[key]);
+        Map.layers().get(indexOfshownLayer).setShown(false);
 
-        switch (keys[key]) {
-          case manager.currentLayer:
-            var UnshownLayerIndex = Map.layers().indexOf(manager.app.elevationLayer);
-            Map.layers().get(UnshownLayerIndex).setShown(false);
-            break;
-          case manager.elevationLayer:
-            var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayer);
-            Map.layers().get(UnshownLayerIndex).setShown(false);
-            break;
-        }
-      }
+      //   switch (keys[key]) {
+      //     case manager.currentLayer:
+      //       var UnshownLayerIndex = Map.layers().indexOf(manager.app.elevationLayer);
+      //       Map.layers().get(UnshownLayerIndex).setShown(false);
+      //       break;
+      //     case manager.elevationLayer:
+      //       var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayer);
+      //       Map.layers().get(UnshownLayerIndex).setShown(false);
+      //       break;
+      //   }
+      // }
   });
 
   manager.selectBoxContainer = ui.Panel({
