@@ -24,7 +24,7 @@ exports.initialise = function(app) {
 };
 
 /**
-* to create the time label shows clicked time
+* to create the layer select panel.
 */
 var createSelectWidget = function (paddock) {
   
@@ -59,7 +59,7 @@ var createSelectWidget = function (paddock) {
       //}
   });
   manager.layerSelectPanel = ui.Panel({
-    widgets: [timeLabel, selectTitle, selectBox],
+    widgets: [selectTitle, selectBox],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
       width: '300px',
