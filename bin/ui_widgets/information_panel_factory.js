@@ -172,7 +172,7 @@ var createHeading = function(paddock) {
     // remove this panel's NDVI layer after closing
     manager.app.imageVisualiser.clearAllNdviLayers();
 
-    // remove this panel's legen widget after closing
+    // remove this panel's legend widget after closing
     manager.app.legendWidget.removeWidget();
     manager.app.elevationWidget.removeWidget();
   };
@@ -308,6 +308,10 @@ var createNDVIVisualiser = function(paddock) {
           // the layer name
           'elvation',
           true);
+
+      // remove this panel's legend widget if exists
+      manager.app.legendWidget.removeWidget();
+      manager.app.elevationWidget.removeWidget();
 
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
