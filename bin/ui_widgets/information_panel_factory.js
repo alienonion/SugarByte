@@ -23,8 +23,6 @@ exports.initialise = function(app) {
   manager.app = app;// create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
   // no default layer select panel
   manager.layerSelectPanel = null;
-  //
-  manager.currentLayers = {elevation : manager.app.elevationLayer};
 };
 
 /**
