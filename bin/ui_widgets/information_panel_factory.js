@@ -44,7 +44,7 @@ var createSelectWidget = function (paddock) {
           height: '30px',
           backgroundColor:'#dcf0e4',
           fontWeight: 'bold',
-          ontFamily: 'Comic Sans MS',
+          fontFamily: 'Comic Sans MS',
       }
   });
   debug.info('Created selectTitle label');
