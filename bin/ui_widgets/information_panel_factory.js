@@ -52,9 +52,7 @@ var createSelectWidget = function (paddock) {
       }
   });
   debug.info('Created selectTitle label');
-  // Layer selection
-  // keys manager.currentLayers
-  // Select
+
 
 
   var layerSelectPanel = ui.Panel({
@@ -69,6 +67,11 @@ var createSelectWidget = function (paddock) {
   return layerSelectPanel;
 };
 
+/**
+  Layer selection
+  keys manager.currentLayers
+  Select
+*/
 var createSelectButton = function() {
     manager.selectBox = ui.Select({
       items: Object.keys(manager.currentLayers),
