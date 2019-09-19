@@ -95,6 +95,7 @@ var createSelectButton = function() {
         var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.elevation);
         Map.layers().get(UnshownLayerIndex).setShown(false);
         debug.info("undisplay elevation layer");
+        manager.app.elevationLegendWidget.removeWidget();
         break;
       case manager.currentLayers.elevation:
         var UnshownLayerIndex1 = Map.layers().indexOf(manager.currentLayers.NDVI);
