@@ -254,6 +254,8 @@ var createNDVIVisualiser = function(paddock) {
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function(xValue, yValue, seriesName) {
+
+      debug.info("a user clicked a time point");
       if (!xValue) return;  // Selection was cleared.
 
       // add the selectBox container to the layer select panel
