@@ -277,6 +277,13 @@ var createNDVIVisualiser = function(paddock) {
           // the layer name
           'NDVI layer for paddock: '+ manager.id,
           true);
+          
+      manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
+          // the paddock chosen by user
+          manager.app.paddocks,
+          // the layer name
+          'elvation',
+          true);
 
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
