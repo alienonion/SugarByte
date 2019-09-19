@@ -28,7 +28,7 @@ exports.initialise = function(app) {
 */
 var createSelectWidget = function (paddock) {
   
-  manager.time_label  = ui.Label({
+  manager.timeLabel  = ui.Label({
     value: 'Click a point on the chart to show the NDVI for that date.',
     style: {
       position: 'top-left',
@@ -59,7 +59,7 @@ var createSelectWidget = function (paddock) {
       //}
   });
   manager.layerSelectPanel = ui.Panel({
-    widgets: [selectTitle, selectBox],
+    widgets: [timeLabel, selectTitle, selectBox],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
       width: '300px',
@@ -246,7 +246,7 @@ var createNDVIVisualiser = function(paddock) {
           true);
 
       // Show a label with the date on the map.
-      manager.time_label.setValue(new Date(xValue).toUTCString());
+      manager.timeLabel.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
       debug.info("added NDVI imagery to time series", date);
     });
