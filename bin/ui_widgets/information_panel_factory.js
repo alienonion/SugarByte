@@ -36,7 +36,7 @@ exports.initialise = function(app) {
 /**
 * to create the time label shows clicked time
 */
-var createSelectWidget = function () {
+var createSelectWidget = function (paddock) {
   debug.info('Creating selectTitle label');
   var selectTitle  = ui.Label({
       value: 'Please select the layer to show',
@@ -65,6 +65,8 @@ var createSelectWidget = function () {
       position: 'middle-right',
     }
   });
+  
+  Map.add(manager.layerSelectPanel);
 };
 
 /**
@@ -472,6 +474,8 @@ exports.createInfoPanel = function(paddock) {
   debug.info('Creating an info panel for the paddock:', paddock);
   // Create and add a heading for the info panel
   var headingWidget = createHeading(paddock);
+  
+  creatSelectWidget(paddock);
 
   // ndvi chart visualiser
   var visualiserWidget = createNDVIVisualiser(paddock);
