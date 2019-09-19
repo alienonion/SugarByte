@@ -46,7 +46,7 @@ exports.initialise = function(app) {
 /**
 * to create the layer select panel.
 */
-var createSelectWidget = function (paddock) {
+var createSelectWidget = function () {
   manager.layerSelectPanel.clear();
   
   manager.timeLabel  = ui.Label({
@@ -82,14 +82,14 @@ var createSelectButton = function() {
   });
   debug.info('Created selectTitle label');
   
+  //select widget represents a drop-down menu of layers from which the user can choose one. 
   var selectBox = ui.Select({
   items: Object.keys(manager.currentLayers),
   onChange: function(key) {
-    print(manager.currentLayers[key]);
-    print(manager.currentLayers["NDVI"]);
     var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
      Map.layers().get(indexOfshownLayer).setShown(true);
 
+    // to hide the unselected layer
     switch (manager.currentLayers[key]) {
       case manager.currentLayers.NDVI:
         var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.elevation);
@@ -266,7 +266,7 @@ var createNDVIVisualiser = function(paddock) {
     ndviChart.setChartType('ScatterChart');
 
     // create layer select panel
-    createSelectWidget(paddock);
+    createSelectWidget();
     
     // add the layer select panel to the map
     Map.add(manager.layerSelectPanel);
@@ -283,6 +283,9 @@ var createNDVIVisualiser = function(paddock) {
       // Show the image for the clicked date.
       var date = ee.Date(new Date(xValue));
       debug.info("clicked data is", date);
+
+      // Get the 5 day range (guarantees that at least one data point will be present
+      // var dateRange = ee.DateRange(date, date.advance(5, 'day'));
 
       // clear all NDVI and elevation layers before displaying new one
       manager.app.imageVisualiser.clearAllNdviLayers();
@@ -318,26 +321,11 @@ var createNDVIVisualiser = function(paddock) {
       createSelectButton();
     });
   };
-
+  
   // Visualise button
   var visualiseButton = ui.Button({
     label: 'Visualise',
     onClick: visualise,
-  });
-  
-  
-  // Layer selection
-  // keys
-  var keys = {
-    Soil: 'select soil layer',
-    Evelation: 'select evelation layer'
-  };
-  // Select
-  var selectBox = ui.Select({
-    items: Object.keys(keys),
-    //onChange: function(key) {
-      // change layer
-    //}
   });
 
   // Create panel to encompass these widgets and return it
