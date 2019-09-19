@@ -58,7 +58,7 @@ var createSelectWidget = function (paddock) {
   manager.selectBox = ui.Select({
       items: Object.keys(manager.currentLayers),
       onChange: function(key) {
-        print(layers[key]);
+        print(manager.currentLayers[key]);
         var indexOfshownLayer = Map.layers().indexOf(manager.currentLayers[key]);
         Map.layers().get(0).setShown(false);
       }
@@ -281,9 +281,6 @@ var createNDVIVisualiser = function(paddock) {
           // the layer name
           'NDVI layer for paddock: '+ manager.id,
           true);
-      
-      //
-      manager.currentLayers.push(currentNdviLayer);
 
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
