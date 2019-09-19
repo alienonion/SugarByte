@@ -62,6 +62,7 @@ var createSelectWidget = function (paddock) {
       onChange: function(key) {
         var indexOfshownLayer = Map.layers().indexOf(layers[key]);
         Map.layers().get(indexOfshownLayer).setShown(false);
+      }
 
       //   switch (keys[key]) {
       //     case manager.currentLayer:
