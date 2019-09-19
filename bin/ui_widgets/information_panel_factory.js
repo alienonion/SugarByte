@@ -109,7 +109,7 @@ var createSelectButton = function() {
 
   
   manager.layerSelectPanel.add(manager.selectBoxContainer);
-}
+};
 
 /**
  * Creates an information panel heading for the given paddock.
