@@ -59,7 +59,6 @@ var createSelectWidget = function (paddock) {
   debug.info("created time label");
 
   manager.layerSelectPanel.add(manager.timeLabel)
-  return layerSelectPanel;
 };
 
 /**
@@ -259,7 +258,7 @@ var createNDVIVisualiser = function(paddock) {
     ndviChart.setChartType('ScatterChart');
 
     // create layer select panel
-    manager.layerSelectPanel = createSelectWidget(paddock);
+    createSelectWidget(paddock);
     
     // add the layer select panel to the map
     Map.add(manager.layerSelectPanel);
