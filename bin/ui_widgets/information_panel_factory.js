@@ -82,11 +82,11 @@ var createSelectButton = function() {
 
     switch (manager.currentLayers[key]) {
       case manager.currentLayers.NDVI:
-        var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers["elevation"]);
+        var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.elevation);
         Map.layers().get(UnshownLayerIndex).setShown(false);
         break;
-      case manager.currentLayers["elevation"]:
-        var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers["NDVI"]);
+      case manager.currentLayers.elevation:
+        var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.NDVI);
         Map.layers().get(UnshownLayerIndex).setShown(false);
         break;
     }
