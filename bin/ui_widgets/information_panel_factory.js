@@ -20,7 +20,6 @@ exports.initialise = function(app) {
   debug.info('Initialising informationPanelFactory.');
   // Grab a reference to the app
   manager.app = app;// create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
-
   manager.time_label  = ui.Label({
     value: 'Click a point on the chart to show the NDVI for that date.',
     style: {
@@ -28,6 +27,10 @@ exports.initialise = function(app) {
       height: '40px',
     }
   });
+  
+  // add time label on the map
+  Map.add(manager.time_label);
+  debug.info("show time label on map");
 };
 
 
@@ -77,13 +80,12 @@ var createHeading = function(paddock) {
    * @param {ui.Button} button - The button that executed this onClick function.
    */
   var closeEvent = function(button) {
-
+    // deselect paddock and close current info panel
+    manager.app.paddockManager.deselectPaddock(paddock);
     // remove time label
     Map.remove(manager.time_label);
     // remove this panel's NDVI layer after closing
     manager.app.imageVisualiser.clearCurrentNdviLayer(manager.currenttLayer);
-    // deselect paddock and close current info panel
-    manager.app.paddockManager.deselectPaddock(paddock);
   };
 
   var closeButton = ui.Button('Close', closeEvent, false, {});
@@ -176,9 +178,6 @@ var createNDVIVisualiser = function(paddock) {
 
     // Clear the chart container panel and add the new chart
     chartContainer.clear().add(ndviChart);
-    // add time label on the map
-    Map.add(manager.time_label);
-    debug.info("show time label on map");
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function(xValue, yValue, seriesName) {
@@ -210,7 +209,7 @@ var createNDVIVisualiser = function(paddock) {
       manager.time_label.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
       debug.info("added NDVI imagery to time series", date);
-    })
+    });
   };
     ////////////////////////////
   // Visualise button
@@ -232,6 +231,8 @@ var createNDVIVisualiser = function(paddock) {
       // change layer
     //}
   });
+  
+
 
 
   // Create panel to encompass these widgets and return it
