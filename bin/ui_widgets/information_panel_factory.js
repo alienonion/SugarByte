@@ -108,7 +108,7 @@ var createSelectButton = function() {
   manager.selectBoxContainer.add(selectBox);
 
   
-  manager.layerSelectPanel.add(selectBoxTitle);
+  manager.layerSelectPanel.add(manager.selectBoxContainer);
 }
 
 /**
