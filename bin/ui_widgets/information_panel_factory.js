@@ -122,7 +122,7 @@ var createHeading = function(paddock) {
     //remove layer select panel
     Map.remove(manager.layerSelectPanel);
     // remove this panel's NDVI layer after closing
-    manager.app.imageVisualiser.clearCurrentNdviLayer(manager.currenttLayer);
+    manager.app.imageVisualiser.clearAllNdviLayers();
   };
 
   var closeButton = ui.Button('Close', closeEvent, false, {});
