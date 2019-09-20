@@ -76,7 +76,6 @@ var createSelectButton = function() {
       backgroundColor:'#dcf0e4',
       fontWeight: 'bold',
       fontFamily: 'Comic Sans MS',
-      padding: '5px',
     }
   });
   debug.info('Created select box title');
@@ -365,7 +364,7 @@ var createSeasonComparator = function(paddock) {
   var growingSeasons = [];
 
   // Title label for growing season comparison
-  debug.info('Creating title label for growing season comparison.')
+  debug.info('Creating title label for growing season comparison.');
   var titleLabel = ui.Label({
     value: 'Growing Season Comparison',
     style: {
@@ -515,7 +514,7 @@ var createSeasonComparator = function(paddock) {
   var compareButton = ui.Button({
       label: 'Create/Update Comparison Chart',
       onClick: refreshComparisonChart,
-  })
+  });
 
   // Create and return the season comparator panel
   var seasonComparatorPanel = ui.Panel({
