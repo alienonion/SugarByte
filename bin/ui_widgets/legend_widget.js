@@ -1,6 +1,6 @@
-/*
-  Legend Widget
-*/
+/**
+ * @fileoverview This is the UI tool that displays NDVI legend for selected paddocks.
+ */
 
 var manager = {};
 
