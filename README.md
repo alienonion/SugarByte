@@ -13,4 +13,4 @@ With regard to examples, this folder consists of eleven files which are basic da
 ## Authors and Acknowledgment
 Authors: Chao Lin; Wei Chen; Chenxi Li; Jiasheng Li; Huiyu Zeng; Qiyao Jiang; Yiheng Zhang
 
-Based on code from team NDVI
+Based on code from team NDVI : Team NDVI (2019) SugarByte source code (Version 1.0) [Source code]. https://csiro1622crop.users.earthengine.app/view/csiro-1622-project
