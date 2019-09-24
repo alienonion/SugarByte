@@ -1,6 +1,6 @@
-/*
-  Elevation Legend Widget
-*/
+/**
+ * @fileoverview This is the UI tool that displays elevation legend for selected paddocks.
+ */
 
 var manager = {};
 
@@ -48,12 +48,10 @@ manager.createUi = function() {
         params: {bbox:'0,0,100,10', dimensions:'200x10'},
         style: {padding: '1px', position: 'bottom-center'}
     });
-
     manager.legend.add(thumbnail);
 
     // Max value label
     manager.legend.add(ui.Label(manager.app.elevation.max));
-
     Map.add(manager.legend);
 };
 

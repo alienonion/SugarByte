@@ -6,8 +6,7 @@
  *
  */
 
-// Manager
-// Only used to grab global app access. Management of each individual
+// Manager only used to grab global app access. Management of each individual
 // information panel is performed by paddock_inspector.js.js
 var manager = {};
 
@@ -20,7 +19,7 @@ var debug = require('users/balddinosaur/sugarbyte:bin/debug.js');
 exports.initialise = function(app) {
   debug.info('Initialising informationPanelFactory.');
   // Grab a reference to the app
-  manager.app = app;// create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
+  manager.app = app;
   // current NDVI and elevation layers
   manager.currentLayers = {};
   // select box container
@@ -46,7 +45,7 @@ exports.initialise = function(app) {
 */
 var createSelectWidget = function () {
   manager.layerSelectPanel.clear();
-  // a time label shows the date of NDVI image
+  // create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
   manager.timeLabel  = ui.Label({
     value: 'Click a point on the chart to show the NDVI for that date.',
     style: {
@@ -68,6 +67,7 @@ var createSelectButton = function() {
   // clear all elements in select box container
   manager.selectBoxContainer.clear();
 
+  // create a label to prompt users to select the layer to show
   var selectBoxTitle  = ui.Label({
     value: 'Please select the layer to show',
     style: {
@@ -76,7 +76,6 @@ var createSelectButton = function() {
       backgroundColor:'#dcf0e4',
       fontWeight: 'bold',
       fontFamily: 'Comic Sans MS',
-      padding: '5px',
     }
   });
   debug.info('Created select box title');
@@ -98,8 +97,9 @@ var createSelectButton = function() {
         // set elevation layer invisible
         Map.layers().get(UnshownLayerIndex).setShown(false);
         debug.info("set elevation layer invisible");
-        // remove elevation legend widget
+        // remove elevation legend widget if exists
         manager.app.elevationLegendWidget.removeWidget();
+        // create a new NDVI legend widget
         manager.app.legendWidget.initialise(manager.app);
         break;
 
@@ -109,8 +109,9 @@ var createSelectButton = function() {
         // set NDVI layer invisible
         Map.layers().get(UnshownLayerIndex1).setShown(false);
         debug.info("set NDVI layer invisible");
-        // remove NDVI legend
+        // remove NDVI legend widget if exists
         manager.app.legendWidget.removeWidget();
+        // create a new NDVI legend widget
         manager.app.elevationLegendWidget.initialise(manager.app);
         break;
     }
@@ -144,7 +145,6 @@ var createHeading = function(paddock) {
       backgroundColor: '#dcf0e4',
       padding: '5px',
       margin: '10px 5px',
-
     }
   });
 
@@ -186,6 +186,7 @@ var createHeading = function(paddock) {
     manager.app.elevationLegendWidget.removeWidget();
   };
 
+  //create close button
   var closeButton = ui.Button('Close', closeEvent, false, {});
 
   // Create panel to encompass these widgets and return it
@@ -276,6 +277,7 @@ var createNDVIVisualiser = function(paddock) {
 
     // create layer select panel
     createSelectWidget();
+    debug.info("added the layer select panel");
     
     // add the layer select panel to the map
     Map.add(manager.layerSelectPanel);
@@ -287,36 +289,35 @@ var createNDVIVisualiser = function(paddock) {
     ndviChart.onClick(function(xValue, yValue, seriesName) {
       if (!xValue) return;  // Selection was cleared.
 
-      debug.info("added the layer select panel");
-
       // Show the image for the clicked date.
       var date = ee.Date(new Date(xValue));
       debug.info("clicked data is", date);
 
-      // Get the 5 day range (guarantees that at least one data point will be present
-      // var dateRange = ee.DateRange(date, date.advance(5, 'day'));
-
       // clear all NDVI and elevation layers before displaying new one
       manager.app.imageVisualiser.clearAllNdviLayers();
 
-      //visualizing NDVI of chosen time point of scatter chart on the map,
+      // visualizing NDVI of chosen time point of scatter chart on the map,
       // then assign returned layer to Object manager.currentLayers
       manager.currentLayers.NDVI = manager.app.imageVisualiser.displayPaddockNDVIOnDate(
 
-          //the clicked date on the scatter chart
-          date,
-          // the paddock chosen by user
-          paddock.geometry(),
-          // the layer name
-          'NDVI layer for paddock: '+ manager.id,
-          true);
-          
+        //the clicked date on the scatter chart
+        date,
+        // the paddock chosen by user
+        paddock.geometry(),
+        // the layer name
+        'NDVI layer for paddock: '+ manager.id,
+        // clip the imagery to the paddock geometries
+        true);
+
+      // visualizing elevation of the paddock,
+      // then assign returned layer to Object manager.currentLayers
       manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
-          // the paddock chosen by user
-          manager.app.paddocks,
-          // the layer name
-          'elvation',
-          true);
+        // the paddock chosen by user
+        manager.app.paddocks,
+        // the layer name
+        'elvation',
+        // clip the imagery to the paddock geometries
+        true);
 
       // remove this panel's legend widget if exists
       manager.app.legendWidget.removeWidget();
@@ -326,7 +327,8 @@ var createNDVIVisualiser = function(paddock) {
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
       debug.info("added NDVI imagery to time series", date);
-      // to create select button
+
+      // create select button
       createSelectButton();
     });
   };
@@ -362,7 +364,7 @@ var createSeasonComparator = function(paddock) {
   var growingSeasons = [];
 
   // Title label for growing season comparison
-  debug.info('Creating title label for growing season comparison.')
+  debug.info('Creating title label for growing season comparison.');
   var titleLabel = ui.Label({
     value: 'Growing Season Comparison',
     style: {
@@ -512,7 +514,7 @@ var createSeasonComparator = function(paddock) {
   var compareButton = ui.Button({
       label: 'Create/Update Comparison Chart',
       onClick: refreshComparisonChart,
-  })
+  });
 
   // Create and return the season comparator panel
   var seasonComparatorPanel = ui.Panel({

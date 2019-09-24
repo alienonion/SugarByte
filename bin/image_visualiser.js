@@ -145,13 +145,15 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   // the elevation layer parameters
   var visParams = {bands: ['elevation'], min: 0, max: 150, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
       '#ffc623', '#ffa114','#ff5a0c'], shown: false};
-   
+
+  // Whether or not to clip the imagery to the paddock geometries
   if (clipToPaddocks) {
     var elevationOfPaddocks = elevationImage.clipToCollection(paddockCollection);
   }
   
   var layer = Map.addLayer(elevationOfPaddocks, visParams, layerName);
-  //add elevation layers to ndviLayers list as we want to remove it when remove ndvi layers
+
+  //add elevation layers to ndviLayers list so it can be removed when remove ndvi layers
   manager.ndviLayers.push(layer);
   return layer;
 }

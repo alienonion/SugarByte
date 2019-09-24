@@ -28,9 +28,8 @@ app.smoother = require('users/balddinosaur/sugarbyte:bin/smooth_filter.js');
 app.imageVisualiser = require('users/balddinosaur/sugarbyte:bin/image_visualiser.js');
 app.mapClickHandler = require('users/balddinosaur/sugarbyte:bin/map_click_handler.js');
 app.input = require('users/balddinosaur/sugarbyte:bin/ui_widgets/input.js');
+//legend widget
 app.legendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/legend_widget.js');
-
-//elevation widget
 app.elevationLegendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/elevation_legend_widget.js');
 
 /**
@@ -152,12 +151,6 @@ var initialiseInternalModules = function() {
 	// Image visualisation and paddock selection widget (panel along the top)
 	debug.info('Initialising input.js widget.');
 	app.input.initialise(app);
-
-	// // NDVI Legend Widget
-	// app.legendWidget.initialise(app);
-	//
-	// // Elevation Legend Widget
-	// app.elevationLegendWidget.initialise(app);
 };
 
 /**
