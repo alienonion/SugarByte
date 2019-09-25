@@ -222,7 +222,7 @@ var createNDVIVisualiser = function(paddock) {
   });
   // Encapsulate the date text boxes in a panel that includes a horizontally positioned label
   var startDatePanel = ui.Panel([ui.Label('Start date'), startDateBox], ui.Panel.Layout.flow('horizontal'));
-  var endDatePanel = ui.Panel([ui.Label('End date  a'), endDateBox], ui.Panel.Layout.flow('horizontal'));
+  var endDatePanel = ui.Panel([ui.Label('End date  '), endDateBox], ui.Panel.Layout.flow('horizontal'));
 
   // NDVI chart container. Each time a new graph is created,
   // this panel is cleared and the new chart is added.
