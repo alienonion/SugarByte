@@ -5,13 +5,6 @@ var farmer = ee.FeatureCollection("projects/1622crop/regions");
 // The base application object.
 var app = {};
 
-// Get now date
-// var date = new Date();
-// var nowYear = date.getFullYear();
-// var nowMonth = date.getMonth()+1;
-// var nowDate = date.getDate();
-// var fullDate = nowYear + '-' + nowMonth + '-' + nowDate;
-
 var debug = require('users/balddinosaur/sugarbyte:bin/debug.js');
 
 // Import all required scripts, including those required by imported scripts.
