@@ -6,11 +6,11 @@ var farmer = ee.FeatureCollection("projects/1622crop/regions");
 var app = {};
 
 // Get now date
-var date = new Date();
-var nowYear = date.getFullYear();
-var nowMonth = date.getMonth()+1;
-var nowDate = date.getDate();
-var fullDate = nowYear + '-' + nowMonth + '-' + nowDate;
+// var date = new Date();
+// var nowYear = date.getFullYear();
+// var nowMonth = date.getMonth()+1;
+// var nowDate = date.getDate();
+// var fullDate = nowYear + '-' + nowMonth + '-' + nowDate;
 
 var debug = require('users/balddinosaur/sugarbyte:bin/debug.js');
 
@@ -58,7 +58,8 @@ var createConstants = function() {
   // Defaults
   app.default = {
     CHART_START_DATE: '2018-01-01',
-    CHART_END_DATE: fullDate, 
+    // the default end date is current date
+    CHART_END_DATE: new Date().toJSON().slice(0,10),
     MAP_ZOOM: 15,
     MAP_ZOOM_SELECTED: 16,
     mapCoordinates: {
