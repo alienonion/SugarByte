@@ -178,4 +178,3 @@ var initialiseApp = function() {
 };
 
 initialiseApp();
-Map.centerObject(app.paddocks, 15);
