@@ -75,6 +75,10 @@ Will only work if things are removed in the same order they were opened.
  * @param {ee.Feature} paddock - The paddock to add.
  */
 exports.addPaddock = function(paddock) {
+  if (manager.infoPanels != null) {
+    removeFromApp();
+  }
+
   debug.info('Adding the following paddock to the inspector UI:', paddock);
   // Create the info panel
   var infoPanel = manager.app.infoPanelFactory.createInfoPanel(paddock);
