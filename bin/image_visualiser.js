@@ -178,7 +178,7 @@ exports.displaySoil = function(paddocks, layerName, clipToPaddocks) {
   // import digital elevation date
   var soilImage = soil;
   // the elevation layer parameters
-  var visParams = {bands: ['b1'], min: 0, max: 150, palette: ['#7a6f64', '#879c8d'], shown: false};
+  var visParams = {bands: ['b1'], min: 4, max: 39, palette: ['#7a6f64', '#879c8d'], shown: false};
 
   // Whether or not to clip the imagery to the paddock geometries
   if (clipToPaddocks) {
