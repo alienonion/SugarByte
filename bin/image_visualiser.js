@@ -1,3 +1,6 @@
+/**** Start of imports. If edited, may not auto-convert in the playground. ****/
+var soil = ee.Image("users/balddinosaur/soil/Soils_Wet_Tropics_nodata");
+/***** End of imports. If edited, may not auto-convert in the playground. *****/
 /**
  * @fileoverview Visualiser tool for displaying NDVI imagery on the map.
  * Explicit functionality is offered by the exported functions, while the
@@ -172,7 +175,7 @@ exports.displaySoil = function(paddocks, layerName, clipToPaddocks) {
   // Cast singular features to collections
   var paddockCollection = ee.FeatureCollection(paddocks);
   // import digital elevation date
-  var soilImage = ee.Image('CGIAR/SRTM90_V4');
+  var soilImage = soil;
   // the elevation layer parameters
   var visParams = {bands: ['soil'], min: 0, max: 150, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
       '#ffc623', '#ffa114','#ff5a0c'], shown: false};
