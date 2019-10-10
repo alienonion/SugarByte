@@ -77,6 +77,7 @@ Will only work if things are removed in the same order they were opened.
 exports.addPaddock = function(paddock) {
   if (manager.infoPanels != null) {
     removeFromApp();
+    manager.numPanels--;
   }
 
   debug.info('Adding the following paddock to the inspector UI:', paddock);
