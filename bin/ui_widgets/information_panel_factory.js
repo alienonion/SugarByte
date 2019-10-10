@@ -319,6 +319,8 @@ var createNDVIVisualiser = function(paddock) {
         // clip the imagery to the paddock geometries
         true);
 
+        Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)).setShown(false)
+
       // visualizing elevation of the paddock,
       // then assign returned layer to Object manager.currentLayers
       manager.currentLayers.soil = manager.app.imageVisualiser.displaySoil(
@@ -332,6 +334,7 @@ var createNDVIVisualiser = function(paddock) {
       // remove this panel's legend widget if exists
       manager.app.legendWidget.removeWidget();
       manager.app.elevationLegendWidget.removeWidget();
+      Map.layers().get(Map.layers().indexOf(manager.currentLayers.soil)).setShown(false)
 
       // Show a label with the date on the map.
       manager.timeLabel.setValue(new Date(xValue).toUTCString());
