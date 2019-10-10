@@ -16,7 +16,7 @@ var debug = require('users/balddinosaur/sugarbyte:bin/debug.js');
  * done when the first paddock is selected.
  */
 exports.initialise = function(app) {
-	debug.info('Initialising paddockInspector.');
+  debug.info('Initialising paddockInspector.');
   // Grab a reference to the app
   manager.app = app;
   // The paddock inspector UI widget
