@@ -146,8 +146,7 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   // import digital elevation date
   var elevationImage = ee.Image('CGIAR/SRTM90_V4');
   // the elevation layer parameters
-  var visParams = {bands: ['elevation'], min: 0, max: 150, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
-      '#ffc623', '#ffa114','#ff5a0c'], shown: false};
+  var visParams = {bands: ['elevation'], min: 0, max: 150, palette: ['#7a6f64', '#879c8d'], shown: false};
 
   // Whether or not to clip the imagery to the paddock geometries
   if (clipToPaddocks) {

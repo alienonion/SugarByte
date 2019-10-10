@@ -320,7 +320,7 @@ var createNDVIVisualiser = function(paddock) {
         true);
 
         Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)).setShown(false)
-        debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)));
+        debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)));
 
       // visualizing elevation of the paddock,
       // then assign returned layer to Object manager.currentLayers
