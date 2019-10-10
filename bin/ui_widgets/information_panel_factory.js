@@ -319,6 +319,16 @@ var createNDVIVisualiser = function(paddock) {
         // clip the imagery to the paddock geometries
         true);
 
+      // visualizing elevation of the paddock,
+      // then assign returned layer to Object manager.currentLayers
+      manager.currentLayers.soil = manager.app.imageVisualiser.displaysoil(
+          // the paddock chosen by user
+          manager.app.paddocks,
+          // the layer name
+          'soil',
+          // clip the imagery to the paddock geometries
+          true);
+
       // remove this panel's legend widget if exists
       manager.app.legendWidget.removeWidget();
       manager.app.elevationLegendWidget.removeWidget();
