@@ -75,7 +75,7 @@ Will only work if things are removed in the same order they were opened.
  * @param {ee.Feature} paddock - The paddock to add.
  */
 exports.addPaddock = function(paddock) {
-  if (manager.infoPanels.length === 0) {
+  if (manager.infoPanels.length !== 0) {
     removeFromApp();
     manager.numPanels--;
   }
