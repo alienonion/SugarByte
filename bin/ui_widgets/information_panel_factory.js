@@ -321,7 +321,7 @@ var createNDVIVisualiser = function(paddock) {
 
       // visualizing elevation of the paddock,
       // then assign returned layer to Object manager.currentLayers
-      manager.currentLayers.soil = manager.app.imageVisualiser.displaysoil(
+      manager.currentLayers.soil = manager.app.imageVisualiser.displaySoil(
           // the paddock chosen by user
           manager.app.paddocks,
           // the layer name
