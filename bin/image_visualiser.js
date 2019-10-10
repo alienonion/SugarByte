@@ -157,3 +157,34 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   manager.ndviLayers.push(layer);
   return layer;
 }
+
+/**
+ * Displays elavation imagery for paddocks.
+ *
+ * @param {ee.Feature | ee.FeatureCollection} paddocks - The paddock(s) to display imagery for.
+ *      Pass app.paddocks to display imagery for all paddocks.
+ * @param {String} layerName - The name of the layer to be added to the map.
+ * @param {boolean} clipToPaddocks - Whether or not to clip the imagery to the paddock geometries.
+ *
+ * @return {ui.Map.Layer} The layer that was created and added to the Map.
+ */
+exports.displaySoil = function(paddocks, layerName, clipToPaddocks) {
+  // Cast singular features to collections
+  var paddockCollection = ee.FeatureCollection(paddocks);
+  // import digital elevation date
+  var elevationImage = ee.Image('CGIAR/SRTM90_V4');
+  // the elevation layer parameters
+  var visParams = {bands: ['soil'], min: 0, max: 150, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
+      '#ffc623', '#ffa114','#ff5a0c'], shown: false};
+
+  // Whether or not to clip the imagery to the paddock geometries
+  if (clipToPaddocks) {
+    var soilOfPaddocks = elevationImage.clipToCollection(paddockCollection);
+  }
+
+  var layer = Map.addLayer(soilOfPaddocks, visParams, layerName);
+
+  //add elevation layers to ndviLayers list so it can be removed when remove ndvi layers
+  manager.ndviLayers.push(layer);
+  return layer;
+}
