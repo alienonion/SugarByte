@@ -1,7 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var farmer = ee.FeatureCollection("users/balddinosaur/SugarcaneRegions/Cairns_paddocks_2018");
+var farmer = ee.FeatureCollection("projects/1622crop/regions");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
-
 // The base application object.
 var app = {};
 
