@@ -78,6 +78,7 @@ exports.addPaddock = function(paddock) {
   debug.info('Adding the following paddock to the inspector UI:', paddock);
   // Create the info panel
   var infoPanel = manager.app.infoPanelFactory.createInfoPanel(paddock);
+
   // if already exits an info panel
   if (manager.numPanels === 1) {
     // get the right index of old info panel
@@ -86,6 +87,8 @@ exports.addPaddock = function(paddock) {
     debug.info('attempting to remove old paddock', oldPaddock);
     // remove old selected paddock with info panel
     manager.app.paddockManager.deselectPaddock(oldPaddock);
+    // remove layer select panel widget if exist
+    manager.app.layerSelectWidget.closePanelWidgets();
   }
   // Add the info panel and paddock to the dictionary
   manager.infoPanels[manager.numPanels] = [paddock, infoPanel];

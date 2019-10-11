@@ -85,14 +85,17 @@ exports.createSelectButton = function (layers) {
       // make chosen layer visible
       Map.layers().get(indexOfShownLayer).setShown(true);
 
+      // find the index of layers in Map.layers() list
+      var soilLayerIndex = Map.layers().indexOf(manager.currentLayers.soil);
+      var elevationLayerIndex = Map.layers().indexOf(manager.currentLayers.elevation);
+      var ndviLayerIndex = Map.layers().indexOf(manager.currentLayers.NDVI);
+
       // a switch statement to hide unselected layer
       switch (manager.currentLayers[key]) {
         case manager.currentLayers.NDVI: // when the chosen layer is NDVI
-          // find the index of elevation layers in Map.layers() list
-          var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.elevation);
-          // set elevation layer invisible
-          Map.layers().get(UnshownLayerIndex).setShown(false);
-          debug.info("set elevation layer invisible");
+          // set other layers invisible
+          Map.layers().get(soilLayerIndex).setShown(false);
+          Map.layers().get(elevationLayerIndex).setShown(false);
           // remove elevation legend widget if exists
           manager.app.elevationLegendWidget.removeWidget();
           // create a new NDVI legend widget
@@ -100,11 +103,19 @@ exports.createSelectButton = function (layers) {
           break;
 
         case manager.currentLayers.elevation: // when the chosen layer is elevation
-          // find the index of NDVI layers in Map.layers() list
-          var UnshownLayerIndex1 = Map.layers().indexOf(manager.currentLayers.NDVI);
           // set NDVI layer invisible
-          Map.layers().get(UnshownLayerIndex1).setShown(false);
-          debug.info("set NDVI layer invisible");
+          Map.layers().get(soilLayerIndex).setShown(false);
+          Map.layers().get(ndviLayerIndex).setShown(false);
+          // remove NDVI legend widget if exists
+          manager.app.legendWidget.removeWidget();
+          // create a new NDVI legend widget
+          manager.app.elevationLegendWidget.initialise(manager.app);
+          break;
+
+        case manager.currentLayers.soil: // when the chosen layer is soil
+          // set other two layers invisible
+          Map.layers().get(elevationLayerIndex).setShown(false);
+          Map.layers().get(ndviLayerIndex).setShown(false);
           // remove NDVI legend widget if exists
           manager.app.legendWidget.removeWidget();
           // create a new NDVI legend widget
