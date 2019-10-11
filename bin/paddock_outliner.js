@@ -1,7 +1,3 @@
-/**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var elevationOfSelectedPaddocks = ee.Image("CGIAR/SRTM90_V4"),
-    imageCollection = ee.ImageCollection("CSIRO/SLGA");
-/***** End of imports. If edited, may not auto-convert in the playground. *****/
 /**
  * @fileoverview This script contains functions for 
  * rendering one or more feature collections on to the map as outlines.
