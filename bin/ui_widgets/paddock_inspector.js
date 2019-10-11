@@ -59,15 +59,6 @@ Will only work if things are removed in the same order they were opened.
 */
 
 
-
-
-
-
-
-
-
-
-
 /**
  * Creates an info panel for the given paddock and adds it to the paddock inspector UI.
  * This is called whenever a paddock is selected.
@@ -79,17 +70,17 @@ exports.addPaddock = function(paddock) {
   // Create the info panel
   var infoPanel = manager.app.infoPanelFactory.createInfoPanel(paddock);
 
-  // if already exits an info panel
-  if (manager.numPanels === 1) {
-    // get the right index of old info panel
-    debug.info('attempting to remove old paddock', paddock);
-    var oldPaddock = manager.infoPanels[0][0];
-    debug.info('attempting to remove old paddock', oldPaddock);
-    // remove old selected paddock with info panel
-    manager.app.paddockManager.deselectPaddock(oldPaddock);
-    // remove layer select panel widget if exist
-    manager.app.layerSelectWidget.closePanelWidgets();
-  }
+  // // if already exits an info panel
+  // if (manager.numPanels === 1) {
+  //   // get the right index of old info panel
+  //   debug.info('attempting to remove old paddock', paddock);
+  //   var oldPaddock = manager.infoPanels[0][0];
+  //   debug.info('attempting to remove old paddock', oldPaddock);
+  //   // remove old selected paddock with info panel
+  //   manager.app.paddockManager.deselectPaddock(oldPaddock);
+  //   // remove layer select panel widget if exist
+  //   manager.app.layerSelectWidget.closePanelWidgets();
+  // }
   // Add the info panel and paddock to the dictionary
   manager.infoPanels[manager.numPanels] = [paddock, infoPanel];
   debug.info('infoPanels after addition of paddock:', manager.infoPanels);
