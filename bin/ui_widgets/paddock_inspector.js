@@ -78,6 +78,11 @@ exports.addPaddock = function(paddock) {
   debug.info('Adding the following paddock to the inspector UI:', paddock);
   // Create the info panel
   var infoPanel = manager.app.infoPanelFactory.createInfoPanel(paddock);
+  if (manager.numPanels !== 0) {
+    var oldPaddock = manager.infoPanels[manager.numPanels][0];
+    // remove old selected paddock with info panel
+    manager.app.paddockManager.deselectPaddock(oldPaddock);
+  }
   // Add the info panel and paddock to the dictionary
   manager.infoPanels[manager.numPanels] = [paddock, infoPanel];
   debug.info('infoPanels after addition of paddock:', manager.infoPanels);
@@ -98,7 +103,7 @@ exports.addPaddock = function(paddock) {
  *
  * @param {ee.Feature} paddock - The paddock to remove.
  */
-exports.removePaddock = function(paddock) {
+var removePaddock = function(paddock) {
   debug.info('Attempting to remove a paddock/infopanel from the paddock inspector:', paddock);
   manager.numPanels--;
   // Get the info panel
@@ -114,3 +119,5 @@ exports.removePaddock = function(paddock) {
     removeFromApp();
   }
 };
+
+exports.removePaddock = removePaddock;
