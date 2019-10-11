@@ -6,7 +6,7 @@ var manager = {};
 
 var debug = require('users/balddinosaur/sugarbyte:bin/debug.js');
 
-manager.createVariables = function(app) {
+exports.initialise = function(app) {
   manager.app = app;
   // current NDVI and elevation layers
   manager.currentLayers = {};
@@ -31,7 +31,7 @@ manager.createVariables = function(app) {
 /**
  * to create the layer select panel.
  */
-var createSelectWidget = function() {
+exports.createSelectWidget = function() {
   manager.layerSelectPanel.clear();
   // create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
   manager.timeLabel = ui.Label({
@@ -132,21 +132,15 @@ exports.createSelectButton = function (layers) {
   manager.layerSelectPanel.add(manager.selectBoxContainer);
 };
 
-exports.createPanel = function(app) {
-  debug.info('Initialising layer select widget.');
-  manager.createVariables(app);
-  createSelectWidget();
-};
-
 exports.closePanelWidgets = function () {
   //remove layer select panel
   if (manager.layerSelectPanel !== null) {
     Map.remove(manager.layerSelectPanel);
     debug.info("layer select panel removed");
+    // remove this panel's NDVI layer after closing
+    manager.app.imageVisualiser.clearAllNdviLayers();
+    // remove this panel's legend widget after closing
+    manager.app.legendWidget.removeWidget();
+    manager.app.elevationLegendWidget.removeWidget();
   }
-  // remove this panel's NDVI layer after closing
-  manager.app.imageVisualiser.clearAllNdviLayers();
-  // remove this panel's legend widget after closing
-  manager.app.legendWidget.removeWidget();
-  manager.app.elevationLegendWidget.removeWidget();
 };

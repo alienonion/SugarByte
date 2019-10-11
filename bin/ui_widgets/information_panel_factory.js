@@ -168,8 +168,8 @@ var createNDVIVisualiser = function (paddock) {
 
 
     debug.info("adding the layer select panel");
-    // create layer select panel
-    manager.app.layerSelectWidget.createPanel(manager.app);
+    // create layer select widget
+    manager.app.layerSelectWidget.createSelectWidget();
 
     // Clear the chart container panel and add the new chart
     chartContainer.clear().add(ndviChart);
@@ -443,6 +443,8 @@ var createSeasonComparator = function (paddock) {
  * @return {ui.Panel} - The UI information panel object.
  */
 exports.createInfoPanel = function (paddock) {
+
+
   debug.info('Creating an info panel for the paddock:', paddock);
   // Create and add a heading for the info panel
   var headingWidget = createHeading(paddock);
