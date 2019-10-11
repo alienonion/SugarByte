@@ -118,8 +118,7 @@ exports.createSelectButton = function (layers) {
           Map.layers().get(ndviLayerIndex).setShown(false);
           // remove NDVI legend widget if exists
           manager.app.legendWidget.removeWidget();
-          // create a new NDVI legend widget
-          manager.app.elevationLegendWidget.initialise(manager.app);
+          manager.app.elevationLegendWidget.removeWidget();
           break;
       }
     }
