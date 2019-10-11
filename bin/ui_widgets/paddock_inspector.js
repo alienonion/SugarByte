@@ -79,7 +79,9 @@ exports.addPaddock = function(paddock) {
   // Create the info panel
   var infoPanel = manager.app.infoPanelFactory.createInfoPanel(paddock);
   if (manager.numPanels !== 0) {
+    debug.info('attempting to remove old paddock', paddock);
     var oldPaddock = manager.infoPanels[manager.numPanels][0];
+    debug.info('attempting to remove old paddock', oldPaddock);
     // remove old selected paddock with info panel
     manager.app.paddockManager.deselectPaddock(oldPaddock);
   }
