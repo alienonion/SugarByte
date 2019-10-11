@@ -56,8 +56,8 @@ var createConstants = function() {
     MAP_ZOOM: 15,
     MAP_ZOOM_SELECTED: 16,
     mapCoordinates: {
-      LON: 145.71546,
-      LAT: -16.83435
+      LON: 145.9222,
+      LAT: -17.566
     },
     DATE_PLACEHOLDER: 'yyyy-mm-dd',
   };
