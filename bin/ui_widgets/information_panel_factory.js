@@ -72,7 +72,9 @@ var createHeading = function (paddock) {
   var closeEvent = function (button) {
     // deselect paddock and close current info panel
     manager.app.paddockManager.deselectPaddock(paddock);
-    //remove layer select panel
+
+    debug("closing layer select panel widget")
+    //remove layer select panel if exist
     manager.app.layerSelectWidget.closePanelWidgets();
   };
 
