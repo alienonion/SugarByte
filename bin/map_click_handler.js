@@ -46,6 +46,8 @@ exports.handleClick = function (clickEventInfo) {
     // Check the size of the paddocks that contain the point
     // If 0 then clicked off the paddock and should go back to normal view
     if (size !== 0) {
+      debug('close old info panel');
+      app.infoPanelFactory.closeEvent();
       debug.info('Paddock Selected');
       // Flag the paddock as selected
       manager.app.paddockManager.selectPaddock(paddocksContaining.first());
