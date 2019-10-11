@@ -85,7 +85,7 @@ exports.addPaddock = function(paddock) {
     // remove old selected paddock with info panel
     manager.app.paddockManager.deselectPaddock(oldPaddock);
   }
-  Add the info panel and paddock to the dictionary
+  debug('Add the info panel and paddock to the dictionary');
   manager.infoPanels[manager.numPanels] = [paddock, infoPanel];
   debug.info('infoPanels after addition of paddock:', manager.infoPanels);
   manager.numPanels++;
