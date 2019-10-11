@@ -1,5 +1,6 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var soil = ee.Image("users/balddinosaur/soil/Soils_Wet_Tropics_nodata");
+var soil = ee.Image("users/balddinosaur/soil/Soils_Wet_Tropics_nodata"),
+    elevation = ee.Image("users/balddinosaur/elevation/DEM_Wet_Tropics_int");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 /**
  * @fileoverview Visualiser tool for displaying NDVI imagery on the map.
@@ -144,16 +145,15 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   // Cast singular features to collections
   var paddockCollection = ee.FeatureCollection(paddocks);
   // import digital elevation date
-  var elevationImage = ee.Image('CGIAR/SRTM90_V4');
+  var elevationImage = elevation;
   // the elevation layer parameters
-  var visParams = {bands: ['elevation'], min: 0, max: 150, palette: ['#7a6f64', '#879c8d'], shown: false};
+  var visParams = {bands: ['b1'], min: 0, max: 1500, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
+          '#ffc623', '#ffa114','#ff5a0c'], shown: false};
 
   // Whether or not to clip the imagery to the paddock geometries
   if (clipToPaddocks) {
     var elevationOfPaddocks = elevationImage.clipToCollection(paddockCollection);
   }
-  var visParams = {bands: ['elevation'], min: 0, max: 150, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
-            '#ffc623', '#ffa114','#ff5a0c'], shown: false};
 
   var layer = Map.addLayer(elevationOfPaddocks, visParams, layerName);
 
