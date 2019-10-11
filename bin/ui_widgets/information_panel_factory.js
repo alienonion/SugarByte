@@ -167,7 +167,7 @@ var createNDVIVisualiser = function (paddock) {
 
     debug.info("adding the layer select panel");
     // create layer select panel
-    manager.app.layerSelectWidget.createPanel(app);
+    manager.app.layerSelectWidget.createPanel(manager.app);
 
     // Clear the chart container panel and add the new chart
     chartContainer.clear().add(ndviChart);
