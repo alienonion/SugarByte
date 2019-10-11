@@ -133,6 +133,8 @@ var createNDVIVisualiser = function (paddock) {
    * @param {ui.Button} button - The button that executed this onClick function.
    */
   var visualise = function (button) {
+    // clear all  soil elevation and ndvi layers if exists
+    manager.app.imageVisualiser.clearAllNdviLayers();
     debug.info('Visualise: Updating Charts.');
     // Filter to relevant data
     debug.info('Paddock:', paddock);
