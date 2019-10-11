@@ -82,12 +82,10 @@ exports.addPaddock = function(paddock) {
   if (manager.numPanels === 1) {
     // get the right index of old info panel
     debug.info('attempting to remove old paddock', paddock);
-    var oldPanel = manager.infoPanels[0][1];
+    var oldPaddock = manager.infoPanels[0][0];
     debug.info('attempting to remove old paddock', oldPaddock);
     // remove old selected paddock with info panel
     manager.app.paddockManager.deselectPaddock(oldPaddock);
-    // remove this panel's layers after closing
-    manager.app.imageVisualiser.clearAllNdviLayers();
   }
   // Add the info panel and paddock to the dictionary
   manager.infoPanels[manager.numPanels] = [paddock, infoPanel];
