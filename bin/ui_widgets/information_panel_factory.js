@@ -169,7 +169,7 @@ var createHeading = function (paddock) {
    * The function to run when the close button onClick event is triggered.
    * @param {ui.Button} button - The button that executed this onClick function.
    */
-  var closeEvent = function (button) {
+  exports.closeEvent = function (button) {
     // deselect paddock and close current info panel
     manager.app.paddockManager.deselectPaddock(paddock);
     //remove layer select panel
@@ -185,8 +185,6 @@ var createHeading = function (paddock) {
     manager.app.legendWidget.removeWidget();
     manager.app.elevationLegendWidget.removeWidget();
   };
-
-  exports.closeEvent();
 
   //create close button
   var closeButton = ui.Button('Close', closeEvent, false, {});
