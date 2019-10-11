@@ -1,5 +1,5 @@
 /**** Start of imports. If edited, may not auto-convert in the playground. ****/
-var farmer = ee.FeatureCollection("projects/1622crop/regions");
+var farmer = ee.FeatureCollection("users/balddinosaur/SugarcaneRegions/Cairns_paddocks_2018");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 // The base application object.
 var app = {};
@@ -56,8 +56,8 @@ var createConstants = function() {
     MAP_ZOOM: 15,
     MAP_ZOOM_SELECTED: 16,
     mapCoordinates: {
-      LON: 145.9222,
-      LAT: -17.566
+      LON: 145.71546,
+      LAT: -16.83435
     },
     DATE_PLACEHOLDER: 'yyyy-mm-dd',
   };
