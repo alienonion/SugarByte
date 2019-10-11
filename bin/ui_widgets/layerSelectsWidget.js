@@ -1,0 +1,129 @@
+/**
+ * @fileoverview This is the UI tool that let user switch between soil, NDVI and elevation layers
+ */
+
+var manager = {};
+
+var debug = require('users/balddinosaur/sugarbyte:bin/debug.js');
+
+manager.createVariables = function(app) {
+  manager.app = app;
+  // current NDVI and elevation layers
+  manager.currentLayers = {};
+  // select box container
+  manager.selectBoxContainer = ui.Panel({
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      maxWidth: '250px',
+      position: 'top-center',
+    }
+  })
+  // the layer-select-panel contains time label and select box container
+  manager.layerSelectPanel = ui.Panel({
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      maxWidth: '250px',
+      position: 'middle-left',
+    }
+  });
+};
+
+/**
+ * to create the layer select panel.
+ */
+exports.createSelectWidget = function () {
+  manager.layerSelectPanel.clear();
+  // create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
+  manager.timeLabel = ui.Label({
+    value: 'Click a point on the chart to show the NDVI for that date.',
+    style: {
+      position: 'top-center',
+      height: '30px',
+    }
+  });
+  debug.info("created time label");
+
+  manager.layerSelectPanel.add(manager.timeLabel)
+  return manager.timeLabel;
+};
+
+/**
+ create select widget represents a drop-down menu of layers from which the user can choose one.
+ */
+exports.createSelectPanel = function () {
+  // remove old select box container before adding new one
+  manager.layerSelectPanel.remove(manager.selectBoxContainer);
+  // clear all elements in select box container
+  manager.selectBoxContainer.clear();
+
+  // create a label to prompt users to select the layer to show
+  var selectBoxTitle = ui.Label({
+    value: 'Please select the layer to show',
+    style: {
+      position: 'top-center',
+      height: '30px',
+      backgroundColor: '#dcf0e4',
+      fontWeight: 'bold',
+      fontFamily: 'Comic Sans MS',
+    }
+  });
+  debug.info('Created select box title');
+
+  //select widget represents a drop-down menu of layers from which the user can choose one.
+  var selectBox = ui.Select({
+    items: Object.keys(manager.currentLayers),
+    onChange: function (key) {
+      // get the index of layer to show
+      var indexOfShownLayer = Map.layers().indexOf(manager.currentLayers[key]);
+      // make chosen layer visible
+      Map.layers().get(indexOfShownLayer).setShown(true);
+
+      // a switch statement to hide unselected layer
+      switch (manager.currentLayers[key]) {
+        case manager.currentLayers.NDVI: // when the chosen layer is NDVI
+          // find the index of elevation layers in Map.layers() list
+          var UnshownLayerIndex = Map.layers().indexOf(manager.currentLayers.elevation);
+          // set elevation layer invisible
+          Map.layers().get(UnshownLayerIndex).setShown(false);
+          debug.info("set elevation layer invisible");
+          // remove elevation legend widget if exists
+          manager.app.elevationLegendWidget.removeWidget();
+          // create a new NDVI legend widget
+          manager.app.legendWidget.initialise(manager.app);
+          break;
+
+        case manager.currentLayers.elevation: // when the chosen layer is elevation
+          // find the index of NDVI layers in Map.layers() list
+          var UnshownLayerIndex1 = Map.layers().indexOf(manager.currentLayers.NDVI);
+          // set NDVI layer invisible
+          Map.layers().get(UnshownLayerIndex1).setShown(false);
+          debug.info("set NDVI layer invisible");
+          // remove NDVI legend widget if exists
+          manager.app.legendWidget.removeWidget();
+          // create a new NDVI legend widget
+          manager.app.elevationLegendWidget.initialise(manager.app);
+          break;
+      }
+    }
+  });
+  // Set a place holder.
+  selectBox.setPlaceholder('Choose a layer...');
+  // add select box title and select Box to the container
+  manager.selectBoxContainer.add(selectBoxTitle);
+  manager.selectBoxContainer.add(selectBox);
+  // add select box container to layer-select-panel
+  manager.layerSelectPanel.add(manager.selectBoxContainer);
+};
+
+exports.closePanelWidgets = function () {
+  //remove layer select panel
+  if (manager.layerSelectPanel !== null) {
+    Map.remove(manager.layerSelectPanel);
+    debug.info("layer select panel removed");
+  }
+  // remove this panel's NDVI layer after closing
+  manager.app.imageVisualiser.clearAllNdviLayers();
+  // remove this panel's legend widget after closing
+  manager.app.legendWidget.removeWidget();
+  manager.app.elevationLegendWidget.removeWidget();
+};

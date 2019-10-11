@@ -177,10 +177,21 @@ var createHeading = function (paddock) {
       Map.remove(manager.layerSelectPanel);
       debug.info("layer select panel removed");
     }
-
     // remove this panel's NDVI layer after closing
     manager.app.imageVisualiser.clearAllNdviLayers();
+    // remove this panel's legend widget after closing
+    manager.app.legendWidget.removeWidget();
+    manager.app.elevationLegendWidget.removeWidget();
+  };
 
+  exports.closePanelWidgets = function () {
+    //remove layer select panel
+    if (manager.layerSelectPanel !== null) {
+      Map.remove(manager.layerSelectPanel);
+      debug.info("layer select panel removed");
+    }
+    // remove this panel's NDVI layer after closing
+    manager.app.imageVisualiser.clearAllNdviLayers();
     // remove this panel's legend widget after closing
     manager.app.legendWidget.removeWidget();
     manager.app.elevationLegendWidget.removeWidget();
