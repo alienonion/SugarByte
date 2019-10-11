@@ -147,7 +147,7 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   // import digital elevation date
   var elevationImage = elevation;
   // the elevation layer parameters
-  var visParams = {bands: ['b1'], min: 0, max: 1500, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
+  var visParams = {bands: ['b1'], min: 0, max: 100, palette: ['#1e7a00', '#66b100', '#dff100','#f1c90d',
           '#ffc623', '#ffa114','#ff5a0c'], shown: false};
 
   // Whether or not to clip the imagery to the paddock geometries
