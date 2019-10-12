@@ -4,6 +4,7 @@ var collection = ee.ImageCollection('LANDSAT/LC08/C01/T1');
 var start = ee.Image(collection.first()).date().get('year').format();
 var now = Date.now();
 var end = ee.Date(now).format();
+var start ="2018-1-1";
 
 // Run this function on a change of the dateSlider.
 var showMosaic = function(range) {
@@ -23,7 +24,7 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
   var dateSlider = ui.DateSlider({
     start: range['dates'][0],
     end: range['dates'][1],
-    value: "2016-1-1",
+    value: start,
     period: 5,
     onChange: showMosaic,
     style: {
