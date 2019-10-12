@@ -29,7 +29,7 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
     width: '300px'
   });
   
-  dataSlider.style().set({
+  dateSlider.style().set({
   height: '40px',
   width: '300px'
 });
