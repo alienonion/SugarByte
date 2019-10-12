@@ -25,13 +25,7 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
     end: range['dates'][1],
     value: null,
     period: 365,
-    onChange: showMosaic,
-    width: '300px'
+    onChange: showMosaic
   });
-  
-  // dateSlider.style().set({
-  // height: '40px',
-  // width: '300px'
-  // });
   Map.add(dateSlider.setValue(now));
 });
