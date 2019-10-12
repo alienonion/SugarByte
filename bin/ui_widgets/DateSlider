@@ -27,7 +27,9 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
     period: 5,
     onChange: showMosaic,
     style: {
-      minWidth: '300px'
+      minWidth: '500px',
+      padding: '5px',
+      whiteSoace: 'nowrap'
     }
   });
   Map.add(dateSlider.setValue(now));
