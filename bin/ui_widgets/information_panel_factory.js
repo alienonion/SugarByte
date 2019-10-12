@@ -162,8 +162,10 @@ var createNDVIVisualiser = function (paddock) {
           count: 7
         }
       },
+      width: '500px',
+      height: '300px',
       pointSize: 0.6,
-      //lineSize: 0.3, // We don't want lines on the 'raw' scatter plot due to inconsistent data coverage
+      lineSize: 0.3, // We don't want lines on the 'raw' scatter plot due to inconsistent data coverage
     });
     debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
     ndviChart.setChartType('ScatterChart');
