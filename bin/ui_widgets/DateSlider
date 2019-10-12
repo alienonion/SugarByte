@@ -29,6 +29,6 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
   });
   Map.add(dateSlider.setValue(now));
   dateSlider.Style().set({
-    width: '300px',
+    width: '600px',
   })
 });
