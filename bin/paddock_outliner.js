@@ -39,7 +39,7 @@ var LAYER_NAME_SELECTED = 'Currently selected paddock: ';
 // Whether or not the outlines should be shown automatically.
 // Setting these to false can speed up app performance.
 var SHOWN_OUTLINES = true;
-var SHOWN_SELECTED = true;
+var SHOWN_SELECTED = false;
 
 /**
  * Resets the outline layer to the current master list of paddocks.
