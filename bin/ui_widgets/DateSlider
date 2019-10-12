@@ -34,5 +34,5 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
       fontSize: '15px'
     }
   });
-  Map.add(dateSlider.setValue(now));
+  Map.add(dateSlider.setValue("2018-1-1"));
 });
