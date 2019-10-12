@@ -24,9 +24,9 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
   var dateSlider = ui.DateSlider({
     start: range['dates'][0],
     end: range['dates'][1],
-    value: start,
+    value: "2018-2-2",
     period: 5,
-    onChange: showMosaic,
+    // onChange: showMosaic,
     style: {
       minWidth: '500px',
       padding: '5px',
