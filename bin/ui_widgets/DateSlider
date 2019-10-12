@@ -8,7 +8,7 @@ var end = ee.Date(now).format();
 // Run this function on a change of the dateSlider.
 var showMosaic = function(range) {
   var mosaic = ee.Algorithms.Landsat.simpleComposite({
-    collection: collection.filterDate(range.start(), range.end())
+    co llection: collection.filterDate(range.start(), range.end())
   });
   // Asynchronously compute the name of the composite.  Display it.
   range.start().get('year').evaluate(function(name) {
@@ -27,11 +27,8 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
     period: 365,
     onChange: showMosaic,
     style: {
-      width: '300px'
+      minWidth: '200px'
     }
   });
   Map.add(dateSlider.setValue(now));
-  dateSlider.Style().set({
-    width: '600px',
-  })
 });
