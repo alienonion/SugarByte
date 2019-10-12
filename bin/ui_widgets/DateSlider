@@ -11,7 +11,7 @@ var showMosaic = function(range) {
     collection: collection.filterDate(range.start(), range.end())
   });
   // Asynchronously compute the name of the composite.  Display it.
-  range.start().get('year').evaluate(function(name) {
+  range.start().get('day').evaluate(function(name) {
     var visParams = {bands: ['B4', 'B3', 'B2'], max: 100};
     var layer = ui.Map.Layer(mosaic, visParams, name + ' composite');
     Map.layers().set(0, layer);
