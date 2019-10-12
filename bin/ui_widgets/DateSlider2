@@ -20,8 +20,10 @@ ee.DateRange(start, end).evaluate(function(range) {
     period: 1,
     onChange: showImage,
     style: {
-      width: "200px",
-      padding: "2px"
+      minWidth: '500px',
+      padding: '5px',
+      whiteSpace: 'pre',
+      fontSize: '15px'
     }
   });
   var main_panel = ui.Panel({
