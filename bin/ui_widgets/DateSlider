@@ -27,8 +27,6 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
     period: 365,
     onChange: showMosaic,
     style: {
-      fontWeight: 'bold',
-      fontSize: '24px',
       width: '300px'
     }
   });
