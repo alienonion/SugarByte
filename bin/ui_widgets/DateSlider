@@ -25,7 +25,8 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
     end: range['dates'][1],
     value: null,
     period: 365,
-    onChange: showMosaic
+    onChange: showMosaic,
+    style({height: '60px', width: '300px'})
   });
   Map.add(dateSlider.setValue(now));
   dateSlider.Style().set({
