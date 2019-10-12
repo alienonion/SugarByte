@@ -29,9 +29,9 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
     width: '300px'
   });
   
-  dateSlider.style().set({
-  height: '40px',
-  width: '300px'
-});
+  // dateSlider.style().set({
+  // height: '40px',
+  // width: '300px'
+  // });
   Map.add(dateSlider.setValue(now));
 });
