@@ -23,7 +23,7 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
   var dateSlider = ui.DateSlider({
     start: range['dates'][0],
     end: range['dates'][1],
-    value: Date().toUTCString(),
+    value: '2018-1-10',
     period: 5,
     onChange: showMosaic,
     style: {
