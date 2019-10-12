@@ -24,7 +24,7 @@ var dateRange = ee.DateRange(start, end).evaluate(function(range) {
     start: range['dates'][0],
     end: range['dates'][1],
     value: null,
-    period: 365,
+    period: 5,
     onChange: showMosaic,
     style: {
       minWidth: '200px'
