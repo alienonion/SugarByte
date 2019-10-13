@@ -69,8 +69,9 @@ var createHeading = function (paddock) {
     // deselect paddock and close current info panel
     manager.app.paddockManager.deselectPaddock(paddock);
     // remove this panel's NDVI layer after close
-    manager.app.imageVisualiser.clearEleSoilLayers();
+    manager.app.imageVisualiser.clearAllNdviLayers();
     // remove elevation and soil layers after close
+    manager.app.imageVisualiser.clearEleSoilLayers();
     debug.info("closing layer select panel widget")
     //remove layer select panel if exist
     manager.app.layerSelectWidget.closePanelWidgets();
