@@ -54,8 +54,11 @@ exports.createSelectWidget = function (layers) {
   debug.info("created time label");
 
   manager.layerSelectPanel.add(manager.timeLabel)
+
   // remove the layer select panel if already exists
-  Map.remove(manager.layerSelectPanel);
+  if (Map.widgets.getJsArray.includes(manager.layerSelectPanel)) {
+    Map.remove(manager.layerSelectPanel);
+  }
   // add the layer select panel to the map
   Map.add(manager.layerSelectPanel);
   manager.currentLayers = layers;
