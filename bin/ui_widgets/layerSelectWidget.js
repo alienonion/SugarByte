@@ -46,6 +46,7 @@ exports.createSelectWidget = function() {
   manager.layerSelectPanel.add(manager.timeLabel)
   // add the layer select panel to the map
   Map.add(manager.layerSelectPanel);
+  return manager.layerSelectPanel;
 };
 
 exports.updateTimeLabel = function(xValue) {
@@ -69,9 +70,7 @@ exports.createSelectButton = function (layers) {
     style: {
       position: 'top-center',
       height: '30px',
-      backgroundColor: '#dcf0e4',
       fontWeight: 'bold',
-      fontFamily: 'Comic Sans MS',
     }
   });
   debug.info('Created select box title');

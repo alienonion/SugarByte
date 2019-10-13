@@ -170,15 +170,14 @@ var createNDVIVisualiser = function (paddock) {
 
     ndviChart.style().set({
       minHeight: '300px',
-      width: '400px'
+      minWidth: '420px'
     })
     debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
     ndviChart.setChartType('ScatterChart');
 
-
     debug.info("adding the layer select panel");
     // create layer select widget
-    manager.app.layerSelectWidget.createSelectWidget();
+    visualiserPanel.add(manager.app.layerSelectWidget.createSelectWidget());
 
     // Clear the chart container panel and add the new chart
     chartContainer.clear().add(ndviChart);
