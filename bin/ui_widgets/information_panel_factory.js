@@ -25,7 +25,6 @@ exports.initialise = function (app) {
 };
 
 
-
 /**
  * Creates an information panel heading for the given paddock.
  * Includes a title with the paddock's ID and the close button, among other things.
@@ -35,7 +34,7 @@ exports.initialise = function (app) {
 var createHeading = function (paddock) {
   debug.info('Creating heading widget panel for an information panel.');
   // Title
-  var title = "Paddock: ";
+  var title = "Paddock Explorer";
   var titleLabel = ui.Label({
     value: title,
     style: {
@@ -46,7 +45,7 @@ var createHeading = function (paddock) {
   });
 
   // Description
-  var description = "The NDVI visualiser for Paddock: ";
+  var description = "The NDVI visualiser for Paddock: loading...";
   var descriptionLabel = ui.Label(description);
 
   // Asynchronous retrieval of paddock ID. Resets the contents of the
@@ -55,8 +54,8 @@ var createHeading = function (paddock) {
     debug.info('Paddock ID:', id);
     manager.id = id;
     title += id;
-    description += id;
-    titleLabel.setValue(title);
+    description = "The NDVI visualiser for Paddock: " + id;
+    // titleLabel.setValue(title);
     descriptionLabel.setValue(description);
   };
   paddock.get('ID').evaluate(getPaddockId);
@@ -113,10 +112,11 @@ var createNDVIVisualiser = function (paddock) {
   var dateLabelTextStyle = {
     margin: '6px 0 -3px 8px',
     fontSize: '12px',
-    color: 'gray'}
+    color: 'gray'
+  }
   // Encapsulate the date text boxes in a panel that includes a horizontally positioned label
   var startDatePanel = ui.Panel([ui.Label('Start date', dateLabelTextStyle), startDateBox], ui.Panel.Layout.flow('vertical'));
-  var endDatePanel = ui.Panel([ui.Label('End date',dateLabelTextStyle), endDateBox], ui.Panel.Layout.flow('vertical'));
+  var endDatePanel = ui.Panel([ui.Label('End date', dateLabelTextStyle), endDateBox], ui.Panel.Layout.flow('vertical'));
 
   // NDVI chart container. Each time a new graph is created,
   // this panel is cleared and the new chart is added.
@@ -148,51 +148,58 @@ var createNDVIVisualiser = function (paddock) {
         .filterDate(startDateBox.getValue(), endDateBox.getValue()));
     debug.info('filtered:', filtered);
 
-    // Generate Chart
-    debug.info('Generating NDVI chart:', paddock);
-    var ndviChart = ui.Chart.image.series(filtered, ee.Geometry(localPaddock.geometry), ee.Reducer.mean(), 500);
 
-    ndviChart.setOptions({
-      title: 'NDVI Over Time',
-      vAxis: {
-        title: 'NDVI',
-      },
-      hAxis: {
-        title: 'date',
-        format: 'MM-yy',
-        gridlines: {
-          count: 7
+    var generateChart= function() {
+      // Generate Chart
+      debug.info('Generating NDVI chart:', paddock);
+      var ndviChart = ui.Chart.image.series(filtered, ee.Geometry(localPaddock.geometry), ee.Reducer.mean(), 500);
+      ndviChart.setOptions({
+        title: 'NDVI Over Time',
+        vAxis: {
+          title: 'NDVI',
+        },
+        hAxis: {
+          title: 'date',
+          format: 'MM-yy',
+          gridlines: {
+            count: 7
+          }
+        },
+        pointSize: 0.6,
+        //lineSize: 0.3, // We don't want lines on the 'raw' scatter plot due to inconsistent data coverage
+      });
+
+      ndviChart.style().set({
+        minHeight: '300px',
+        minWidth: '420px'
+      })
+      debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
+      ndviChart.setChartType('ScatterChart');
+
+      return ndviChart;
+    }
+
+    var refreshChartContainer = function(chart) {
+      debug.info("adding the layer select panel");
+      // create layer select widget
+      manager.app.layerSelectWidget.createSelectWidget();
+
+      manager.timeLabel = ui.Label({
+        value: 'Click a point on the chart to show the NDVI for that date.',
+        style: {
+          position: 'top-center',
+          fontSize: '12px',
+          margin: '-5px 0 0 30px'
         }
-      },
-      pointSize: 0.6,
-      //lineSize: 0.3, // We don't want lines on the 'raw' scatter plot due to inconsistent data coverage
-    });
+      });
+      // Clear the chart container panel and add the new chart
+      chartContainer.clear().add(ndviChart);
+      // add click-point time label
+      chartContainer.add(manager.timeLabel);
+    }
 
-    ndviChart.style().set({
-      minHeight: '300px',
-      minWidth: '420px'
-    })
-    debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
-    ndviChart.setChartType('ScatterChart');
+    refreshChartContainer(generateChart);
 
-
-    debug.info("adding the layer select panel");
-    // create layer select widget
-    manager.app.layerSelectWidget.createSelectWidget();
-
-    manager.timeLabel = ui.Label({
-      value: 'Click a point on the chart to show the NDVI for that date.',
-      style: {
-        position: 'top-center',
-        fontSize: '12px',
-        margin: '-5px 0 0 30px'
-      }
-    });
-
-    // Clear the chart container panel and add the new chart
-    chartContainer.clear().add(ndviChart);
-    // add click-point time label
-    chartContainer.add(manager.timeLabel);
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function (xValue, yValue, seriesName) {
@@ -202,14 +209,18 @@ var createNDVIVisualiser = function (paddock) {
       var date = ee.Date(new Date(xValue));
       debug.info("clicked data is", date);
 
+      // Get the 5 day range (guarantees that at least one data point will be present
+      var dateRange = ee.DateRange(date, date.advance(5, 'day'));
+
       // clear all NDVI and elevation layers before displaying new one
       manager.app.imageVisualiser.clearAllNdviLayers();
 
       // visualizing NDVI of chosen time point of scatter chart on the map,
       // then assign returned layer to Object manager.currentLayers
-      manager.currentLayers.NDVI = manager.app.imageVisualiser.displayPaddockNDVIOnDate(
+      manager.currentLayers.NDVI = manager.app.imageVisualiser.displayPaddockNDVIMedian(
           //the clicked date on the scatter chart
-          date,
+          dateRange.start(),
+          dateRange.end(),
           // the paddock chosen by user
           paddock.geometry(),
           // the layer name
@@ -248,7 +259,7 @@ var createNDVIVisualiser = function (paddock) {
 
       // Show a label with the date on the map.
       manager.app.layerSelectWidget.updateTimeLabel(xValue);
-      manager.timeLabel.setValue("click point time: "+ new Date(xValue).toJSON().slice(0,10));
+      manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
 
       // create select button
