@@ -40,10 +40,7 @@ var createHeading = function (paddock) {
     value: title,
     style: {
       fontWeight: 'bold',
-      fontSize: '20px',
-      fontFamily: 'Comic Sans MS',
-      backgroundColor: '#dcf0e4',
-      padding: '5px',
+      fontSize: '22px',
       margin: '10px 5px',
     }
   });
@@ -112,9 +109,13 @@ var createNDVIVisualiser = function (paddock) {
     placeholder: manager.app.default.DATE_PLACEHOLDER,
     value: manager.app.default.CHART_END_DATE,
   });
+  var dateLabelTextStyle = {
+    margin: '8px 0 -3px 8px',
+    fontSize: '12px',
+    color: 'gray'}
   // Encapsulate the date text boxes in a panel that includes a horizontally positioned label
-  var startDatePanel = ui.Panel([ui.Label('Start date'), startDateBox], ui.Panel.Layout.flow('horizontal'));
-  var endDatePanel = ui.Panel([ui.Label('End date  '), endDateBox], ui.Panel.Layout.flow('horizontal'));
+  var startDatePanel = ui.Panel([ui.Label('Start date', dateLabelTextStyle), startDateBox], ui.Panel.Layout.flow('vertical'));
+  var endDatePanel = ui.Panel([ui.Label('End date',dateLabelTextStyle), endDateBox], ui.Panel.Layout.flow('vertical'));
 
   // NDVI chart container. Each time a new graph is created,
   // this panel is cleared and the new chart is added.
