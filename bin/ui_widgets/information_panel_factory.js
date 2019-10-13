@@ -124,7 +124,6 @@ var createNDVIVisualiser = function (paddock) {
   var chartContainer = ui.Panel({
     style: {
       width: '450px',
-      height: '400px',
     },
   });
 
@@ -461,14 +460,13 @@ exports.createInfoPanel = function (paddock) {
   var visualiserWidget = createNDVIVisualiser(paddock);
 
   // Season comparisons
-  var seasonComparatorWidget = createSeasonComparator(paddock);
+  // var seasonComparatorWidget = createSeasonComparator(paddock);
 
   // Create and return the info panel
   var infoPanel = ui.Panel({
     widgets: [
       headingWidget,
-      visualiserWidget,
-      seasonComparatorWidget],
+      visualiserWidget,],
     style: {width: '450px'},
   });
   return infoPanel;
