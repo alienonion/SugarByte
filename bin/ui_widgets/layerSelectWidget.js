@@ -31,7 +31,16 @@ exports.initialise = function(app) {
 /**
  * to create the layer select panel.
  */
-exports.createSelectWidget = function() {
+
+exports.updateTimeLabel = function(xValue) {
+  // Show a label with the date on the map.
+  manager.timeLabel.setValue("click point time: "+ new Date(xValue).toJSON().slice(0,10));
+}
+
+/**
+ create select widget represents a drop-down menu of layers from which the user can choose one.
+ */
+exports.createSelectButton = function (layers) {
   manager.layerSelectPanel.clear();
   // create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
   manager.timeLabel = ui.Label({
@@ -46,18 +55,6 @@ exports.createSelectWidget = function() {
   manager.layerSelectPanel.add(manager.timeLabel)
   // add the layer select panel to the map
   Map.add(manager.layerSelectPanel);
-  return manager.layerSelectPanel;
-};
-
-exports.updateTimeLabel = function(xValue) {
-  // Show a label with the date on the map.
-  manager.timeLabel.setValue("click point time: "+ new Date(xValue).toJSON().slice(0,10));
-}
-
-/**
- create select widget represents a drop-down menu of layers from which the user can choose one.
- */
-exports.createSelectButton = function (layers) {
   manager.currentLayers = layers;
   // remove old select box container before adding new one
   manager.layerSelectPanel.remove(manager.selectBoxContainer);
@@ -121,6 +118,7 @@ exports.createSelectButton = function (layers) {
           break;
       }
     }
+
   });
   // Set a place holder.
   selectBox.setPlaceholder('Choose a layer...');
@@ -129,6 +127,9 @@ exports.createSelectButton = function (layers) {
   manager.selectBoxContainer.add(selectBox);
   // add select box container to layer-select-panel
   manager.layerSelectPanel.add(manager.selectBoxContainer);
+
+  // return this layer select Panel
+  return manager.layerSelectPanel;
 };
 
 exports.closePanelWidgets = function () {

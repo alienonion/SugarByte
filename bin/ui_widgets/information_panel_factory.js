@@ -182,9 +182,8 @@ var createNDVIVisualiser = function (paddock) {
     var refreshChartContainer = function() {
       var ndviChart = generateChart();
       debug.info("adding the layer select panel");
-      // create layer select widget
-      manager.app.layerSelectWidget.createSelectWidget();
 
+      // create prompt label for chart
       manager.timeLabel = ui.Label({
         value: 'Click a point on the chart to show the NDVI for that date.',
         style: {
