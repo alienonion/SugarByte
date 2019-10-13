@@ -231,34 +231,34 @@ var createNDVIVisualiser = function (paddock) {
 
       // visualizing elevation of the paddock,
       // then assign returned layer to Object manager.currentLayers
-      manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
+      manager.currentLayers.Elevation = manager.app.imageVisualiser.displayElevation(
           // the paddock chosen by user
           manager.app.paddocks,
           // the layer name
-          'elvation',
+          'Elvation',
           // clip the imagery to the paddock geometries
           true);
 
-      Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)).setShown(false)
-      debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)));
+      Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false)
+      debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)));
 
       // visualizing elevation of the paddock,
       // then assign returned layer to Object manager.currentLayers
-      manager.currentLayers.soil = manager.app.imageVisualiser.displaySoil(
+      manager.currentLayers.Soil = manager.app.imageVisualiser.displaySoil(
           // the paddock chosen by user
           manager.app.paddocks,
           // the layer name
-          'soil',
+          'Soil',
           // clip the imagery to the paddock geometries
           true);
 
       // remove this panel's legend widget if exists
       manager.app.legendWidget.removeWidget();
       manager.app.elevationLegendWidget.removeWidget();
-      Map.layers().get(Map.layers().indexOf(manager.currentLayers.soil)).setShown(false);
-      debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.soil)));
+      Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)).setShown(false);
+      debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)));
 
-      // create select button
+      // create layer select
       manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
       // Show a label with the date on the map.
       manager.app.layerSelectWidget.updateTimeLabel(xValue);
