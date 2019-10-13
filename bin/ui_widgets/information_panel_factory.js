@@ -46,7 +46,7 @@ var createHeading = function (paddock) {
   });
 
   // Description
-  var description = "Detailed information for Paddock: ";
+  var description = "The NDVI visualiser for Paddock: ";
   var descriptionLabel = ui.Label(description);
 
   // Asynchronous retrieval of paddock ID. Resets the contents of the
@@ -111,7 +111,7 @@ var createNDVIVisualiser = function (paddock) {
   });
 
   var dateLabelTextStyle = {
-    margin: '6px 0 -3px 6px',
+    margin: '6px 0 -3px 8px',
     fontSize: '12px',
     color: 'gray'}
   // Encapsulate the date text boxes in a panel that includes a horizontally positioned label
@@ -123,7 +123,7 @@ var createNDVIVisualiser = function (paddock) {
   var CHART_POSITION_INDEX = 3;
   var chartContainer = ui.Panel({
     style: {
-      width: '400px',
+      width: '450px',
       height: '400px',
     },
   });
@@ -167,6 +167,11 @@ var createNDVIVisualiser = function (paddock) {
       pointSize: 0.6,
       //lineSize: 0.3, // We don't want lines on the 'raw' scatter plot due to inconsistent data coverage
     });
+
+    ndviChart.style().set({
+      minHeight: '300px',
+      width: '400px'
+    })
     debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
     ndviChart.setChartType('ScatterChart');
 
