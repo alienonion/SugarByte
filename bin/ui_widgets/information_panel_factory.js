@@ -124,6 +124,7 @@ var createNDVIVisualiser = function (paddock) {
   var chartContainer = ui.Panel({
     style: {
       width: '450px',
+      minHeight: '500px'
     },
   });
 
@@ -169,23 +170,26 @@ var createNDVIVisualiser = function (paddock) {
 
     ndviChart.style().set({
       minHeight: '300px',
-      minWidth: '420px'
+      minWidth: '420px',
+      marginBottom: '20px'
     })
     debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
     ndviChart.setChartType('ScatterChart');
 
     debug.info("adding the layer select panel");
 
-    // Clear the chart container panel and add the new chart
-    chartContainer.clear().add(ndviChart);
-    // add click-point time label
     manager.timeLabel = ui.Label({
       value: 'Click a point on the chart to show the NDVI for that date.',
       style: {
         position: 'top-center',
-        fontSize: '12px'
+        fontSize: '12px',
+        margin: '-5px 0 0 20px'
       }
     });
+
+    // Clear the chart container panel and add the new chart
+    chartContainer.clear().add(ndviChart);
+    // add click-point time label
     chartContainer.add(manager.timeLabel);
 
     // When the chart is clicked, update the map and label.
@@ -210,6 +214,35 @@ var createNDVIVisualiser = function (paddock) {
           'NDVI layer for paddock: ' + manager.id,
           // clip the imagery to the paddock geometries
           true);
+
+      // visualizing elevation of the paddock,
+      // then assign returned layer to Object manager.currentLayers
+      manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
+          // the paddock chosen by user
+          manager.app.paddocks,
+          // the layer name
+          'elvation',
+          // clip the imagery to the paddock geometries
+          true);
+
+      Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)).setShown(false)
+      debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)));
+
+      // visualizing elevation of the paddock,
+      // then assign returned layer to Object manager.currentLayers
+      manager.currentLayers.soil = manager.app.imageVisualiser.displaySoil(
+          // the paddock chosen by user
+          manager.app.paddocks,
+          // the layer name
+          'soil',
+          // clip the imagery to the paddock geometries
+          true);
+
+      // remove this panel's legend widget if exists
+      manager.app.legendWidget.removeWidget();
+      manager.app.elevationLegendWidget.removeWidget();
+      Map.layers().get(Map.layers().indexOf(manager.currentLayers.soil)).setShown(false);
+      debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.soil)));
 
       // Show a label with the date on the map.
       manager.app.layerSelectWidget.updateTimeLabel(xValue);
@@ -419,37 +452,6 @@ var createSeasonComparator = function (paddock) {
   return seasonComparatorPanel;
 };
 
-var displaySoilElevationLayers = function(){
-  // visualizing elevation of the paddock,
-  // then assign returned layer to Object manager.currentLayers
-  manager.currentLayers.elevation = manager.app.imageVisualiser.displayElevation(
-      // the paddock chosen by user
-      manager.app.paddocks,
-      // the layer name
-      'elvation',
-      // clip the imagery to the paddock geometries
-      true);
-
-  Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)).setShown(false)
-  debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.elevation)));
-
-  // visualizing elevation of the paddock,
-  // then assign returned layer to Object manager.currentLayers
-  manager.currentLayers.soil = manager.app.imageVisualiser.displaySoil(
-      // the paddock chosen by user
-      manager.app.paddocks,
-      // the layer name
-      'soil',
-      // clip the imagery to the paddock geometries
-      true);
-
-  // remove this panel's legend widget if exists
-  manager.app.legendWidget.removeWidget();
-  manager.app.elevationLegendWidget.removeWidget();
-  Map.layers().get(Map.layers().indexOf(manager.currentLayers.soil)).setShown(false);
-  debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.soil)));
-}
-
 /**
  * Creates and returns an info panel. DOES NOT render it anywhere.
  *
@@ -469,9 +471,6 @@ exports.createInfoPanel = function (paddock) {
 
   // ndvi chart visualiser
   var visualiserWidget = createNDVIVisualiser(paddock);
-
-  // initially add soil and elevation layers
-  displaySoilElevationLayers();
 
   // Season comparisons
   // var seasonComparatorWidget = createSeasonComparator(paddock);
