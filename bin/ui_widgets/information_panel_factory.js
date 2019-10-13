@@ -176,11 +176,9 @@ var createNDVIVisualiser = function (paddock) {
     ndviChart.setChartType('ScatterChart');
 
     debug.info("adding the layer select panel");
-    // create layer select widget
-    visualiserPanel.add(manager.app.layerSelectWidget.createSelectWidget());
 
     // Clear the chart container panel and add the new chart
-    chartContainer.clear().add(ndviChart);
+    chartContainer.clear().add(ndviChart,manager.app.layerSelectWidget.createSelectWidget());
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function (xValue, yValue, seriesName) {
