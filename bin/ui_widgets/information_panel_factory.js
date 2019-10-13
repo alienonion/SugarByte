@@ -175,14 +175,17 @@ var createNDVIVisualiser = function (paddock) {
     debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
     ndviChart.setChartType('ScatterChart');
 
+
     debug.info("adding the layer select panel");
+    // create layer select widget
+    manager.app.layerSelectWidget.createSelectWidget();
 
     manager.timeLabel = ui.Label({
       value: 'Click a point on the chart to show the NDVI for that date.',
       style: {
         position: 'top-center',
         fontSize: '12px',
-        margin: '-5px 0 0 20px'
+        margin: '-5px 0 0 30px'
       }
     });
 
