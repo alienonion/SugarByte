@@ -179,7 +179,7 @@ var createNDVIVisualiser = function (paddock) {
       return ndviChart;
     }
 
-    var refreshChartContainer = function(chart) {
+    var refreshChartContainer = function() {
       var ndviChart = generateChart();
       debug.info("adding the layer select panel");
       // create layer select widget
