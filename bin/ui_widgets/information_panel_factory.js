@@ -170,8 +170,7 @@ var createNDVIVisualiser = function (paddock) {
 
     ndviChart.style().set({
       minHeight: '300px',
-      minWidth: '420px',
-      marginBottom: '20px'
+      minWidth: '420px'
     })
     debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
     ndviChart.setChartType('ScatterChart');
