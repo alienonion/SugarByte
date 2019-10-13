@@ -38,8 +38,8 @@ var createConstants = function () {
     min: -0.1, max: 1,
     //  palette: ['FFFFFF', 'CE7E45', 'FCD163', '66A000', '207401',
     //       '056201', '004C00', '023B01', '012E01', '011301']
-    palette: ['red', 'CE7E45', 'FCD163', '66A000', '207401',
-      '056201', '011301']
+    palette: ['#ff0b00','#FF4A00', '#CE7E45', '#FCD163', '#66A000', '#207401',
+      '#056201', '#004C00', '#023B01', '#012E01','#011301']
   };
 
   // elevation visualisation parameters
