@@ -104,7 +104,7 @@ exports.createSelectWidget = function (layers) {
           manager.app.legendWidget.initialise(manager.app);
           break;
 
-        case manager.currentLayers.elevation: // when the chosen layer is elevation
+        case manager.currentLayers.Elevation: // when the chosen layer is elevation
           // set NDVI layer invisible
           Map.layers().get(soilLayerIndex).setShown(false);
           Map.layers().get(ndviLayerIndex).setShown(false);
@@ -114,7 +114,7 @@ exports.createSelectWidget = function (layers) {
           manager.app.elevationLegendWidget.initialise(manager.app);
           break;
 
-        case manager.currentLayers.soil: // when the chosen layer is soil
+        case manager.currentLayers.Soil: // when the chosen layer is soil
           // set other two layers invisible
           Map.layers().get(elevationLayerIndex).setShown(false);
           Map.layers().get(ndviLayerIndex).setShown(false);

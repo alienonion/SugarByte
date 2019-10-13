@@ -131,6 +131,11 @@ var createNDVIVisualiser = function (paddock) {
     },
   });
 
+  // hide elevation and soil layers
+  var hideEleSoilLayers = function () {
+    Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)).setShown(false);
+    Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false);
+  }
 
   /**
    *
@@ -164,9 +169,11 @@ var createNDVIVisualiser = function (paddock) {
     manager.app.elevationLegendWidget.removeWidget();
     Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)).setShown(false);
     debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)));
+
+    // hide elevation and soil layer
+    hideEleSoilLayers();
   }
   addEleSoilImages();
-
 
 
   /**
@@ -255,6 +262,9 @@ var createNDVIVisualiser = function (paddock) {
 
       // clear all NDVI and elevation layers before displaying new one
       manager.app.imageVisualiser.clearAllNdviLayers();
+
+      // hide elevation and soil layers
+      hideEleSoilLayers();
 
       // visualizing NDVI of chosen time point of scatter chart on the map,
       // then assign returned layer to Object manager.currentLayers
