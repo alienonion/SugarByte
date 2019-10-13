@@ -180,6 +180,7 @@ var createNDVIVisualiser = function (paddock) {
     }
 
     var refreshChartContainer = function(chart) {
+      var ndviChart = generateChart();
       debug.info("adding the layer select panel");
       // create layer select widget
       manager.app.layerSelectWidget.createSelectWidget();
@@ -198,7 +199,7 @@ var createNDVIVisualiser = function (paddock) {
       chartContainer.add(manager.timeLabel);
     }
 
-    refreshChartContainer(generateChart);
+    refreshChartContainer();
 
 
     // When the chart is clicked, update the map and label.
