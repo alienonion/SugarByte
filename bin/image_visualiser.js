@@ -25,9 +25,9 @@ exports.initialise = function(app) {
   // Grab a reference to the app
   manager.app = app;
   // Managed list of NDVI imagery layers. Used to remove them all from map when asked to.
-  manager.ndviEleSoilLayers = [];
-  // the elevation layer
-  manager.elevationLayer = null;
+  manager.ndviLayers = [];
+  // the elevation and soil layer
+  manager.eleSoilLayers = [];
 
 };
 
@@ -41,20 +41,23 @@ exports.clearAllNdviLayers = function() {
     Map.remove(layer);
   };
   // Remove all layers
-  manager.ndviEleSoilLayers.map(removeFromMap);
+  manager.ndviLayers.map(removeFromMap);
   // Reset list
-  manager.ndviEleSoilLayers = [];
+  manager.ndviLayers = [];
 };
 
 /**
  * Clear the layer of current information panel
  */
-exports.clearCurrentNdviLayer = function (currentLayer) {
-  // remove current layer when closing a information panel
-  Map.remove(currentLayer);
-  var layerIndex = manager.ndviEleSoilLayers.indexOf(currentLayer);
-  manager.ndviEleSoilLayers.splice(layerIndex, 1);
-  debug.info("remove current layer", currentLayer)
+exports.clearEleSoilLayers = function (currentLayer) {
+  // Mappable function that removes the given layer from the Map Interface
+  var removeFromMap = function(layer) {
+    Map.remove(layer);
+  };
+  // Remove all layers
+  manager.eleSoilLayers.map(removeFromMap);
+  // Reset list
+  manager.eleSoilLayers = [];
 };
 
 /**
@@ -99,7 +102,7 @@ exports.displayPaddockNDVIOnDate = function(date, paddocks, layerName, clipToPad
   }
   // Display on Map
   var layer = Map.addLayer(latest, manager.app.vis, layerName);
-  manager.ndviEleSoilLayers.push(layer);
+  manager.ndviLayers.push(layer);
   return layer;
 };
 
@@ -127,7 +130,7 @@ exports.displayPaddockNDVIMedian = function(start, end, paddocks, layerName, cli
   }
   // Display on Map
   var layer = Map.addLayer(median, manager.app.vis, layerName);
-  manager.ndviEleSoilLayers.push(layer);
+  manager.ndviLayers.push(layer);
   return layer;
 };
 
@@ -158,7 +161,7 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   var layer = Map.addLayer(elevationOfPaddocks, visParams, layerName);
 
   //add elevation layers to ndviEleSoilLayers list so it can be removed when remove ndvi layers
-  manager.ndviEleSoilLayers.push(layer);
+  manager.eleSoilLayers.push(layer);
   return layer;
 }
 
@@ -188,6 +191,6 @@ exports.displaySoil = function(paddocks, layerName, clipToPaddocks) {
   var layer = Map.addLayer(soilOfPaddocks, visParams, layerName);
 
   //add elevation layers to ndviEleSoilLayers list so it can be removed when remove ndvi layers
-  manager.ndviEleSoilLayers.push(layer);
+  manager.eleSoilLayers.push(layer);
   return layer;
 }

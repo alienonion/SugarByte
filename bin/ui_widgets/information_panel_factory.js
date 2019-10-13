@@ -68,7 +68,9 @@ var createHeading = function (paddock) {
   var closeEvent = function (button) {
     // deselect paddock and close current info panel
     manager.app.paddockManager.deselectPaddock(paddock);
-
+    // remove this panel's NDVI layer after close
+    manager.app.imageVisualiser.clearEleSoilLayers();
+    // remove elevation and soil layers after close
     debug.info("closing layer select panel widget")
     //remove layer select panel if exist
     manager.app.layerSelectWidget.closePanelWidgets();
@@ -87,6 +89,7 @@ var createHeading = function (paddock) {
   });
   return headingPanel;
 };
+
 
 /**
  * Creates an ndvi chart visualiser for the given paddock.
@@ -127,6 +130,43 @@ var createNDVIVisualiser = function (paddock) {
       minHeight: '500px'
     },
   });
+
+
+  /**
+   *
+   */
+  var addEleSoilImages = function () {
+    // visualizing elevation of the paddock,
+    // then assign returned layer to Object manager.currentLayers
+    manager.currentLayers.Elevation = manager.app.imageVisualiser.displayElevation(
+        // the paddock chosen by user
+        manager.app.paddocks,
+        // the layer name
+        'Elvation',
+        // clip the imagery to the paddock geometries
+        true);
+
+    Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false)
+    debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)));
+
+    // visualizing elevation of the paddock,
+    // then assign returned layer to Object manager.currentLayers
+    manager.currentLayers.Soil = manager.app.imageVisualiser.displaySoil(
+        // the paddock chosen by user
+        manager.app.paddocks,
+        // the layer name
+        'Soil',
+        // clip the imagery to the paddock geometries
+        true);
+
+    // remove this panel's legend widget if exists
+    manager.app.legendWidget.removeWidget();
+    manager.app.elevationLegendWidget.removeWidget();
+    Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)).setShown(false);
+    debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)));
+  }
+  addEleSoilImages();
+
 
 
   /**
@@ -228,35 +268,6 @@ var createNDVIVisualiser = function (paddock) {
           'NDVI layer for paddock: ' + manager.id,
           // clip the imagery to the paddock geometries
           true);
-
-      // visualizing elevation of the paddock,
-      // then assign returned layer to Object manager.currentLayers
-      manager.currentLayers.Elevation = manager.app.imageVisualiser.displayElevation(
-          // the paddock chosen by user
-          manager.app.paddocks,
-          // the layer name
-          'Elvation',
-          // clip the imagery to the paddock geometries
-          true);
-
-      Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false)
-      debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)));
-
-      // visualizing elevation of the paddock,
-      // then assign returned layer to Object manager.currentLayers
-      manager.currentLayers.Soil = manager.app.imageVisualiser.displaySoil(
-          // the paddock chosen by user
-          manager.app.paddocks,
-          // the layer name
-          'Soil',
-          // clip the imagery to the paddock geometries
-          true);
-
-      // remove this panel's legend widget if exists
-      manager.app.legendWidget.removeWidget();
-      manager.app.elevationLegendWidget.removeWidget();
-      Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)).setShown(false);
-      debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)));
 
       // create layer select
       manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);

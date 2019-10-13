@@ -87,8 +87,8 @@ exports.createSelectWidget = function (layers) {
       Map.layers().get(indexOfShownLayer).setShown(true);
 
       // find the index of layers in Map.layers() list
-      var soilLayerIndex = Map.layers().indexOf(manager.currentLayers.soil);
-      var elevationLayerIndex = Map.layers().indexOf(manager.currentLayers.elevation);
+      var soilLayerIndex = Map.layers().indexOf(manager.currentLayers.Soil);
+      var elevationLayerIndex = Map.layers().indexOf(manager.currentLayers.Elevation);
       var ndviLayerIndex = Map.layers().indexOf(manager.currentLayers.NDVI);
 
       // a switch statement to hide unselected layer
@@ -142,8 +142,6 @@ exports.closePanelWidgets = function () {
   if (manager.layerSelectPanel !== null) {
     Map.remove(manager.layerSelectPanel);
     debug.info("layer select panel removed");
-    // remove this panel's NDVI layer after closing
-    manager.app.imageVisualiser.clearAllNdviLayers();
     // remove this panel's legend widget after closing
     manager.app.legendWidget.removeWidget();
     manager.app.elevationLegendWidget.removeWidget();
