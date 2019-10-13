@@ -109,6 +109,7 @@ var createNDVIVisualiser = function (paddock) {
     placeholder: manager.app.default.DATE_PLACEHOLDER,
     value: manager.app.default.CHART_END_DATE,
   });
+
   var dateLabelTextStyle = {
     margin: '8px 0 -3px 8px',
     fontSize: '12px',
