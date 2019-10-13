@@ -140,7 +140,8 @@ exports.createSelectWidget = function (layers) {
 
 exports.closePanelWidgets = function () {
   //remove layer select panel
-  if (manager.layerSelectPanel !== null) {
+  // remove the layer select panel if already exists
+  if (Map.widgets().indexOf(manager.layerSelectPanel) !== -1) {
     Map.remove(manager.layerSelectPanel);
     debug.info("layer select panel removed");
     // remove this panel's legend widget after closing
