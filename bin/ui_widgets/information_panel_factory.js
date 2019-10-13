@@ -111,7 +111,7 @@ var createNDVIVisualiser = function (paddock) {
   });
 
   var dateLabelTextStyle = {
-    margin: '8px 0 -3px 8px',
+    margin: '6px 0 -3px 6px',
     fontSize: '12px',
     color: 'gray'}
   // Encapsulate the date text boxes in a panel that includes a horizontally positioned label
@@ -249,6 +249,7 @@ var createNDVIVisualiser = function (paddock) {
   // Create panel to encompass these widgets and return it
   var visualiserPanel = ui.Panel({
     widgets: [
+      ui.Label('Select date range for NDVI images', {fontWeight: 'bold', margin: '10px, 0, 0, 8px '}),
       startDatePanel,
       endDatePanel,
       visualiseButton,
