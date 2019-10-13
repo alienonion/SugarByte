@@ -178,8 +178,8 @@ var createNDVIVisualiser = function (paddock) {
     debug.info("adding the layer select panel");
 
     // Clear the chart container panel and add the new chart
-    chartContainer.clear().add(ndviChart,manager.app.layerSelectWidget.createSelectWidget());
-
+    chartContainer.clear().add(ndviChart);
+    chartContainer.add(manager.app.layerSelectWidget.createSelectWidget());
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function (xValue, yValue, seriesName) {
       if (!xValue) return;  // Selection was cleared.
