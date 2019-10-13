@@ -45,7 +45,7 @@ exports.createSelectWidget = function() {
 
   manager.layerSelectPanel.add(manager.timeLabel)
   // add the layer select panel to the map
-  Map.add(manager.layerSelectPanel);
+  // Map.add(manager.layerSelectPanel);
   return manager.layerSelectPanel;
 };
 
@@ -134,7 +134,7 @@ exports.createSelectButton = function (layers) {
 exports.closePanelWidgets = function () {
   //remove layer select panel
   if (manager.layerSelectPanel !== null) {
-    Map.remove(manager.layerSelectPanel);
+    // Map.remove(manager.layerSelectPanel);
     debug.info("layer select panel removed");
     // remove this panel's NDVI layer after closing
     manager.app.imageVisualiser.clearAllNdviLayers();
