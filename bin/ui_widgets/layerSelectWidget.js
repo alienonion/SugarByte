@@ -40,7 +40,7 @@ exports.updateTimeLabel = function(xValue) {
 /**
  create select widget represents a drop-down menu of layers from which the user can choose one.
  */
-exports.createSelectButton = function (layers) {
+exports.createSelectWidget = function (layers) {
   manager.layerSelectPanel.clear();
   // create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
   manager.timeLabel = ui.Label({

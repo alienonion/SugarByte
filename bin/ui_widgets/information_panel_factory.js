@@ -258,13 +258,13 @@ var createNDVIVisualiser = function (paddock) {
       Map.layers().get(Map.layers().indexOf(manager.currentLayers.soil)).setShown(false);
       debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.soil)));
 
+      // create select button
+      manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
       // Show a label with the date on the map.
       manager.app.layerSelectWidget.updateTimeLabel(xValue);
+
       manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
-
-      // create select button
-      manager.app.layerSelectWidget.createSelectButton(manager.currentLayers);
     });
   };
 
