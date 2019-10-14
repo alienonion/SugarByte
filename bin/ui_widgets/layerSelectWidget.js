@@ -97,29 +97,22 @@ exports.createSelectWidget = function (layers) {
           // set other layers invisible
           Map.layers().get(soilLayerIndex).setShown(false);
           Map.layers().get(elevationLayerIndex).setShown(false);
-          // remove elevation legend widget if exists
-          manager.app.elevationLegendWidget.removeWidget();
-          // create a new NDVI legend widget
-          manager.app.legendWidget.initialise(manager.app);
+          manager.app.legendWidget.showNDVILayer();
           break;
 
         case manager.currentLayers.Elevation: // when the chosen layer is elevation
           // set NDVI layer invisible
           Map.layers().get(soilLayerIndex).setShown(false);
           Map.layers().get(ndviLayerIndex).setShown(false);
-          // remove NDVI legend widget if exists
-          manager.app.legendWidget.removeWidget();
-          // create a new NDVI legend widget
-          manager.app.elevationLegendWidget.initialise(manager.app);
+          manager.app.legendWidget.showElevationLayer();
           break;
 
         case manager.currentLayers.Soil: // when the chosen layer is soil
           // set other two layers invisible
           Map.layers().get(elevationLayerIndex).setShown(false);
           Map.layers().get(ndviLayerIndex).setShown(false);
-          // remove NDVI legend widget if exists
-          manager.app.legendWidget.removeWidget();
-          manager.app.elevationLegendWidget.removeWidget();
+          // todo
+          manager.app.legendWidget.hideAllLegends();
           break;
       }
     }
@@ -142,9 +135,9 @@ exports.closePanelWidgets = function () {
   // remove the layer select panel if already exists
   // if (container.widgets().indexOf(manager.layerSelectPanel) !== -1) {
   //   container.remove(manager.layerSelectPanel);
-    debug.info("layer select panel removed");
+  //   debug.info("layer select panel removed");
     // remove this panel's legends widget after closing
-    manager.app.legendWidget.removeWidget();
-    manager.app.elevationLegendWidget.removeWidget();
+    // manager.app.legendWidget.removeWidget();
+    // manager.app.elevationLegendWidget.removeWidget();
   // }
 };

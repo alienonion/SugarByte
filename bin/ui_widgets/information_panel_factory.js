@@ -74,9 +74,9 @@ var createHeading = function (paddock) {
     manager.app.imageVisualiser.clearAllNdviLayers();
     // remove elevation and soil layers after close
     manager.app.imageVisualiser.clearEleSoilLayers();
-    debug.info("closing layer select panel widget")
-    //remove layer select panel if exist
-    manager.app.layerSelectWidget.closePanelWidgets();
+    debug.info("removing legends while closing info panel");
+    // remove legends while closing info panel
+    manager.app.legendWidget.hideAllLegends();
     // remove timeline widget
     manager.app.timeline.removeTimeline();
   };
@@ -169,9 +169,6 @@ var createNDVIVisualiser = function (paddock) {
         // clip the imagery to the paddock geometries
         true);
 
-    // remove this panel's legend widget if exists
-    manager.app.legendWidget.removeWidget();
-    manager.app.elevationLegendWidget.removeWidget();
     Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)).setShown(false);
     debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)));
 
@@ -302,12 +299,8 @@ var createNDVIVisualiser = function (paddock) {
 
       manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
-
-      // remove this panel's legends widget after closing
-      manager.app.legendWidget.removeWidget();
-      manager.app.elevationLegendWidget.removeWidget();
       // create a new NDVI legend widget
-      manager.app.legendWidget.initialise(manager.app);
+      manager.app.legendWidget.showNDVILayer();
     });
   };
 

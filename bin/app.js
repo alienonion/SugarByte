@@ -23,7 +23,7 @@ app.input = require('users/balddinosaur/sugarbyte:bin/ui_widgets/input.js');
 app.layerSelectWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/layerSelectWidget.js');
 //legend widget
 app.legendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/legend_widget.js');
-app.elevationLegendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/elevation_legend_widget.js');
+// app.elevationLegendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/elevation_legend_widget.js');
 app.timeline = require('users/balddinosaur/sugarbyte:bin/ui_widgets/timeline.js')
 
 /**
@@ -139,6 +139,8 @@ var initialiseInternalModules = function () {
 
   // Image visualisation manager
   app.imageVisualiser.initialise(app);
+
+  app.legendWidget.initialise(app);
 
   // Geometry input.js widget (for drawing new paddocks)
   debug.info('Initialising drawing widget.');
