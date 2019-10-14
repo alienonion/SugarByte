@@ -71,9 +71,5 @@ exports.initialise = function(app) {
  * Removes the NDVI legend widget if it already exists.
  */
 exports.removeWidget = function() {
-  if (manager.legend != null) {
-    debug.info('Remove elevation legend widget. ');
-    Map.remove(manager.legend);
-    manager.legend = null;
-  }
+  manager.legend.Style().set(shown, false)
 }
