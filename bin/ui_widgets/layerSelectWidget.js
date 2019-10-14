@@ -14,7 +14,7 @@ exports.initialise = function(app) {
   manager.selectBoxContainer = ui.Panel({
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      maxWidth: '250px',
+      maxWidth: '300px',
       position: 'top-center',
     }
   })
@@ -125,8 +125,6 @@ exports.createSelectWidget = function (layers) {
       }
     }
   });
-  // Set a place holder.
-  selectBox.setPlaceholder('Choose a layer...');
   // add select box title and select Box to the container
   manager.selectBoxContainer.add(selectBoxTitle);
   manager.selectBoxContainer.add(selectBox);
