@@ -386,7 +386,7 @@ var createSeasonComparator = function (paddock) {
      * Called when the removeButton is clicked.
      * @param {ui.Button} button - The button that called this function.
      */
-    var removeGrowingSeason = function (button) {
+    var removeGrowingSeason = function () {
       debug.info('Executing removeGrowingSeason.');
       // Using a closure to save the plant and panel that it is deleting
       growingSeasons = growingSeasons.filter(function (season) {
