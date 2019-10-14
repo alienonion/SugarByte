@@ -40,8 +40,9 @@ var changeNDVIImage = function(range, paddock){
 };
 
 exports.createTimeline = function(startDate, endDate, initialDate, currentLayers, paddock) {
+  debug.info("creating time line");
   // remove the layer select panel if already exists
-  if (manager.dateSliderContainer !== null) {
+  if (Map.widgets().indexOf(manager.dateSliderContainer) !== -1) {
     manager.dateSliderContainer.clear();
     Map.remove(manager.dateSlider);
   }
