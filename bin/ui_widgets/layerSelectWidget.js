@@ -80,6 +80,7 @@ exports.createSelectWidget = function (layers) {
   //select widget represents a drop-down menu of layers from which the user can choose one.
   var selectBox = ui.Select({
     items: Object.keys(manager.currentLayers),
+    placeholder: 'NDVI',
     onChange: function (key) {
       // get the index of layer to show
       var indexOfShownLayer = Map.layers().indexOf(manager.currentLayers[key]);
@@ -123,7 +124,6 @@ exports.createSelectWidget = function (layers) {
           break;
       }
     }
-
   });
   // Set a place holder.
   selectBox.setPlaceholder('Choose a layer...');
