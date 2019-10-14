@@ -289,7 +289,7 @@ var createNDVIVisualiser = function (paddock) {
       manager.app.timeline.createTimeline(
           manager.app.default.CHART_START_DATE,
           manager.app.default.CHART_END_DATE,
-          dateRange,
+          xValue,
           manager.currentLayers,
           paddock
           )
