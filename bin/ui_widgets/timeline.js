@@ -51,7 +51,7 @@ exports.createTimeline = function(startDate, endDate, dateRange, currentLayers) 
   manager.dateSlider = ui.DateSlider({
     start: startDate,
     end: endDate,
-    value: dateRange.start(),
+    value: '2018-1-1',
     period: 5,
     onChange: changeNDVIImage,
     style: {
