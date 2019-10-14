@@ -66,7 +66,7 @@ Draw.createPanels = function() {
   });
 
   // Dummy label to store the title of the management panel.
-  Draw.titleLabel = ui.Label('Draw');
+  Draw.titleLabel = ui.Label('Draw', {fontWeight : 'bold'});
   Draw.container.widgets().set(0, Draw.titleLabel);
 
   // Draw that contains the sub ui.Panels for each element.
