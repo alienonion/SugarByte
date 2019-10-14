@@ -302,6 +302,12 @@ var createNDVIVisualiser = function (paddock) {
 
       manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
+
+      // remove this panel's legends widget after closing
+      manager.app.legendWidget.removeWidget();
+      manager.app.elevationLegendWidget.removeWidget();
+      // create a new NDVI legend widget
+      manager.app.legendWidget.initialise(manager.app);
     });
   };
 
