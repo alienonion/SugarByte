@@ -19,8 +19,7 @@ var changeNDVIImage = function(range, paddock){
   debug.info("changing NDVI image to slide date");
   // clear all NDVI and elevation layers before displaying new one
   manager.app.imageVisualiser.clearAllNdviLayers();
-  // set layer select value to NDVI
-  manager.app.layerSelectWidget.setSelectValue();
+
 
   // get the start date
   var date = range.start();
@@ -39,6 +38,9 @@ var changeNDVIImage = function(range, paddock){
       'NDVI layer for paddock: ' + manager.id,
       // clip the imagery to the paddock geometries
       true);
+
+  // set layer select value to NDVI
+  manager.app.layerSelectWidget.setSelectValue();
 };
 
 exports.createTimeline = function(startDate, endDate, initialDate, currentLayers, paddock) {
