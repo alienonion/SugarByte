@@ -140,7 +140,7 @@ exports.initialise = function(app) {
  */
 var hideAllLegends = function() {
   // for loop all legends
-  for (var element of manager.legends) {
+  for (var element in manager.legends) {
     element.style().set("shown", false);
   }
 };
