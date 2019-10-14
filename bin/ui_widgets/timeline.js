@@ -10,7 +10,8 @@ exports.initialise = function(app) {
   manager.app = app;
   // current NDVI and elevation layers
   manager.currentLayers = {};
-  manager.dateSlider = null;
+  manager.dateSliderContainer = null;
+  manager.sliderLabel = ui.Label('Slide to show NDVI images for different dates');
 };
 
 var changeNDVIImage = function(range, paddock){
@@ -40,13 +41,19 @@ var changeNDVIImage = function(range, paddock){
 
 exports.createTimeline = function(startDate, endDate, initialDate, currentLayers, paddock) {
   // remove the layer select panel if already exists
-  if (manager.dateSlider !== null) {
+  if (manager.dateSliderContainer !== null) {
+    manager.dateSliderContainer.clear();
     Map.remove(manager.dateSlider);
   }
 
   // pass current layers to manager object
   manager.currentLayers = currentLayers;
   manager.paddock = paddock;
+
+  manager.dateSliderContainer = ui.Panel({
+    widgets: [manager.sliderLabel],
+    layout: ui.Panel.Layout.flow('vertical'),
+  })
 
   debug.info("creating date slider")
   manager.dateSlider = ui.DateSlider({
@@ -63,8 +70,9 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
     }
   });
 
+  manager.dateSliderContainer.add(manager.dateSlider);
   debug.info("adding date slider widget to the map")
-  Map.add(manager.dateSlider);
+  Map.add(manager.dateSliderContainer);
 };
 
 exports.removeTimeline = function() {
