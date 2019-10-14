@@ -75,6 +75,8 @@ var createHeading = function (paddock) {
     debug.info("closing layer select panel widget")
     //remove layer select panel if exist
     manager.app.layerSelectWidget.closePanelWidgets();
+    // remove timeline widget
+    manager.app.timeline.removeTimeline();
   };
 
   //create close button
