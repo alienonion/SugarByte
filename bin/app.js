@@ -152,7 +152,7 @@ var initialiseInternalModules = function () {
 
   // Timeline widget a NDVI date slider
   debug.info('Initialising timeline widget');
-  app.layerSelectWidget.initialise(app);
+  app.timeline.initialise(app);
 };
 
 /**
