@@ -22,6 +22,8 @@ exports.initialise = function (app) {
   manager.app = app;
   // current NDVI and elevation layers
   manager.currentLayers = {};
+  // the lay select panel
+  manager.layerSelectPanel = null;
 };
 
 
@@ -221,7 +223,6 @@ var createNDVIVisualiser = function (paddock) {
       });
 
       ndviChart.style().set({
-        minHeight: '300px',
         minWidth: '420px'
       })
       debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
@@ -239,7 +240,7 @@ var createNDVIVisualiser = function (paddock) {
         value: 'Click a point on the chart to show the NDVI for that date.',
         style: {
           fontSize: '14px',
-          margin: '-5px 0 0 30px'
+          margin: '0 0 -5px 30px'
         }
       });
       // Clear the chart container panel and add the new chart
@@ -248,14 +249,12 @@ var createNDVIVisualiser = function (paddock) {
       chartContainer.add(ndviChart);
       return ndviChart;
     }
-
+    // refresh chart container for every visualisation
     var ndviChart = refreshChartContainer();
 
-
     // When the chart is clicked, update the map and label.
-    ndviChart.onClick(function (xValue, yValue, seriesName) {
+    ndviChart.onClick(function (xValue) {
       if (!xValue) return;  // Selection was cleared.
-
       // Show the image for the clicked date.
       var date = ee.Date(new Date(xValue));
       debug.info("clicked data is", date);
@@ -282,10 +281,15 @@ var createNDVIVisualiser = function (paddock) {
           // clip the imagery to the paddock geometries
           true);
 
+      // remove existing layer select panel from chart container
+      if (manager.layerSelectPanel !== null) {
+        chartContainer.remove(manager.layerSelectPanel)
+      }
+      manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
       // create layer select
-      manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
-      // Show a label with the date on the map.
-      manager.app.layerSelectWidget.updateTimeLabel(xValue);
+      chartContainer.add(manager.layerSelectPanel);
+      // // Show a label with the date on the map.
+      // manager.app.layerSelectWidget.updateTimeLabel(xValue);
 
       // create timeline widget
       manager.app.timeline.createTimeline(
@@ -308,7 +312,7 @@ var createNDVIVisualiser = function (paddock) {
   });
 
   // Create panel to encompass these widgets and return it
-  var visualiserPanel = ui.Panel({
+  return ui.Panel({
     widgets: [
       ui.Label('Select date range for NDVI images'),
       startDatePanel,
@@ -317,7 +321,6 @@ var createNDVIVisualiser = function (paddock) {
       chartContainer,
     ],
   });
-  return visualiserPanel;
 };
 
 /**
@@ -527,7 +530,7 @@ exports.createInfoPanel = function (paddock) {
     widgets: [
       headingWidget,
       visualiserWidget,],
-    style: {width: '450px'},
+    style: {width: '450px', minHeight: '600px'},
   });
   return infoPanel;
 };

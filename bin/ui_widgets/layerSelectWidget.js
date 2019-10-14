@@ -43,24 +43,24 @@ exports.updateTimeLabel = function(xValue) {
 exports.createSelectWidget = function (layers) {
   manager.layerSelectPanel.clear();
 
-  // create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
-  manager.timeLabel = ui.Label({
-    value: 'Click a point on the chart to show the NDVI for that date.',
-    style: {
-      position: 'top-center',
-      height: '30px',
-    }
-  });
-  debug.info("created time label");
-
-  manager.layerSelectPanel.add(manager.timeLabel);
-
-  // remove the layer select panel if already exists
-  if (Map.widgets().indexOf(manager.layerSelectPanel) !== -1) {
-    Map.remove(manager.layerSelectPanel);
-  }
-  // add the layer select panel to the map
-  Map.add(manager.layerSelectPanel);
+  // // create a label to prompt users that points on map can be clicked to show the NDVI for that day on the map
+  // manager.timeLabel = ui.Label({
+  //   value: 'Click a point on the chart to show the NDVI for that date.',
+  //   style: {
+  //     position: 'top-center',
+  //     height: '30px',
+  //   }
+  // });
+  // debug.info("created time label");
+  //
+  // manager.layerSelectPanel.add(manager.timeLabel);
+  //
+  // // remove the layer select panel if already exists
+  // if (Map.widgets().indexOf(manager.layerSelectPanel) !== -1) {
+  //   Map.remove(manager.layerSelectPanel);
+  // }
+  // // add the layer select panel to the map
+  // Map.add(manager.layerSelectPanel);
   manager.currentLayers = layers;
   // remove old select box container before adding new one
   manager.layerSelectPanel.remove(manager.selectBoxContainer);
@@ -144,11 +144,11 @@ exports.createSelectWidget = function (layers) {
 exports.closePanelWidgets = function () {
   //remove layer select panel
   // remove the layer select panel if already exists
-  if (Map.widgets().indexOf(manager.layerSelectPanel) !== -1) {
-    Map.remove(manager.layerSelectPanel);
+  // if (container.widgets().indexOf(manager.layerSelectPanel) !== -1) {
+  //   container.remove(manager.layerSelectPanel);
     debug.info("layer select panel removed");
-    // remove this panel's legend widget after closing
+    // remove this panel's legends widget after closing
     manager.app.legendWidget.removeWidget();
     manager.app.elevationLegendWidget.removeWidget();
-  }
+  // }
 };
