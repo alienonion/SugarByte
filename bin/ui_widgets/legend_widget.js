@@ -12,8 +12,8 @@ manager.createVariables = function(app) {
 };
 
 manager.createUi = function() {
-
-  var createNdviLegend = function() {
+  // create NDVI legend
+  var createNDVILegend = function() {
     // Master panel
     manager.legends.ndviLegend = ui.Panel({
       style: {
@@ -103,7 +103,7 @@ manager.createUi = function() {
     Map.add(manager.legends.elevationLegend);
   }
 
-  createNdviLegend();
+  createNDVILegend();
   createElevationLegend();
 };
 
