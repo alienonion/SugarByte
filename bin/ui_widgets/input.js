@@ -58,14 +58,13 @@ var createUI = function() {
   });
 
   // Paddock Selection label
-  var paddockSelectLabel = ui.Label('Paddock Select');
+  var paddockSelectLabel = ui.Label('Paddock Select', {margin : "5px 0 0 0"});
   mainPanel.widgets().set(0, paddockSelectLabel);
 
   // Paddock selector container that gets updated whenever createPaddockSelector is called.
   mainPanel.widgets().set(1, manager.paddockSelectorContainer);
   // Retrieve the feature collection of paddocks asynchronously
   manager.app.paddocks.evaluate(createPaddockSelector);
-
 
   // // Date select label
   // var dateSelectLabel = ui.Label('View a Date (Will Display a median image of the surrounding 5 days)');
@@ -83,28 +82,28 @@ var createUI = function() {
    *
    * @param {ui.Button} button - The button that triggered the event.
    */
-//   var viewDate = function(button) {
-//     // Get date from the text box
-//     var date = ee.Date.parse('YYYY-MM-dd', dateInput.getValue());
-//     // Get the 5 day range (guarantees that at least one data point will be present
-//     var dateRange = ee.DateRange(date, date.advance(5, 'day'));
-//     // Clear other imagery layers
-//     manager.app.imageVisualiser.clearAllNdviLayers();
-//     // Create and display the imagery, holding on to a copy of the layer
-//
-//     manager.app.imageVisualiser.displayPaddockNDVIMedian(
-//         dateRange.start(),
-//         dateRange.end(),
-//         manager.app.paddocks,
-//         'Paddock NDVI median',
-//         true);
-//   };
-//   // Date select button
-//   var dateSelectButton = ui.Button('View Date', viewDate, false, {});
-//   mainPanel.widgets().set(4, dateSelectButton);
-//
-//   return mainPanel;
-// };
+  // var viewDate = function(button) {
+  //   // Get date from the text box
+  //   var date = ee.Date.parse('YYYY-MM-dd', dateInput.getValue());
+  //   // Get the 5 day range (guarantees that at least one data point will be present
+  //   var dateRange = ee.DateRange(date, date.advance(5, 'day'));
+  //   // Clear other imagery layers
+  //   manager.app.imageVisualiser.clearAllNdviLayers();
+  //   // Create and display the imagery, holding on to a copy of the layer
+  //
+  //   manager.app.imageVisualiser.displayPaddockNDVIMedian(
+  //       dateRange.start(),
+  //       dateRange.end(),
+  //       manager.app.paddocks,
+  //       'Paddock NDVI median',
+  //       true);
+  // };
+  // // Date select button
+  // var dateSelectButton = ui.Button('View Date', viewDate, false, {});
+  // mainPanel.widgets().set(4, dateSelectButton);
+
+  return mainPanel;
+};
 
 exports.initialise = function(app) {
   // Save the parent app
