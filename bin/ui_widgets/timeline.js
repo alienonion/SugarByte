@@ -11,7 +11,7 @@ exports.initialise = function(app) {
   // current NDVI and elevation layers
   manager.currentLayers = {};
   manager.dateSliderContainer = null;
-  manager.sliderLabel = ui.Label('Slide to show NDVI images for different dates', {margin: '0 0 -5px 8x'});
+  manager.sliderLabel = ui.Label('Slide to show NDVI images for different dates', {margin: '0 0 -5px 15x'});
 };
 
 var changeNDVIImage = function(range, paddock){

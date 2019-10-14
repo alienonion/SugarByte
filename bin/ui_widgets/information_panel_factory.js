@@ -237,15 +237,14 @@ var createNDVIVisualiser = function (paddock) {
       manager.timeLabel = ui.Label({
         value: 'Click a point on the chart to show the NDVI for that date.',
         style: {
-          position: 'top-center',
-          fontSize: '12px',
+          fontSize: '14px',
           margin: '-5px 0 0 30px'
         }
       });
       // Clear the chart container panel and add the new chart
-      chartContainer.clear().add(ndviChart);
+      chartContainer.clear().add(manager.timeLabel);
       // add click-point time label
-      chartContainer.add(manager.timeLabel);
+      chartContainer.add(ndviChart);
       return ndviChart;
     }
 
