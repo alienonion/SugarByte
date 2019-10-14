@@ -45,8 +45,9 @@ var createConstants = function () {
 
   // elevation visualisation parameters
   app.elevation = {
-    min: 0, max: 200,
-    palette: ['#1e7a00', '#66b100', '#dff100', '#f1c90d', '#ffc623', '#ffa114', '#ff5a0c']
+    min: 0, max: 100,
+    palette: ['#78cdcb', '#7877f3', '#b877cb','#b877cb',
+      '#f77774', '#f8b774','#f8f775']
   };
 
   // Defaults
