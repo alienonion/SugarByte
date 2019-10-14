@@ -44,7 +44,7 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
   // remove the layer select panel if already exists
   if (Map.widgets().indexOf(manager.dateSliderContainer) !== -1) {
     manager.dateSliderContainer.clear();
-    Map.remove(manager.dateSlider);
+    Map.remove(manager.dateSliderContainer);
   }
 
   // pass current layers to manager object

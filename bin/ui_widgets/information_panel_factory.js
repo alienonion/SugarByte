@@ -223,7 +223,7 @@ var createNDVIVisualiser = function (paddock) {
       });
 
       ndviChart.style().set({
-        minWidth: '420px',
+        minWidth: '450px',
         minHeight: '400px'
       })
       debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
@@ -531,7 +531,7 @@ exports.createInfoPanel = function (paddock) {
     widgets: [
       headingWidget,
       visualiserWidget,],
-    style: {width: '450px', minHeight: '600px'},
+    style: {width: '500px', minHeight: '600px'},
   });
   return infoPanel;
 };
