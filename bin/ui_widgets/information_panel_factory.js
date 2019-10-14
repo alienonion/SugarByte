@@ -131,7 +131,6 @@ var createNDVIVisualiser = function (paddock) {
   var CHART_POSITION_INDEX = 3;
   var chartContainer = ui.Panel({
     style: {
-      width: '440px',
       minHeight: '450px',
       margin: '10px 0 0 0'
     },

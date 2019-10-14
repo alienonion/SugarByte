@@ -14,7 +14,7 @@ exports.initialise = function(app) {
   manager.selectBoxContainer = ui.Panel({
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      maxWidth: '300px',
+      maxWidth: '350px',
       position: 'top-center',
     }
   })
@@ -22,7 +22,7 @@ exports.initialise = function(app) {
   manager.layerSelectPanel = ui.Panel({
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      maxWidth: '300px',
+      padding: '0 0 20px 0',
     }
   });
 };
