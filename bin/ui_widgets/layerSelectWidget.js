@@ -134,8 +134,11 @@ exports.createSelectWidget = function (layers) {
   // add select box container to layer-select-panel
   manager.layerSelectPanel.add(manager.selectBoxContainer);
 
+  debug.info('Created layer select widget');
   // return this layer select Panel
   return manager.layerSelectPanel;
+
+
 };
 
 exports.closePanelWidgets = function () {

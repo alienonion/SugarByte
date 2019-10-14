@@ -15,6 +15,7 @@ exports.initialise = function(app) {
 
 var changeNDVIImage = function(range){
 
+  debug.info("changing NDVI image to slide date");
   // clear all NDVI and elevation layers before displaying new one
   manager.app.imageVisualiser.clearAllNdviLayers();
 
@@ -46,6 +47,7 @@ exports.createTimeline = function(startDate, endDate, dateRange, currentLayers) 
   // pass current layers to manager object
   manager.currentLayers = currentLayers
 
+  debug.info("creating date slider")
   manager.dateSlider = ui.DateSlider({
     start: startDate,
     end: endDate,
@@ -60,6 +62,7 @@ exports.createTimeline = function(startDate, endDate, dateRange, currentLayers) 
     }
   });
 
+  debug.info("adding date slider widget to the map")
   Map.add(manager.dateSlider);
 };
 
