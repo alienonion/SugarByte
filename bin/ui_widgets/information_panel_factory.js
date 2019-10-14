@@ -530,7 +530,7 @@ exports.createInfoPanel = function (paddock) {
     widgets: [
       headingWidget,
       visualiserWidget,],
-    style: {width: '500px', minHeight: '800px'},
+    style: {width: '500px'},
   });
   return infoPanel;
 };

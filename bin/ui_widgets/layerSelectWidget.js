@@ -22,7 +22,7 @@ exports.initialise = function(app) {
   manager.layerSelectPanel = ui.Panel({
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      margin: '0 0 50px 0',
+      margin: '0 0 100px 0',
     }
   });
 };
@@ -31,9 +31,9 @@ exports.initialise = function(app) {
  * to create the layer select panel.
  */
 
-exports.updateTimeLabel = function(xValue) {
-  // Show a label with the date on the map.
-  manager.timeLabel.setValue("click point time: "+ new Date(xValue).toJSON().slice(0,10));
+exports.setSelectValue = function() {
+  // set select value NDVI
+  manager.selectBox.setValue('NDVI', true)
 }
 
 /**
@@ -71,14 +71,13 @@ exports.createSelectWidget = function (layers) {
     value: 'Switch layers between NDVI, Elvation and Soil',
     style: {
       position: 'top-center',
-      height: '30px',
       fontWeight: 'bold',
     }
   });
   debug.info('Created select box title');
 
   //select widget represents a drop-down menu of layers from which the user can choose one.
-  var selectBox = ui.Select({
+  manager.selectBox = ui.Select({
     items: Object.keys(manager.currentLayers),
     placeholder: 'NDVI',
     onChange: function (key) {
@@ -127,7 +126,7 @@ exports.createSelectWidget = function (layers) {
   });
   // add select box title and select Box to the container
   manager.selectBoxContainer.add(selectBoxTitle);
-  manager.selectBoxContainer.add(selectBox);
+  manager.selectBoxContainer.add(manager.selectBox);
   // add select box container to layer-select-panel
   manager.layerSelectPanel.add(manager.selectBoxContainer);
 
