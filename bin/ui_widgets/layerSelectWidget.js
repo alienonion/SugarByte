@@ -22,7 +22,7 @@ exports.initialise = function(app) {
   manager.layerSelectPanel = ui.Panel({
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      padding: '0 0 20px 0',
+      margin: '0 0 50px 0',
     }
   });
 };
