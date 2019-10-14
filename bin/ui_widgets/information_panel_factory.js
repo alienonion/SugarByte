@@ -290,7 +290,8 @@ var createNDVIVisualiser = function (paddock) {
           manager.app.default.CHART_START_DATE,
           manager.app.default.CHART_END_DATE,
           dateRange,
-          manager.currentLayers
+          manager.currentLayers,
+          paddock
           )
 
       manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));

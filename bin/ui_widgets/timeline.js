@@ -13,7 +13,7 @@ exports.initialise = function(app) {
   manager.dateSlider = null;
 };
 
-var changeNDVIImage = function(range){
+var changeNDVIImage = function(range, paddock){
 
   debug.info("changing NDVI image to slide date");
   // clear all NDVI and elevation layers before displaying new one
@@ -31,21 +31,22 @@ var changeNDVIImage = function(range){
       dateRange.start(),
       dateRange.end(),
       // the paddock chosen by user
-      paddock.geometry(),
+      manager.paddock.geometry(),
       // the layer name
       'NDVI layer for paddock: ' + manager.id,
       // clip the imagery to the paddock geometries
       true);
 };
 
-exports.createTimeline = function(startDate, endDate, dateRange, currentLayers) {
+exports.createTimeline = function(startDate, endDate, dateRange, currentLayers, paddock) {
   // remove the layer select panel if already exists
   if (manager.dateSlider !== null) {
     Map.remove(manager.dateSlider);
   }
 
   // pass current layers to manager object
-  manager.currentLayers = currentLayers
+  manager.currentLayers = currentLayers;
+  manager.paddock = paddock;
 
   debug.info("creating date slider")
   manager.dateSlider = ui.DateSlider({
