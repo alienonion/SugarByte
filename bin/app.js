@@ -24,6 +24,7 @@ app.layerSelectWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/lay
 //legend widget
 app.legendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/legend_widget.js');
 app.elevationLegendWidget = require('users/balddinosaur/sugarbyte:bin/ui_widgets/elevation_legend_widget.js');
+app.timeline = require('users/balddinosaur/sugarbyte:bin/ui_widgets/timeline.js')
 
 /**
  * Adds global application constants as properties of the root app object.
@@ -147,6 +148,10 @@ var initialiseInternalModules = function () {
   app.input.initialise(app);
 
   debug.info('Initialising layer select widget.');
+  app.layerSelectWidget.initialise(app);
+
+  // Timeline widget a NDVI date slider
+  debug.info('Initialising timeline widget');
   app.layerSelectWidget.initialise(app);
 };
 

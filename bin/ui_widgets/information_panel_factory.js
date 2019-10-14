@@ -285,6 +285,14 @@ var createNDVIVisualiser = function (paddock) {
       // Show a label with the date on the map.
       manager.app.layerSelectWidget.updateTimeLabel(xValue);
 
+      // create timeline widget
+      manager.app.timeline.createTimeline(
+          manager.app.default.CHART_START_DATE,
+          manager.app.default.CHART_END_DATE,
+          dateRange,
+          manager.currentLayers
+          )
+
       manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
     });

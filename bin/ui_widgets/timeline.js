@@ -37,11 +37,14 @@ var changeNDVIImage = function(range){
       true);
 };
 
-exports.createTimeLine = function (startDate, endDate, dateRange, currentLayers) {
+exports.createTimeline = function(startDate, endDate, dateRange, currentLayers) {
   // remove the layer select panel if already exists
   if (manager.dateSlider !== null) {
     Map.remove(manager.dateSlider);
   }
+
+  // pass current layers to manager object
+  manager.currentLayers = currentLayers
 
   manager.dateSlider = ui.DateSlider({
     start: startDate,
@@ -59,3 +62,10 @@ exports.createTimeLine = function (startDate, endDate, dateRange, currentLayers)
 
   Map.add(manager.dateSlider);
 };
+
+exports.removeTimeline = function() {
+  if (manager.dateSlider !== null) {
+    Map.remove(manager.dateSlider);
+  }
+  Map.add(manager.dateSlider);
+}
