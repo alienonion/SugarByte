@@ -131,7 +131,7 @@ var createNDVIVisualiser = function (paddock) {
     style: {
       width: '440px',
       minHeight: '450px',
-      margin: '5px 0 0 0'
+      margin: '10px 0 0 0'
     },
   });
 
