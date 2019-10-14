@@ -22,8 +22,7 @@ exports.initialise = function(app) {
   manager.layerSelectPanel = ui.Panel({
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      maxWidth: '250px',
-      position: 'middle-left',
+      maxWidth: '300px',
     }
   });
 };

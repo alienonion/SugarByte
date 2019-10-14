@@ -75,8 +75,9 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
 };
 
 exports.removeTimeline = function() {
-  if (manager.dateSliderContainer !== null) {
+  debug.info("removing existing timeline from map");
+  // remove existing time line from map
+  if (Map.widgets().indexOf(manager.dateSliderContainer) !== -1) {
     Map.remove(manager.dateSliderContainer);
   }
-  Map.add(manager.dateSliderContainer);
 }
