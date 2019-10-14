@@ -11,7 +11,7 @@ exports.initialise = function(app) {
   // current NDVI and elevation layers
   manager.currentLayers = {};
   manager.dateSliderContainer = null;
-  manager.sliderLabel = ui.Label('Slide to show NDVI images for different dates');
+  manager.sliderLabel = ui.Label('Slide to show NDVI images for different dates', {margin: '0 0 -10px 0'});
 };
 
 var changeNDVIImage = function(range, paddock){
@@ -76,8 +76,8 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
 };
 
 exports.removeTimeline = function() {
-  if (manager.dateSlider !== null) {
-    Map.remove(manager.dateSlider);
+  if (manager.dateSliderContainer !== null) {
+    Map.remove(manager.dateSliderContainer);
   }
-  Map.add(manager.dateSlider);
+  Map.add(manager.dateSliderContainer);
 }
