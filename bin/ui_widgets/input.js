@@ -58,7 +58,7 @@ var createUI = function() {
   });
 
   // Paddock Selection label
-  var paddockSelectLabel = ui.Label('Paddock Select');
+  var paddockSelectLabel = ui.Label('Select paddock to explore');
   mainPanel.widgets().set(0, paddockSelectLabel);
 
   // Paddock selector container that gets updated whenever createPaddockSelector is called.

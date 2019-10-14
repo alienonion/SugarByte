@@ -81,6 +81,9 @@ Draw.createPanels = function() {
   });
   Draw.container.widgets().set(2, Draw.loadGeometryDraw);
 
+  // add paddock select to the draw panel
+  Draw.container.widgets().set(3, Draw.app.input.initialise(Draw.app));
+
 };
 
 /**

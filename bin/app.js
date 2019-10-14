@@ -143,9 +143,9 @@ var initialiseInternalModules = function () {
   debug.info('Initialising drawing widget.');
   app.drawingWidget = app.draw.create('Custom Geometry', app, true);
 
-  // Image visualisation and paddock selection widget (panel along the top)
-  debug.info('Initialising input.js widget.');
-  app.input.initialise(app);
+  // // Image visualisation and paddock selection widget (panel along the top)
+  // debug.info('Initialising input.js widget.');
+  // app.input.initialise(app);
 
   debug.info('Initialising layer select widget.');
   app.layerSelectWidget.initialise(app);
