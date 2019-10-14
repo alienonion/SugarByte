@@ -12,7 +12,10 @@ manager.createVariables = function(app) {
 };
 
 manager.createUi = function() {
-  // create NDVI legend
+
+  /*
+  create NDVI layer
+   */
   var createNDVILegend = function() {
     // Master panel
     manager.legends.ndviLegend = ui.Panel({
@@ -59,6 +62,9 @@ manager.createUi = function() {
     Map.add(manager.legends.ndviLegend);
   }
 
+  /*
+  create elevation layer
+   */
   var createElevationLegend = function () {
     // Master panel
     manager.legends.elevationLegend = ui.Panel({
@@ -134,8 +140,8 @@ exports.initialise = function(app) {
  */
 var hideAllLegends = function() {
   // for loop all legends
-  manager.legends.forEach(function (element) {
+  for (var element of manager.legends) {
     element.style().set("shown", false);
-  });
+  }
 };
 exports.hideAllLegends = hideAllLegends;
