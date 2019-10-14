@@ -67,10 +67,6 @@ exports.initialise = function(app) {
 /**
  * Removes the elevation legend widget if it already exists.
  */
-exports.removeWidget = function () {
-    if (manager.legend != null) {
-        debug.info('Remove elevation legend widget. ');
-        Map.remove(manager.legend);
-        manager.legend = null;
-    }
+exports.removeWidget = function() {
+  manager.legend.style().set(shown, false);
 }
