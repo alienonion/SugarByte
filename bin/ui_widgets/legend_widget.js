@@ -18,7 +18,8 @@ manager.createUi = function() {
     manager.legends.ndviLegend = ui.Panel({
       style: {
         position: 'bottom-center',
-        padding: '8px 15px'
+        padding: '8px 15px',
+        shown: false
       },
       layout: ui.Panel.Layout.flow('horizontal'),
     });
@@ -63,7 +64,8 @@ manager.createUi = function() {
     manager.legends.elevationLegend = ui.Panel({
       style: {
         position: 'bottom-center',
-        padding: '8px 15px'
+        padding: '8px 15px',
+        shown : false
       },
       layout: ui.Panel.Layout.flow('horizontal'),
     });
@@ -100,6 +102,9 @@ manager.createUi = function() {
     manager.legends.elevationLegend.add(ui.Label(manager.app.elevation.max));
     Map.add(manager.legends.elevationLegend);
   }
+
+  createNdviLegend();
+  createElevationLegend();
 };
 
 /**
@@ -122,7 +127,6 @@ exports.initialise = function(app) {
   debug.info('Initialising legendWidget.');
   manager.createVariables(app);
   manager.createUi();
-  hideAllLegends();
 };
 
 /**
