@@ -71,5 +71,5 @@ exports.initialise = function(app) {
  * Removes the NDVI legend widget if it already exists.
  */
 exports.removeWidget = function() {
-  manager.legend.Style().set(shown, false)
+  manager.legend.style().set(shown, false);
 }
