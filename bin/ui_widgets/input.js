@@ -65,7 +65,6 @@ var createUI = function() {
   mainPanel.widgets().set(1, manager.paddockSelectorContainer);
   // Retrieve the feature collection of paddocks asynchronously
   manager.app.paddocks.evaluate(createPaddockSelector);
-
   // // Date select label
   // var dateSelectLabel = ui.Label('View a Date (Will Display a median image of the surrounding 5 days)');
   // mainPanel.widgets().set(2, dateSelectLabel);
