@@ -140,9 +140,12 @@ exports.initialise = function(app) {
  */
 var hideAllLegends = function() {
   // for loop all legends
-  for (var legend in manager.legends) {
-    if (manager.legends.hasOwnProperty(legend))
-    legend.style().set("shown", false);
-  }
+  // for (var legend in manager.legends) {
+  //   if (manager.legends.hasOwnProperty(legend))
+  //   legend.style().set("shown", false);
+  // }
+
+  manager.legends.elevationLegend.style().set('shown', false);
+  manager.legends.ndviLegend.style().set('shown', false);
 };
 exports.hideAllLegends = hideAllLegends;
