@@ -54,11 +54,11 @@ var createUI = function() {
   // The main panel to add other widgets to
   var mainPanel = ui.Panel({
     style: masterStyle,
-    layout: ui.Panel.Layout.flow('horizontal'),
+    layout: ui.Panel.Layout.flow('vertical'),
   });
 
   // Paddock Selection label
-  var paddockSelectLabel = ui.Label('Paddock Select', {margin : "5px 0 0 0"});
+  var paddockSelectLabel = ui.Label('Paddock Select');
   mainPanel.widgets().set(0, paddockSelectLabel);
 
   // Paddock selector container that gets updated whenever createPaddockSelector is called.
@@ -111,9 +111,10 @@ exports.initialise = function(app) {
   // The contents of this start empty, but are asynchronously updated via createPaddockSelector()
   // Must be a property of manager to allow exports.updatePaddockSelector() to also access the container.
   manager.paddockSelectorContainer = ui.Panel();
-  // Create the UI
-  var mainPanel = createUI();
-  Map.add(mainPanel);
+  // Create the UI and return it
+  return createUI();
+
+  // Map.add(mainPanel);
 };
 
 /**
