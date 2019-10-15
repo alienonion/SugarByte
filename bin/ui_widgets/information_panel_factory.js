@@ -283,19 +283,6 @@ var createNDVIVisualiser = function (paddock) {
       // set select value as NDVI
       manager.app.layerSelectWidget.setSelectValue();
 
-      // // remove existing layer select panel from chart container
-      // if (manager.layerSelectPanel !== null) {
-      //   chartContainer.remove(manager.layerSelectPanel)
-      // }
-      // manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
-      //
-      // if (chartContainer.widgets.indexOf())
-      // // create layer select
-      // chartContainer.add(manager.layerSelectPanel);
-
-      // // Show a label with the date on the map.
-      // manager.app.layerSelectWidget.updateTimeLabel(xValue);
-
       // create timeline widget
       manager.app.timeline.createTimeline(
           manager.app.default.CHART_START_DATE,
