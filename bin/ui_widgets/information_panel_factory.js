@@ -138,16 +138,16 @@ var createNDVIVisualiser = function (paddock) {
    *
    */
   var addEleSoilImages = function () {
-    if (manager.currentLayers.Elevation )
+    if (manager.currentLayers.Elevation)
     // visualizing elevation of the paddock,
     // then assign returned layer to Object manager.currentLayers
-    manager.currentLayers.Elevation = manager.app.imageVisualiser.displayElevation(
-        // the paddock chosen by user
-        manager.app.paddocks,
-        // the layer name
-        'Elvation',
-        // clip the imagery to the paddock geometries
-        true);
+      manager.currentLayers.Elevation = manager.app.imageVisualiser.displayElevation(
+          // the paddock chosen by user
+          manager.app.paddocks,
+          // the layer name
+          'Elvation',
+          // clip the imagery to the paddock geometries
+          true);
 
     Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false);
 
@@ -167,7 +167,6 @@ var createNDVIVisualiser = function (paddock) {
     // hide elevation and soil layer
     hideEleSoilLayers();
   }
-
 
 
   /**
@@ -191,7 +190,7 @@ var createNDVIVisualiser = function (paddock) {
     debug.info('filtered:', filtered);
 
 
-    var generateChart= function() {
+    var generateChart = function () {
       // Generate Chart
       debug.info('Generating NDVI chart:', paddock);
       var ndviChart = ui.Chart.image.series(filtered, ee.Geometry(localPaddock.geometry), ee.Reducer.mean(), 500);
@@ -221,10 +220,8 @@ var createNDVIVisualiser = function (paddock) {
       return ndviChart;
     };
 
-    var refreshChartContainer = function() {
+    var refreshChartContainer = function () {
       var ndviChart = generateChart();
-      debug.info("adding the layer select panel");
-
       // create prompt label for chart
       manager.timeLabel = ui.Label({
         value: 'Click a point on the chart to show the NDVI for that date.',
@@ -274,15 +271,17 @@ var createNDVIVisualiser = function (paddock) {
           // clip the imagery to the paddock geometries
           true);
 
-      manager.app.layerSelectWidget.showLayerSelect();
-/**
- */
+
+      /**
+       */
+      debug.info("adding the layer select panel");
       // check if the chart container already contains a layer select panel
-      if (chartContainer.widgets().indexOf(manager.layerSelectWidget) === - 1) {
+      if (chartContainer.widgets().indexOf(manager.layerSelectWidget) === -1) {
         // add a layer select panel otherwise
         manager.layerSelectWidget = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
         chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
       }
+      manager.app.layerSelectWidget.showLayerSelect();
 
       // // remove existing layer select panel from chart container
       // if (manager.layerSelectWidget !== null) {
@@ -304,7 +303,7 @@ var createNDVIVisualiser = function (paddock) {
           xValue,
           manager.currentLayers,
           paddock
-          )
+      )
 
       manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
