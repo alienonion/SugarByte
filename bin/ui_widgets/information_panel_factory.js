@@ -147,9 +147,9 @@ var createNDVIVisualiser = function (paddock) {
         // clip the imagery to the paddock geometries
         true);
 
-    Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false)
-    debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)));
+    Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false);
 
+    debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)));
     // visualizing elevation of the paddock,
     // then assign returned layer to Object manager.currentLayers
     manager.currentLayers.Soil = manager.app.imageVisualiser.displaySoil(
@@ -166,7 +166,7 @@ var createNDVIVisualiser = function (paddock) {
     // hide elevation and soil layer
     hideEleSoilLayers();
   }
-  addEleSoilImages();
+
 
 
   /**
@@ -177,6 +177,8 @@ var createNDVIVisualiser = function (paddock) {
   var visualise = function (button) {
     // clear all  soil elevation and ndvi layers if exists
     manager.app.imageVisualiser.clearAllNdviLayers();
+    // add elevation and soil layers on the map
+    addEleSoilImages();
     debug.info('Visualise: Updating Charts.');
     // Filter to relevant data
     debug.info('Paddock:', paddock);
