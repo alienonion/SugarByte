@@ -273,6 +273,15 @@ var createNDVIVisualiser = function (paddock) {
       manager.app.layerSelectWidget.showLayerSelect();
 /**
  */
+      // check if the chart container already contains a layer select panel
+      if (chartContainer.widgets().indexOf(manager.layerSelectPanel) === - 1) {
+        // add a layer select panel otherwise
+        manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
+        chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
+      }
+      // show layer select panel
+      manager.layerSelectPanel.showLayerSelect();
+
       // // remove existing layer select panel from chart container
       // if (manager.layerSelectPanel !== null) {
       //   chartContainer.remove(manager.layerSelectPanel)
