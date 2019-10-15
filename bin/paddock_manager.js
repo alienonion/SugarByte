@@ -146,6 +146,16 @@ exports.deselectPaddock = function(paddock) {
   // Update the master paddock list
   manager.app.paddocks = updatedList;
 
+  // remove this panel's NDVI layer after close
+  manager.app.imageVisualiser.clearAllNdviLayers();
+  // remove elevation and soil layers after close
+  manager.app.imageVisualiser.clearEleSoilLayers();
+  debug.info("removing legends while closing info panel");
+  // remove legends while closing info panel
+  manager.app.legendWidget.hideAllLegends();
+  // remove timeline widget
+  manager.app.timeline.removeTimeline();
+
   // Refresh selected paddock outlines
   manager.app.paddockOutliner.refreshSelectedOutlines();
   // Tell the paddock inspector UI to remove the deselected paddock

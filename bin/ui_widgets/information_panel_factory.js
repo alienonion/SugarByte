@@ -70,15 +70,6 @@ var createHeading = function (paddock) {
   var closeEvent = function (button) {
     // deselect paddock and close current info panel
     manager.app.paddockManager.deselectPaddock(paddock);
-    // remove this panel's NDVI layer after close
-    manager.app.imageVisualiser.clearAllNdviLayers();
-    // remove elevation and soil layers after close
-    manager.app.imageVisualiser.clearEleSoilLayers();
-    debug.info("removing legends while closing info panel");
-    // remove legends while closing info panel
-    manager.app.legendWidget.hideAllLegends();
-    // remove timeline widget
-    manager.app.timeline.removeTimeline();
   };
 
   //create close button
