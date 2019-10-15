@@ -14,7 +14,7 @@ exports.initialise = function(app) {
   manager.sliderLabel = ui.Label('Slide to show NDVI images for different dates', {margin: '0 0 -5px 15x'});
 };
 
-var changeNDVIImage = function(range, paddock){
+var changeNDVIImage = function(range){
 
   debug.info("changing NDVI image to slide date");
   // clear all NDVI and elevation layers before displaying new one
@@ -35,7 +35,7 @@ var changeNDVIImage = function(range, paddock){
       // the paddock chosen by user
       manager.paddock.geometry(),
       // the layer name
-      'NDVI layer for paddock: ' + manager.id,
+      'NDVI layer',
       // clip the imagery to the paddock geometries
       true);
 
