@@ -85,4 +85,5 @@ exports.removeTimeline = function() {
   if (Map.widgets().indexOf(manager.dateSliderContainer) !== -1) {
     Map.remove(manager.dateSliderContainer);
   }
+  manager.dateSliderContainer = null;
 }

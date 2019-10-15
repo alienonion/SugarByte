@@ -290,7 +290,7 @@ var createNDVIVisualiser = function (paddock) {
           xValue,
           manager.currentLayers,
           paddock
-          )
+          );
 
       manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
