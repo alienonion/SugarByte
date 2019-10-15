@@ -87,8 +87,6 @@ exports.addPaddock = function(paddock) {
     debug.info('attempting to remove old paddock', oldPaddock);
     // remove old selected paddock with info panel
     manager.app.paddockManager.deselectPaddock(oldPaddock);
-    // remove layer select panel widget if exist
-    manager.app.layerSelectWidget.closePanelWidgets();
   }
   // Add the info panel and paddock to the dictionary
   manager.infoPanels[manager.numPanels] = [paddock, infoPanel];
