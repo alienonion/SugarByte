@@ -83,7 +83,7 @@ exports.removeTimeline = function() {
   debug.info("removing existing timeline from map");
   // remove existing time line from map
   if (Map.widgets().indexOf(manager.dateSliderContainer) !== -1) {
-    manager.dateSliderContainer.remove(manager.sliderLabel)
+    manager.dateSliderContainer.remove(manager.sliderLabel);
     Map.remove(manager.dateSliderContainer);
   }
   manager.dateSliderContainer = null;

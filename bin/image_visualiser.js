@@ -131,6 +131,8 @@ exports.displayPaddockNDVIMedian = function(start, end, paddocks, layerName, cli
   // Display on Map
   var layer = Map.addLayer(median, manager.app.vis, layerName);
   manager.ndviLayers.push(layer);
+
+  debug.info('added NDVI image to the map', layer);
   return layer;
 };
 
@@ -189,7 +191,6 @@ exports.displaySoil = function(paddocks, layerName, clipToPaddocks) {
   }
 
   var layer = Map.addLayer(soilOfPaddocks, visParams, layerName);
-
   //add elevation layers to ndviEleSoilLayers list so it can be removed when remove ndvi layers
   manager.eleSoilLayers.push(layer);
   return layer;
