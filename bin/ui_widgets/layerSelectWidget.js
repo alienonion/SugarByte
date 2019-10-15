@@ -10,19 +10,13 @@ exports.initialise = function(app) {
   manager.app = app;
   // current NDVI and elevation layers
   manager.currentLayers = {};
+
   // select box container
   manager.selectBoxContainer = ui.Panel({
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
       maxWidth: '350px',
       position: 'top-center',
-    }
-  })
-  // the layer-select-panel contains time label and select box container
-  manager.layerSelectPanel = ui.Panel({
-    layout: ui.Panel.Layout.flow('vertical'),
-    style: {
-      margin: '0 0 100px 0'
     }
   });
 };
@@ -40,11 +34,18 @@ exports.setSelectValue = function() {
  create select widget represents a drop-down menu of layers from which the user can choose one.
  */
 exports.createSelectWidget = function (layers) {
-  manager.layerSelectPanel.clear();
+
+
+  // the layer-select-panel contains time label and select box container
+  manager.layerSelectPanel = ui.Panel({
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      margin: '0 0 100px 0'
+    }
+  });
 
   manager.currentLayers = layers;
-  // remove old select box container before adding new one
-  manager.layerSelectPanel.remove(manager.selectBoxContainer);
+
   // clear all elements in select box container
   manager.selectBoxContainer.clear();
 
@@ -108,13 +109,4 @@ exports.createSelectWidget = function (layers) {
   debug.info('Created layer select widget');
   // return this layer select Panel
   return manager.layerSelectPanel;
-
-
-};
-
-/*
- *  show layer select widget
- */
-exports.showLayerSelect = function () {
-  manager.layerSelectPanel.style().set('shown', true)
 };
