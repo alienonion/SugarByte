@@ -76,9 +76,11 @@ Will only work if things are removed in the same order they were opened.
  */
 exports.addPaddock = function(paddock) {
   debug.info('Adding the following paddock to the inspector UI:', paddock);
-  // Create the info panel
+  // remove timeline widget
+  manager.app.timeline.removeTimeline();
   // remove elevation and soil layers if exist
   manager.app.imageVisualiser.clearEleSoilLayers();
+  // Create the info panel
   var infoPanel = manager.app.infoPanelFactory.createInfoPanel(paddock);
 
   // if already exits an info panel
