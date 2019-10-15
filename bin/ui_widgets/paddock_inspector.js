@@ -77,12 +77,13 @@ Will only work if things are removed in the same order they were opened.
 exports.addPaddock = function(paddock) {
   debug.info('Adding the following paddock to the inspector UI:', paddock);
   // Create the info panel
+  // remove elevation and soil layers if exist
+  manager.app.imageVisualiser.clearEleSoilLayers();
   var infoPanel = manager.app.infoPanelFactory.createInfoPanel(paddock);
 
   // if already exits an info panel
   if (manager.numPanels === 1) {
-    // remove elevation and soil layers if exist
-    manager.app.imageVisualiser.clearEleSoilLayers();
+
     // get the right index of old info panel
     debug.info('attempting to remove old paddock', paddock);
     var oldPaddock = manager.infoPanels[0][0];
