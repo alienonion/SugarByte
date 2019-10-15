@@ -22,8 +22,6 @@ exports.initialise = function (app) {
   manager.app = app;
   // current NDVI and elevation layers
   manager.currentLayers = {};
-  // the lay select panel
-  manager.layerSelectPanel = null;
 };
 
 
@@ -174,6 +172,8 @@ var createNDVIVisualiser = function (paddock) {
    * @param {ui.Button} button - The button that executed this onClick function.
    */
   var visualise = function (button) {
+    // the lay select panel
+    manager.layerSelectPanel = null;
     // clear all  soil elevation and ndvi layers if exists
     manager.app.imageVisualiser.clearAllNdviLayers();
     // clear all  soil elevation layers if exists
@@ -277,7 +277,7 @@ var createNDVIVisualiser = function (paddock) {
 /**
  */
       // check if the chart container already contains a layer select panel
-      if (chartContainer.widgets().indexOf(manager.layerSelectPanel) === - 1) {
+      if (manager.layerSelectPanel == null) {
         // add a layer select panel otherwise
         manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
         chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
