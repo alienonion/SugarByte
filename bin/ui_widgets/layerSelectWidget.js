@@ -10,15 +10,6 @@ exports.initialise = function(app) {
   manager.app = app;
   // current NDVI and elevation layers
   manager.currentLayers = {};
-
-  // select box container
-  manager.selectBoxContainer = ui.Panel({
-    layout: ui.Panel.Layout.flow('vertical'),
-    style: {
-      maxWidth: '350px',
-      position: 'top-center',
-    }
-  });
 };
 
 /**
@@ -44,10 +35,16 @@ exports.createSelectWidget = function (layers) {
     }
   });
 
+  // create select box container
+  manager.selectBoxContainer = ui.Panel({
+    layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      maxWidth: '350px',
+      position: 'top-center',
+    }
+  });
+  // pass layers to current layers object
   manager.currentLayers = layers;
-
-  // clear all elements in select box container
-  manager.selectBoxContainer.clear();
 
   // create a label to prompt users to select the layer to show
   var selectBoxTitle = ui.Label({
