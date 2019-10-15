@@ -166,7 +166,6 @@ var createNDVIVisualiser = function (paddock) {
     // hide elevation and soil layer
     hideEleSoilLayers();
   }
-  addEleSoilImages();
 
 
   /**
@@ -177,6 +176,10 @@ var createNDVIVisualiser = function (paddock) {
   var visualise = function (button) {
     // clear all  soil elevation and ndvi layers if exists
     manager.app.imageVisualiser.clearAllNdviLayers();
+    // clear all  soil elevation layers if exists
+    manager.app.imageVisualiser.clearEleSoilLayers();
+    // add elevation and soil layers to the map
+    addEleSoilImages();
     debug.info('Visualise: Updating Charts.');
     // Filter to relevant data
     debug.info('Paddock:', paddock);
@@ -231,6 +234,8 @@ var createNDVIVisualiser = function (paddock) {
           margin: '0 0 -5px 30px'
         }
       });
+
+      debug.info("refreshing ndvi chart");
       // Clear the chart container panel and add the new chart
       chartContainer.clear().add(manager.timeLabel);
       // add click-point time label
@@ -277,6 +282,8 @@ var createNDVIVisualiser = function (paddock) {
         manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
         chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
       }
+      // set select value as NDVI
+      manager.app.layerSelectWidget.setSelectValue();
 
       // // remove existing layer select panel from chart container
       // if (manager.layerSelectPanel !== null) {
