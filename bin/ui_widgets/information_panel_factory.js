@@ -274,8 +274,6 @@ var createNDVIVisualiser = function (paddock) {
           // clip the imagery to the paddock geometries
           true);
 
-/**
- */
       // check if the chart container already contains a layer select panel
       if (manager.layerSelectPanel == null) {
         // add a layer select panel otherwise
