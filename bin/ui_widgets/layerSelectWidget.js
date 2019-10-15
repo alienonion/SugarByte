@@ -23,6 +23,7 @@ exports.initialise = function(app) {
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
       margin: '0 0 100px 0',
+      shown: 'false'
     }
   });
 };
@@ -130,14 +131,9 @@ exports.createSelectWidget = function (layers) {
 
 };
 
-exports.closePanelWidgets = function () {
-  //remove layer select panel
-  // remove the layer select panel if already exists
-  // if (container.widgets().indexOf(manager.layerSelectPanel) !== -1) {
-  //   container.remove(manager.layerSelectPanel);
-  //   debug.info("layer select panel removed");
-    // remove this panel's legends widget after closing
-    // manager.app.legendWidget.removeWidget();
-    // manager.app.elevationLegendWidget.removeWidget();
-  // }
+/*
+ *  show layer select widget
+ */
+exports.showLayerSelect = function () {
+  manager.layerSelectPanel.style().set('shown', true)
 };

@@ -235,6 +235,7 @@ var createNDVIVisualiser = function (paddock) {
       chartContainer.clear().add(manager.timeLabel);
       // add click-point time label
       chartContainer.add(ndviChart);
+      chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
       return ndviChart;
     }
     // refresh chart container for every visualisation
@@ -269,13 +270,19 @@ var createNDVIVisualiser = function (paddock) {
           // clip the imagery to the paddock geometries
           true);
 
-      // remove existing layer select panel from chart container
-      if (manager.layerSelectPanel !== null) {
-        chartContainer.remove(manager.layerSelectPanel)
-      }
-      manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
-      // create layer select
-      chartContainer.add(manager.layerSelectPanel);
+      manager.app.layerSelectWidget.showLayerSelect();
+/**
+ */
+      // // remove existing layer select panel from chart container
+      // if (manager.layerSelectPanel !== null) {
+      //   chartContainer.remove(manager.layerSelectPanel)
+      // }
+      // manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
+      //
+      // if (chartContainer.widgets.indexOf())
+      // // create layer select
+      // chartContainer.add(manager.layerSelectPanel);
+
       // // Show a label with the date on the map.
       // manager.app.layerSelectWidget.updateTimeLabel(xValue);
 
