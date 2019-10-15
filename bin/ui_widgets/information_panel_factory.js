@@ -235,7 +235,6 @@ var createNDVIVisualiser = function (paddock) {
       chartContainer.clear().add(manager.timeLabel);
       // add click-point time label
       chartContainer.add(ndviChart);
-      chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
       return ndviChart;
     }
     // refresh chart container for every visualisation
