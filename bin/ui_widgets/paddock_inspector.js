@@ -81,6 +81,8 @@ exports.addPaddock = function(paddock) {
 
   // if already exits an info panel
   if (manager.numPanels === 1) {
+    // remove elevation and soil layers if exist
+    manager.app.imageVisualiser.clearEleSoilLayers();
     // get the right index of old info panel
     debug.info('attempting to remove old paddock', paddock);
     var oldPaddock = manager.infoPanels[0][0];

@@ -144,7 +144,6 @@ var hideAllLegends = function() {
   //   if (manager.legends.hasOwnProperty(legend))
   //   legend.style().set("shown", false);
   // }
-
   manager.legends.elevationLegend.style().set('shown', false);
   manager.legends.ndviLegend.style().set('shown', false);
 };
