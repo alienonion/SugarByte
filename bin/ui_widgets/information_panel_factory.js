@@ -53,7 +53,7 @@ var createHeading = function (paddock) {
   // Asynchronous retrieval of paddock ID. Resets the contents of the
   // title and description labels to include the ID.
   var getPaddockId = function (id) {
-    debug.info('Paddock ID:', id);
+    debug.info('Get Paddock ID:', id);
     manager.id = id;
     title += id;
     description = "The NDVI visualiser for Paddock: " + id;
@@ -247,7 +247,7 @@ var createNDVIVisualiser = function (paddock) {
       if (!xValue) return;  // Selection was cleared.
       // Show the image for the clicked date.
       var date = ee.Date(new Date(xValue));
-      debug.info("clicked data is", date);
+      debug.info("user clicked on scatter chart, clicked data is", date);
 
       // Get the 5 day range (guarantees that at least one data point will be present
       var dateRange = ee.DateRange(date, date.advance(5, 'day'));
@@ -275,13 +275,13 @@ var createNDVIVisualiser = function (paddock) {
       /**
        */
       debug.info("adding the layer select panel");
-      // check if the chart container already contains a layer select panel
-      if (chartContainer.widgets().indexOf(manager.layerSelectWidget) === -1) {
-        // add a layer select panel otherwise
-        manager.layerSelectWidget = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
-        chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
-      }
-      manager.app.layerSelectWidget.showLayerSelect();
+      // // check if the chart container already contains a layer select panel
+      // if (chartContainer.widgets().indexOf(manager.layerSelectWidget) === -1) {
+      //   // add a layer select panel otherwise
+      //   manager.layerSelectWidget = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
+      //   chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
+      // }
+      // manager.app.layerSelectWidget.showLayerSelect();
 
       // // remove existing layer select panel from chart container
       // if (manager.layerSelectWidget !== null) {
