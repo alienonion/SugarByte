@@ -23,7 +23,7 @@ exports.initialise = function (app) {
   // current NDVI and elevation layers
   manager.currentLayers = {};
   // the lay select panel
-  manager.layerSelectWidget = null;
+  manager.layerSelectPanel = null;
 };
 
 
@@ -53,7 +53,7 @@ var createHeading = function (paddock) {
   // Asynchronous retrieval of paddock ID. Resets the contents of the
   // title and description labels to include the ID.
   var getPaddockId = function (id) {
-    debug.info('Get Paddock ID:', id);
+    debug.info('Paddock ID:', id);
     manager.id = id;
     title += id;
     description = "The NDVI visualiser for Paddock: " + id;
@@ -70,7 +70,6 @@ var createHeading = function (paddock) {
   var closeEvent = function (button) {
     // deselect paddock and close current info panel
     manager.app.paddockManager.deselectPaddock(paddock);
-    manager.currentLayers = {};
   };
 
   //create close button
@@ -138,20 +137,19 @@ var createNDVIVisualiser = function (paddock) {
    *
    */
   var addEleSoilImages = function () {
-    if (manager.currentLayers.Elevation)
     // visualizing elevation of the paddock,
     // then assign returned layer to Object manager.currentLayers
-      manager.currentLayers.Elevation = manager.app.imageVisualiser.displayElevation(
-          // the paddock chosen by user
-          manager.app.paddocks,
-          // the layer name
-          'Elvation',
-          // clip the imagery to the paddock geometries
-          true);
+    manager.currentLayers.Elevation = manager.app.imageVisualiser.displayElevation(
+        // the paddock chosen by user
+        manager.app.paddocks,
+        // the layer name
+        'Elvation',
+        // clip the imagery to the paddock geometries
+        true);
 
-    Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false);
-
+    Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false)
     debug.info("added NDVI layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)));
+
     // visualizing elevation of the paddock,
     // then assign returned layer to Object manager.currentLayers
     manager.currentLayers.Soil = manager.app.imageVisualiser.displaySoil(
@@ -164,9 +162,11 @@ var createNDVIVisualiser = function (paddock) {
 
     Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)).setShown(false);
     debug.info("added soil layer", Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)));
+
     // hide elevation and soil layer
     hideEleSoilLayers();
   }
+  addEleSoilImages();
 
 
   /**
@@ -177,7 +177,6 @@ var createNDVIVisualiser = function (paddock) {
   var visualise = function (button) {
     // clear all  soil elevation and ndvi layers if exists
     manager.app.imageVisualiser.clearAllNdviLayers();
-
     debug.info('Visualise: Updating Charts.');
     // Filter to relevant data
     debug.info('Paddock:', paddock);
@@ -190,7 +189,7 @@ var createNDVIVisualiser = function (paddock) {
     debug.info('filtered:', filtered);
 
 
-    var generateChart = function () {
+    var generateChart= function() {
       // Generate Chart
       debug.info('Generating NDVI chart:', paddock);
       var ndviChart = ui.Chart.image.series(filtered, ee.Geometry(localPaddock.geometry), ee.Reducer.mean(), 500);
@@ -218,10 +217,12 @@ var createNDVIVisualiser = function (paddock) {
       ndviChart.setChartType('ScatterChart');
 
       return ndviChart;
-    };
+    }
 
-    var refreshChartContainer = function () {
+    var refreshChartContainer = function() {
       var ndviChart = generateChart();
+      debug.info("adding the layer select panel");
+
       // create prompt label for chart
       manager.timeLabel = ui.Label({
         value: 'Click a point on the chart to show the NDVI for that date.',
@@ -235,19 +236,16 @@ var createNDVIVisualiser = function (paddock) {
       // add click-point time label
       chartContainer.add(ndviChart);
       return ndviChart;
-    };
-
+    }
     // refresh chart container for every visualisation
     var ndviChart = refreshChartContainer();
-    // add elevation and soil layers to the map
-    addEleSoilImages();
 
     // When the chart is clicked, update the map and label.
     ndviChart.onClick(function (xValue) {
       if (!xValue) return;  // Selection was cleared.
       // Show the image for the clicked date.
       var date = ee.Date(new Date(xValue));
-      debug.info("user clicked on scatter chart, clicked data is", date);
+      debug.info("clicked data is", date);
 
       // Get the 5 day range (guarantees that at least one data point will be present
       var dateRange = ee.DateRange(date, date.advance(5, 'day'));
@@ -271,27 +269,27 @@ var createNDVIVisualiser = function (paddock) {
           // clip the imagery to the paddock geometries
           true);
 
-
-      /**
-       */
-      debug.info("adding the layer select panel");
-      // // check if the chart container already contains a layer select panel
-      // if (chartContainer.widgets().indexOf(manager.layerSelectWidget) === -1) {
-      //   // add a layer select panel otherwise
-      //   manager.layerSelectWidget = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
-      //   chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
-      // }
-      // manager.app.layerSelectWidget.showLayerSelect();
+      manager.app.layerSelectWidget.showLayerSelect();
+/**
+ */
+      // check if the chart container already contains a layer select panel
+      if (chartContainer.widgets().indexOf(manager.layerSelectPanel) === - 1) {
+        // add a layer select panel otherwise
+        manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
+        chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
+      }
+      // show layer select panel
+      manager.layerSelectPanel.showLayerSelect();
 
       // // remove existing layer select panel from chart container
-      // if (manager.layerSelectWidget !== null) {
-      //   chartContainer.remove(manager.layerSelectWidget)
+      // if (manager.layerSelectPanel !== null) {
+      //   chartContainer.remove(manager.layerSelectPanel)
       // }
-      // manager.layerSelectWidget = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
+      // manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
       //
       // if (chartContainer.widgets.indexOf())
       // // create layer select
-      // chartContainer.add(manager.layerSelectWidget);
+      // chartContainer.add(manager.layerSelectPanel);
 
       // // Show a label with the date on the map.
       // manager.app.layerSelectWidget.updateTimeLabel(xValue);
@@ -303,7 +301,7 @@ var createNDVIVisualiser = function (paddock) {
           xValue,
           manager.currentLayers,
           paddock
-      )
+          )
 
       manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
