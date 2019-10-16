@@ -52,7 +52,7 @@ var createHeading = function (paddock) {
 
   var loadingLabel = ui.Label({
     value: 'Loading...',
-    style: {stretch: 'vertical', fontSize : '14px', color: 'gray', shown: true}
+    style: {stretch: 'vertical', fontSize : '14px', color: 'gray'}
   });
   var descriptionContainer = ui.Panel({
       widgets : [descriptionLabel, loadingLabel],
@@ -64,11 +64,10 @@ var createHeading = function (paddock) {
     debug.info('Paddock ID:', id);
     manager.id = id;
     title += id;
-    var description = "The NDVI visualiser for Paddock: " + id;
     // hide loading label
-    loadingLabel.style.set('shown', false);
+    loadingLabel.style.set({color: 'black'});
     // titleLabel.setValue(title);
-    descriptionLabel.setValue(description);
+    loadingLabel.setValue(id);
   };
   paddock.get('ID').evaluate(getPaddockId);
 
