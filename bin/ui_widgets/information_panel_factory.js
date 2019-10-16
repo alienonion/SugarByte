@@ -65,8 +65,8 @@ var createHeading = function (paddock) {
     manager.id = id;
     title += id;
     // hide loading label
-    loadingLabel.style.set({color: 'black'});
-    // titleLabel.setValue(title);
+    loadingLabel.style().set({color: 'black'});
+    // titleLabel.setValue(title)
     loadingLabel.setValue(id);
   };
   paddock.get('ID').evaluate(getPaddockId);
