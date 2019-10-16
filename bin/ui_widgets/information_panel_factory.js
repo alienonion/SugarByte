@@ -236,12 +236,25 @@ var createNDVIVisualiser = function (paddock) {
         }
       });
       debug.info("refreshing ndvi chart");
-      // Clear the chart container panel and add the new chart
-      chartContainer.clear().add(manager.timeLabel);
+
+
+      var chartLabel = ui.Label({
+        value: '2) Click a point on the chart to show the NDVI for that date.',
+        style: {
+          fontSize: '14px',
+          fontWeight: 'bold'
+        }
+      });
+
+      // Clear the chart container panel and add create prompt label for chart
+      chartContainer.clear().add(chartLabel);
+      //  add the new chart
+      chartContainer.add(manager.timeLabel);
       // add click-point time label
       chartContainer.add(ndviChart);
       return ndviChart;
-    }
+    };
+
     // refresh chart container for every visualisation
     var ndviChart = refreshChartContainer();
 
@@ -312,14 +325,6 @@ var createNDVIVisualiser = function (paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButton,
-      // create prompt label for chart
-      ui.Label({
-        value: '2) Click a point on the chart to show the NDVI for that date.',
-        style: {
-          fontSize: '14px',
-          fontWeight: 'bold'
-        }
-      }),
       chartContainer,
     ],
   });
