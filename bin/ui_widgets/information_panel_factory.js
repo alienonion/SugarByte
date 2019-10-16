@@ -45,8 +45,16 @@ var createHeading = function (paddock) {
   });
 
   // Description
-  var description = "The NDVI visualiser for Paddock: loading...";
-  var descriptionLabel = ui.Label(description);
+  var descriptionLabel = ui.Label({
+    value : "The NDVI visualiser for Paddock: ",
+    style: {stretch: 'vertical', fontSize : '14px'}
+  });
+
+  var loadingLabel = ui.Label({
+    value: 'Loading...',
+    style: {stretch: 'vertical', fontSize : '14px', color: 'gray', shown: true}
+  });
+  var descriptionContainer = ui.Label([descriptionLabel, loading]);
 
   // Asynchronous retrieval of paddock ID. Resets the contents of the
   // title and description labels to include the ID.
@@ -54,7 +62,9 @@ var createHeading = function (paddock) {
     debug.info('Paddock ID:', id);
     manager.id = id;
     title += id;
-    description = "The NDVI visualiser for Paddock: " + id;
+    var description = "The NDVI visualiser for Paddock: " + id;
+    // hide loading label
+    loadingLabel.style.set('shown', false);
     // titleLabel.setValue(title);
     descriptionLabel.setValue(description);
   };
@@ -214,7 +224,7 @@ var createNDVIVisualiser = function (paddock) {
 
       ndviChart.style().set({
         minWidth: '450px',
-        minHeight: '400px'
+        minHeight: '350px'
       });
       debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
       ndviChart.setChartType('ScatterChart');
