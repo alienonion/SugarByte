@@ -355,14 +355,18 @@ var createNDVIVisualiser = function (paddock) {
     onClick: visualise,
   });
 
+  var visualiseButtonContainer = ui.Panel({
+    widgets : [visualiseButton, loadingChart],
+    layout : ui.Panel.Layout.flow('vertical')
+  });
+
   // Create panel to encompass these widgets and return it
   return ui.Panel({
     widgets: [
       ui.Label('1) Select date range for NDVI images', {fontWeight: 'bold'}),
       startDatePanel,
       endDatePanel,
-      visualiseButton,
-      loadingChart,
+      visualiseButtonContainer,
       chartContainer,
     ],
   });
