@@ -138,7 +138,7 @@ var createNDVIVisualiser = function (paddock) {
 
   var loadingChart =  ui.Label({
     value: 'Loading...',
-    style: {stretch: 'vertical', color: 'gray', shown: false}
+    style: {stretch: 'vertical', color: 'gray', shown: true}
   });
 
   var loadingState = function (state) {
