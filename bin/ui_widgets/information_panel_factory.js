@@ -346,6 +346,7 @@ var createNDVIVisualiser = function (paddock) {
       manager.app.legendWidget.showNDVILayer();
     });
 
+    // hide loading label
     loadingState(false);
   };
 
