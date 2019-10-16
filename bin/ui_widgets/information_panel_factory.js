@@ -223,6 +223,10 @@ var createNDVIVisualiser = function (paddock) {
         .filterBounds(localPaddock.geometry)
         .filterDate(startDateBox.getValue(), endDateBox.getValue()));
     debug.info('filtered:', filtered);
+    filtered.evaluate(function(filter) {
+      // hide loading label
+      loadingState(false);
+    });
 
     /*
 
@@ -346,8 +350,6 @@ var createNDVIVisualiser = function (paddock) {
       manager.app.legendWidget.showNDVILayer();
     });
 
-    // hide loading label
-    loadingState(false);
   };
 
   // Visualise button
