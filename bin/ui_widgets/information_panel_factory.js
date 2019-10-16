@@ -136,6 +136,25 @@ var createNDVIVisualiser = function (paddock) {
     },
   });
 
+  var loadingChart =  ui.Label({
+    value: 'Loading...',
+    style: {stretch: 'vertical', color: 'gray', shown: false}
+  });
+
+  var loadingState = function (state) {
+    // Set the loading label visibility to the enabled mode.
+    loadingChart.style().set('shown', state);
+    // disable each widget while loading
+    var disableWidget = [
+        startDateBox,
+        endDateBox,
+        visualiseButton
+    ];
+    disableWidget.forEach(function(widget) {
+      widget.setDisabled(state);
+    });
+  };
+
   // hide elevation and soil layers
   var hideEleSoilLayers = function () {
     Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)).setShown(false);
@@ -183,6 +202,8 @@ var createNDVIVisualiser = function (paddock) {
    * @param {ui.Button} button - The button that executed this onClick function.
    */
   var visualise = function (button) {
+    // show the loading label.
+    loadingState(true);
     // the lay select panel
     manager.layerSelectPanel = null;
     // clear all  soil elevation and ndvi layers if exists
@@ -323,6 +344,8 @@ var createNDVIVisualiser = function (paddock) {
       // create a new NDVI legend widget
       manager.app.legendWidget.showNDVILayer();
     });
+
+    loadingState(false);
   };
 
   // Visualise button
@@ -338,6 +361,7 @@ var createNDVIVisualiser = function (paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButton,
+      loadingChart,
       chartContainer,
     ],
   });
