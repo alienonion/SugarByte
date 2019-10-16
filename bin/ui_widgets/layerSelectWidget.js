@@ -48,9 +48,9 @@ exports.createSelectWidget = function (layers) {
 
   // create a label to prompt users to select the layer to show
   var selectBoxTitle = ui.Label({
-    value: 'Switch layers between NDVI, Elvation and Soil',
+    value: '3) Switch layers between NDVI, Elvation and Soil',
     style: {
-      position: 'top-center',
+      fontSize: '14px',
       fontWeight: 'bold',
     }
   });

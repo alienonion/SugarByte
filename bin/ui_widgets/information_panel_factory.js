@@ -39,7 +39,7 @@ var createHeading = function (paddock) {
     value: title,
     style: {
       fontWeight: 'bold',
-      fontSize: '22px',
+      fontSize: '24px',
       margin: '10px 5px',
     }
   });
@@ -208,7 +208,7 @@ var createNDVIVisualiser = function (paddock) {
             count: 7
           }
         },
-        pointSize: 0.6,
+        pointSize: 0.8,
         //lineSize: 0.3, // We don't want lines on the 'raw' scatter plot due to inconsistent data coverage
       });
 
@@ -228,10 +228,11 @@ var createNDVIVisualiser = function (paddock) {
 
       // create prompt label for chart
       manager.timeLabel = ui.Label({
-        value: 'Click a point on the chart to show the NDVI for that date.',
+        value: '2) Click a point on the chart to show the NDVI for that date.',
         style: {
           fontSize: '14px',
-          margin: '0 0 -5px 30px'
+          fontWeight: 'bold',
+          margin: '0 0 -5px 0'
         }
       });
 
@@ -308,7 +309,7 @@ var createNDVIVisualiser = function (paddock) {
   // Create panel to encompass these widgets and return it
   return ui.Panel({
     widgets: [
-      ui.Label('Select date range for NDVI images'),
+      ui.Label('1) Select date range for NDVI images', {fontWeight: 'bold'}),
       startDatePanel,
       endDatePanel,
       visualiseButton,
