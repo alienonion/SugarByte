@@ -192,7 +192,7 @@ var createNDVIVisualiser = function (paddock) {
     debug.info('filtered:', filtered);
 
 
-    var generateChart= function() {
+    var generateChart = function () {
       // Generate Chart
       debug.info('Generating NDVI chart:', paddock);
       var ndviChart = ui.Chart.image.series(filtered, ee.Geometry(localPaddock.geometry), ee.Reducer.mean(), 500);
@@ -220,22 +220,21 @@ var createNDVIVisualiser = function (paddock) {
       ndviChart.setChartType('ScatterChart');
 
       return ndviChart;
-    }
+    };
 
-    var refreshChartContainer = function() {
+    var refreshChartContainer = function () {
       var ndviChart = generateChart();
       debug.info("adding the layer select panel");
 
       // create prompt label for chart
       manager.timeLabel = ui.Label({
-        value: '2) Click a point on the chart to show the NDVI for that date.',
+        value: '',
         style: {
-          fontSize: '14px',
-          fontWeight: 'bold',
-          margin: '0 0 -5px 0'
+          fontSize: '10px',
+          color: 'light blue',
+          margin: '5px 0 -5px 0'
         }
       });
-
       debug.info("refreshing ndvi chart");
       // Clear the chart container panel and add the new chart
       chartContainer.clear().add(manager.timeLabel);
@@ -291,7 +290,7 @@ var createNDVIVisualiser = function (paddock) {
           xValue,
           manager.currentLayers,
           paddock
-          );
+      );
 
       manager.timeLabel.setValue("click point time: " + new Date(xValue).toJSON().slice(0, 10));
       debug.info("display NDVI imagery for paddock:", paddock.getString("ID"));
@@ -313,6 +312,14 @@ var createNDVIVisualiser = function (paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButton,
+      // create prompt label for chart
+      ui.Label({
+        value: '',
+        style: {
+          fontSize: '14px',
+          fontWeight: 'bold'
+        }
+      }),
       chartContainer,
     ],
   });
