@@ -367,7 +367,7 @@ var createNDVIVisualiser = function (paddock) {
       startDatePanel,
       endDatePanel,
       visualiseButtonContainer,
-      chartContainer,
+      chartContainer
     ],
   });
 };
