@@ -54,7 +54,9 @@ var createHeading = function (paddock) {
     value: 'Loading...',
     style: {stretch: 'vertical', fontSize : '14px', color: 'gray', shown: true}
   });
-  var descriptionContainer = ui.Label([descriptionLabel, loadingLabel]);
+  var descriptionContainer = ui.Panel({
+      widgets : [descriptionLabel, loadingLabel],
+      layout : ui.Panel.Layout.flow('horizontal')});
 
   // Asynchronous retrieval of paddock ID. Resets the contents of the
   // title and description labels to include the ID.
