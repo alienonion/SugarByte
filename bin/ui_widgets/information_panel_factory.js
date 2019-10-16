@@ -138,7 +138,7 @@ var createNDVIVisualiser = function (paddock) {
 
   var loadingChart =  ui.Label({
     value: 'Loading...',
-    style: {stretch: 'vertical', color: 'gray', shown: true}
+    style: {stretch: 'vertical', color: 'gray', shown: false}
   });
 
   var loadingState = function (state) {
@@ -150,7 +150,7 @@ var createNDVIVisualiser = function (paddock) {
         endDateBox,
         visualiseButton
     ];
-    debug.info('disable each widget while loading')
+    debug.info('disable each widget while loading');
     disableWidget.forEach(function(widget) {
       widget.setDisabled(state);
     });
@@ -357,7 +357,7 @@ var createNDVIVisualiser = function (paddock) {
 
   var visualiseButtonContainer = ui.Panel({
     widgets : [visualiseButton, loadingChart],
-    layout : ui.Panel.Layout.flow('vertical')
+    layout : ui.Panel.Layout.flow('horizontal')
   });
 
   // Create panel to encompass these widgets and return it
