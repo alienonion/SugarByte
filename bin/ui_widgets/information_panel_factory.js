@@ -201,7 +201,9 @@ var createNDVIVisualiser = function (paddock) {
         .filterDate(startDateBox.getValue(), endDateBox.getValue()));
     debug.info('filtered:', filtered);
 
+    /*
 
+     */
     var generateChart = function () {
       // Generate Chart
       debug.info('Generating NDVI chart:', paddock);
