@@ -129,7 +129,7 @@ var createNDVIVisualiser = function (paddock) {
   var hideEleSoilLayers = function () {
     Map.layers().get(Map.layers().indexOf(manager.currentLayers.Soil)).setShown(false);
     Map.layers().get(Map.layers().indexOf(manager.currentLayers.Elevation)).setShown(false);
-  }
+  };
 
   /**
    *
@@ -163,7 +163,7 @@ var createNDVIVisualiser = function (paddock) {
 
     // hide elevation and soil layer
     hideEleSoilLayers();
-  }
+  };
 
 
   /**
@@ -215,7 +215,7 @@ var createNDVIVisualiser = function (paddock) {
       ndviChart.style().set({
         minWidth: '450px',
         minHeight: '400px'
-      })
+      });
       debug.info('Created NDVI chart for paddock. Setting it to be a scatter chart.');
       ndviChart.setChartType('ScatterChart');
 
@@ -232,7 +232,7 @@ var createNDVIVisualiser = function (paddock) {
         style: {
           fontSize: '10px',
           color: '#2E85F3',
-          margin: '5px 0 -5px 0'
+          margin: '5px 0 -5px 20px'
         }
       });
       debug.info("refreshing ndvi chart");
@@ -314,7 +314,7 @@ var createNDVIVisualiser = function (paddock) {
       visualiseButton,
       // create prompt label for chart
       ui.Label({
-        value: '',
+        value: '2) Click a point on the chart to show the NDVI for that date.',
         style: {
           fontSize: '14px',
           fontWeight: 'bold'
