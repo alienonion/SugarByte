@@ -231,7 +231,7 @@ var createNDVIVisualiser = function (paddock) {
         value: '',
         style: {
           fontSize: '10px',
-          color: 'blue',
+          color: '#2E85F3',
           margin: '5px 0 -5px 0'
         }
       });
