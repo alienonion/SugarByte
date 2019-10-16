@@ -87,7 +87,7 @@ var createHeading = function (paddock) {
   var headingPanel = ui.Panel({
     widgets: [
       titleLabel,
-      descriptionLabel,
+      descriptionContainer,
       closeButton
     ],
   });
