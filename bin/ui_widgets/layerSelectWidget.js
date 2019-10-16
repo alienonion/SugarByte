@@ -52,6 +52,7 @@ exports.createSelectWidget = function (layers) {
     style: {
       fontSize: '14px',
       fontWeight: 'bold',
+      margin: '-10px 0 0 0'
     }
   });
   debug.info('Created select box title');
