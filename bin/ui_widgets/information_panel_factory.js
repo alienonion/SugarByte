@@ -142,7 +142,7 @@ var createNDVIVisualiser = function (paddock) {
   });
 
   var loadingState = function (state) {
-    // Set the loading label visibility to the enabled mode.
+    // Set the loading label visible.
     loadingChart.style().set('shown', state);
     // disable each widget while loading
     var disableWidget = [
@@ -150,6 +150,7 @@ var createNDVIVisualiser = function (paddock) {
         endDateBox,
         visualiseButton
     ];
+    debug.info('disable each widget while loading')
     disableWidget.forEach(function(widget) {
       widget.setDisabled(state);
     });
