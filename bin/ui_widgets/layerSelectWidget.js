@@ -97,8 +97,9 @@ exports.createSelectWidget = function (layers) {
       }
     }
   });
-  // add select box title and select Box to the container
+  // add select box title to the container
   manager.selectBoxContainer.add(selectBoxTitle);
+   // add select Box to the container
   manager.selectBoxContainer.add(manager.selectBox);
   // add select box container to layer-select-panel
   manager.layerSelectPanel.add(manager.selectBoxContainer);

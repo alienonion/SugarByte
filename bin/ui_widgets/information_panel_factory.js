@@ -366,7 +366,7 @@ var createNDVIVisualiser = function (paddock) {
   // Create panel to encompass these widgets and return it
   return ui.Panel({
     widgets: [
-      ui.Label('1) Select date range for NDVI images', {fontWeight: 'bold'}),
+      ui.Label('1) Select a date range(greater than ten days) for NDVI images', {fontWeight: 'bold'}),
       startDatePanel,
       endDatePanel,
       visualiseButtonContainer,
