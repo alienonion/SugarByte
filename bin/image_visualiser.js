@@ -193,5 +193,6 @@ exports.displaySoil = function(paddocks, layerName, clipToPaddocks) {
   var layer = Map.addLayer(soilOfPaddocks, visParams, layerName);
   //add elevation layers to ndviEleSoilLayers list so it can be removed when remove ndvi layers
   manager.eleSoilLayers.push(layer);
+  debug.info('added soil image to the map', layer);
   return layer;
 }
