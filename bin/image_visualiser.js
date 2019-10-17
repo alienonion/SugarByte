@@ -159,9 +159,8 @@ exports.displayElevation = function(paddocks, layerName, clipToPaddocks) {
   if (clipToPaddocks) {
     var elevationOfPaddocks = elevationImage.clipToCollection(paddockCollection);
   }
-
+  // added elevation image to the map
   var layer = Map.addLayer(elevationOfPaddocks, visParams, layerName);
-
   //add elevation layers to ndviEleSoilLayers list so it can be removed when remove ndvi layers
   manager.eleSoilLayers.push(layer);
   return layer;
@@ -184,12 +183,11 @@ exports.displaySoil = function(paddocks, layerName, clipToPaddocks) {
   var soilImage = soil;
   // the elevation layer parameters
   var visParams = {bands: ['b1'], min: 2, max: 39, gamma: 1, shown: false};
-
   // Whether or not to clip the imagery to the paddock geometries
   if (clipToPaddocks) {
     var soilOfPaddocks = soilImage.clipToCollection(paddockCollection);
   }
-
+  // add soil image to the map
   var layer = Map.addLayer(soilOfPaddocks, visParams, layerName);
   //add elevation layers to ndviEleSoilLayers list so it can be removed when remove ndvi layers
   manager.eleSoilLayers.push(layer);
