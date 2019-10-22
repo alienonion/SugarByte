@@ -320,14 +320,14 @@ var createNDVIVisualiser = function (paddock) {
           dateRange.start(),
           dateRange.end(),
           // the paddock chosen by user
-          paddock.geometry(),
+          manager.app.paddocks,
           // the layer name
           'NDVI layer for paddock: ' + manager.id,
           // clip the imagery to the paddock geometries
           true);
 
       // check if the chart container already contains a layer select panel
-      if (manager.layerSelectPanel == null) {
+      if (manager.layerSelectPanel === null) {
         // add a layer select panel otherwise
         manager.layerSelectPanel = manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers);
         chartContainer.add(manager.app.layerSelectWidget.createSelectWidget(manager.currentLayers));
