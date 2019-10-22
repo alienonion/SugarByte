@@ -3,7 +3,7 @@ var soil = ee.Image("users/balddinosaur/soil/Soils_Wet_Tropics_nodata"),
     elevation = ee.Image("users/balddinosaur/elevation/DEM_Wet_Tropics_int");
 /***** End of imports. If edited, may not auto-convert in the playground. *****/
 /**
- * @fileoverview Visualiser tool for displaying NDVI imagery on the map.
+ * @fileoverview Visualiser tool for displaying NDVI, soil and elvation imagery on the map.
  * Explicit functionality is offered by the exported functions, while the
  * script internally handles differing variable types and amounts provided by them.
  */
