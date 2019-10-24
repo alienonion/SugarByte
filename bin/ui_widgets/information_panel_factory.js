@@ -320,7 +320,7 @@ var createNDVIVisualiser = function (paddock) {
           dateRange.start(),
           dateRange.end(),
           // the paddock chosen by user
-          manager.app.paddocks,
+          manager.geometry(),
           // the layer name
           'NDVI layer for paddock: ' + manager.id,
           // clip the imagery to the paddock geometries
