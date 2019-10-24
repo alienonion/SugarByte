@@ -49,11 +49,12 @@ var createHeading = function (paddock) {
     value : "The NDVI visualiser for Paddock: ",
     style: {stretch: 'vertical', fontSize : '14px'}
   });
-
+  // loading label when fecthing data from server
   var loadingLabel = ui.Label({
     value: 'Loading...',
     style: {stretch: 'vertical', fontSize : '14px', color: 'gray'}
   });
+  // description container shows paddock information
   var descriptionContainer = ui.Panel({
       widgets : [descriptionLabel, loadingLabel],
       layout : ui.Panel.Layout.flow('horizontal')});
