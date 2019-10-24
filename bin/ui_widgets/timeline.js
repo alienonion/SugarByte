@@ -1,5 +1,5 @@
 /**
- * @fileoverview This is the UI tool that let user  slide date between a date range to compare NDVI images
+ * @fileoverview This is the UI tool that let user slide date between a date range to compare NDVI images
  */
 
 var manager = {};
