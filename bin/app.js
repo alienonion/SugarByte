@@ -52,7 +52,7 @@ var createConstants = function () {
 
   // Defaults
   app.default = {
-    CHART_START_DATE: '2019-08-01',
+    CHART_START_DATE: '2019-07-01',
     // the default end date is current date
     CHART_END_DATE: new Date().toJSON().slice(0, 10),
     MAP_ZOOM: 15,
