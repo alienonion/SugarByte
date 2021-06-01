@@ -49,7 +49,7 @@ var createPaddockSelector = function(regions) {
  */
 var createUI = function() {
   var masterStyle = {
-    position: 'right-center'
+    position: 'top-center',
   };
 
   // The main panel to add other widgets to
