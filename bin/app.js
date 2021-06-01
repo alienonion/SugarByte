@@ -36,7 +36,7 @@ var createConstants = function () {
 
   // NDVI Visualisation parameters
   app.vis = {
-    min: -0.1, max: 1,
+    min: 0, max: 1,
     //  palette: ['FFFFFF', 'CE7E45', 'FCD163', '66A000', '207401',
     //       '056201', '004C00', '023B01', '012E01', '011301']
     palette: ['#ff0b00','#FF4A00', '#CE7E45', '#FCD163', '#66A000', '#207401',
@@ -52,7 +52,7 @@ var createConstants = function () {
 
   // Defaults
   app.default = {
-    CHART_START_DATE: '2019-07-01',
+    CHART_START_DATE: '2020-01-01',
     // the default end date is current date
     CHART_END_DATE: new Date().toJSON().slice(0, 10),
     MAP_ZOOM: 15,
