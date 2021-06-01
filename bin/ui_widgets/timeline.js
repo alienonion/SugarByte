@@ -58,6 +58,9 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
   manager.dateSliderContainer = ui.Panel({
     widgets: [manager.sliderLabel],
     layout: ui.Panel.Layout.flow('vertical'),
+    style: {
+      margin: '50px 0 0 0'
+    }
   })
 
   debug.info("creating date slider")
