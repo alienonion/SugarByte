@@ -1,6 +1,6 @@
 # SugarByte
 
-SugarByte is essentially a satellite-based web application that focuses on crop fertilizer surveillance. This project is supervised by Dr.Yuri Shendryk, who is a member of working at Commonwealth Scientific and Industrial Research Organization (CSIRO). This project particularly has significance on the preservation of the Great Barrier Reef, one of the significant symbol of Australia, which prevents the Great Barrie Reef from bleaching by excessive use of fertilizer. 
+SugarByte (https://balddinosaur.users.earthengine.app/view/csirosugarbyte) is essentially a satellite-based web application that focuses on crop fertilizer surveillance. This project is supervised by Dr.Yuri Shendryk, who is a member of working at Commonwealth Scientific and Industrial Research Organization (CSIRO). This project particularly has significance on the preservation of the Great Barrier Reef, one of the significant symbol of Australia, which prevents the Great Barrie Reef from bleaching by excessive use of fertilizer. 
 
 ## Code Guide
 ![alt text](https://i.imgur.com/gMYPwhn.png)
