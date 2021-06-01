@@ -57,7 +57,6 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
 
   manager.dateSliderContainer = ui.Panel({
     style: {
-      position: 'top-center',
       margin: '40x 0',
       shown: false
     },
