@@ -59,7 +59,7 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
     widgets: [manager.sliderLabel],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      margin: '50px 0 0 0',
+      margin: '100px 0 0 0',
     }
   })
 
