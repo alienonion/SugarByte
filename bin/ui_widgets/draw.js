@@ -61,7 +61,7 @@ Draw.createPanels = function() {
 
   // Parent container.
   Draw.container = ui.Panel({
-    style: {position: 'top-left', margin: '50px 0 0 0'},
+    style: {position: 'middle-left', margin: '50px 0 0 0'},
     layout: ui.Panel.Layout.flow('vertical')
   });
 
