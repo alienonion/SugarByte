@@ -71,9 +71,8 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
     period: 5,
     onChange: changeNDVIImage,
     style: {
-      margin: '50px 0 0 0',
-      maxWidth: '600px',
-      width: '500',
+      maxWidth: '650px',
+      width: '650px',
       whiteSpace: 'pre',
       fontSize: '12px'
     }
