@@ -50,7 +50,6 @@ var createPaddockSelector = function(regions) {
 var createUI = function() {
   var masterStyle = {
     position: 'top-center',
-    margin: '50px 0 0 0'
   };
 
   // The main panel to add other widgets to
