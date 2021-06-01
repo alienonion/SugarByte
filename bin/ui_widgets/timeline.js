@@ -56,6 +56,11 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
   manager.paddock = paddock;
 
   manager.dateSliderContainer = ui.Panel({
+    style: {
+      position: 'top-center',
+      margin: '40x 0',
+      shown: false
+    },
     widgets: [manager.sliderLabel],
     layout: ui.Panel.Layout.flow('vertical'),
   })
@@ -68,8 +73,7 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
     period: 5,
     onChange: changeNDVIImage,
     style: {
-      maxWidth: '600px',
-      width: '600px',
+      maxWidth: '500px',
       whiteSpace: 'pre',
       fontSize: '12px'
     }

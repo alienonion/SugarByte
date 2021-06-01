@@ -35,7 +35,7 @@ var createPaddockSelector = function(regions) {
   var paddockSelect = ui.Select({
     items: options,
     onChange: handleSelection,
-    placeholder : '    ',
+    placeholder : '        ',
     disabled: false // Now that we have the paddock IDs loaded, we can enable the widget
   });
   // Clear the container and add the new widget
