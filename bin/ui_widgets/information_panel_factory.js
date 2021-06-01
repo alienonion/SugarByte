@@ -583,7 +583,7 @@ exports.createInfoPanel = function (paddock) {
     widgets: [
       headingWidget,
       visualiserWidget,],
-    style: {width: '500px'},
+    style: {maxWidth: '500px'},
   });
   return infoPanel;
 };
