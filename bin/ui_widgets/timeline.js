@@ -11,7 +11,7 @@ exports.initialise = function(app) {
   // current NDVI and elevation layers
   manager.currentLayers = {};
   manager.dateSliderContainer = null;
-  manager.sliderLabel = ui.Label('Slide to show NDVI images for different dates', {margin: '0 0 -5px 15x'});
+  manager.sliderLabel = ui.Label('Slide to show NDVI images for different dates', {fontWeight: 'bold', margin: '0 0 -5px 15px'});
 };
 
 var changeNDVIImage = function(range){
@@ -58,9 +58,6 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
   manager.dateSliderContainer = ui.Panel({
     widgets: [manager.sliderLabel],
     layout: ui.Panel.Layout.flow('vertical'),
-    style: {
-      margin: '100px 0 0 0',
-    }
   })
 
   debug.info("creating date slider")
