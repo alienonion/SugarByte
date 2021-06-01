@@ -46,7 +46,7 @@ var createHeading = function (paddock) {
 
   // Description
   var descriptionLabel = ui.Label({
-    value : "The NDVI visualiser for Paddock: ",
+    value : "The NDVI visualiser for Paddock:",
     style: {stretch: 'vertical', fontSize : '14px'}
   });
   // loading label when fecthing data from server
@@ -66,7 +66,7 @@ var createHeading = function (paddock) {
     manager.id = id;
     title += id;
     // hide loading label
-    loadingLabel.style().set({color: 'black', fontStyle: 'bold'});
+    loadingLabel.style().set({color: 'black', fontWeight : 'bold'});
     // titleLabel.setValue(title)
     loadingLabel.setValue(id);
   };
