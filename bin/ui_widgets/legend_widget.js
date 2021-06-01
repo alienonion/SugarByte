@@ -33,8 +33,7 @@ manager.createUi = function() {
       style: {
         fontWeight: 'bold',
         fontSize: '18px',
-        margin: '0',
-        padding: '0'
+        padding: '5px 0 0 0'
       }
     });
 
