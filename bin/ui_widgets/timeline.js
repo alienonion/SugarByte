@@ -59,7 +59,7 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
     widgets: [manager.sliderLabel],
     layout: ui.Panel.Layout.flow('vertical'),
     style: {
-      margin: '50px 0 0 0'
+      margin: '50px 0 0 0',
     }
   })
 
@@ -71,7 +71,9 @@ exports.createTimeline = function(startDate, endDate, initialDate, currentLayers
     period: 5,
     onChange: changeNDVIImage,
     style: {
+      margin: '50px 0 0 0',
       maxWidth: '600px',
+      width: '500',
       whiteSpace: 'pre',
       fontSize: '12px'
     }
